@@ -1,0 +1,255 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"	
+	xmlns:res="urn:with:com.fort.project.neighbourhoodwatch.client.GwtMapsResources">
+    <ui:with type="com.fort.project.neighbourhoodwatch.client.GwtMapsResources" field="res">
+   	</ui:with>
+
+	<g:DockLayoutPanel unit = "EM">
+	
+		<g:south size="5">
+		    <g:HTMLPanel styleName="{res.style.carbon}"> 
+		        
+		        <g:Label styleName="{res.style.redText}" width="100%" text="."/>
+		        
+		        <g:HorizontalPanel width="100%">
+       			    <g:cell width="40%"> 
+		    			<g:Label width="100%"/>
+		    		</g:cell>
+		    		<g:cell width="20%" horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_BOTTOM">
+       			    	<g:Label styleName="{res.style.fortress}" horizontalAlignment='ALIGN_CENTER' text="Tidying up...." ui:field="label3"/>       			     
+	    			</g:cell>
+	    			<g:cell width="40%"> 
+		    			<g:Label width="100%"/>
+		    		</g:cell>
+	    		</g:HorizontalPanel>	        
+       			  			
+       			<g:HorizontalPanel width="100%">
+    		
+		    		<g:cell width="80%"> 
+		    			<g:Label width="100%"></g:Label>
+		    		</g:cell>	
+		    		<g:cell horizontalAlignment='ALIGN_LEFT'>
+           				<g:Anchor width="100%" styleName="{res.style.blackText}" target="_blank" href="http://publicfortress.blogspot.in/">Blog</g:Anchor>	
+					</g:cell>	    		  		
+       			    <g:cell horizontalAlignment='ALIGN_RIGHT'>
+           				<g:Hyperlink width="100%" styleName="{res.style.blackText}" targetHistoryToken='contactus'>Contact us</g:Hyperlink>	
+					</g:cell>
+					<g:cell horizontalAlignment='ALIGN_CENTER' >
+						<g:Hyperlink width="100%" styleName="{res.style.blackText}" targetHistoryToken='privacy'>Privacy</g:Hyperlink>
+					</g:cell>
+					<g:cell horizontalAlignment='ALIGN_LEFT' >					
+						<g:Hyperlink width="100%" styleName="{res.style.blackText}" targetHistoryToken='aboutus'>About</g:Hyperlink>
+	    			</g:cell>
+	    		</g:HorizontalPanel>
+		    </g:HTMLPanel>
+		</g:south>
+		
+		<g:north size="6">
+		    <g:HTMLPanel styleName="{res.style.carbon}">		    	
+		    	<g:HorizontalPanel>
+		    	
+		    		<g:cell width="5%"> 
+		    			<g:Label width="100%"/>
+		    		</g:cell>
+		    		
+		    		<g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="152px">
+		    			<g:Image width="152px" url="pf_logo.png"/>		    			
+		    		</g:cell>
+		    		
+		    		<g:cell width="6%"> 
+		    			<g:Label width="100%"></g:Label>
+		    		</g:cell>
+		    		
+		    		<g:cell  horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="20%">
+						<g:Label width="110%" horizontalAlignment='ALIGN_CENTER' text="Hello Stranger !" ui:field="label2" styleName="{res.style.fortress}"/>
+					</g:cell>
+					
+					<g:cell width="6%"> 
+		    			<g:Label width="100%"></g:Label>
+		    		</g:cell>
+					
+					<g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="40%">
+						<g:TextBox width="100%" ui:field="input" styleName="{res.style.box}"></g:TextBox>
+					</g:cell>
+				
+					<g:cell width="11%"> 
+		    			<g:Label width="100%"></g:Label>
+		    		</g:cell>
+					
+					<g:cell horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="40px">
+		    			<g:Image width="40px" url="g+.png"/>		    			
+		    		</g:cell>
+					
+					<g:cell  horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="7%">						
+			      		<g:Anchor width="100%" styleName="{res.style.blackText}" ui:field="signin" href="#">Retrieving User Info...</g:Anchor>
+			      	</g:cell>
+			      		
+		      	</g:HorizontalPanel>
+		    </g:HTMLPanel>    
+		</g:north>	
+		
+		<g:center>
+		
+			<g:DockLayoutPanel unit ="EM">
+			
+				<g:west size="20">					
+				    <g:HTMLPanel styleName="{res.style.silver}">	
+				        
+				        <g:Label styleName="{res.style.redText}" width="100%" text="."/>
+				         
+				    	<g:HorizontalPanel>
+				    	    <g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="80px">
+		    					<g:Image width="80px" url="home.png"/>		    			
+		    				</g:cell>
+		    				<g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="100%">
+		    				    <g:Button styleName="{res.style.button}" width="80%" text="Home" ui:field="home"/> 
+		    				</g:cell>
+				    	</g:HorizontalPanel>
+				    	
+				    	<g:Label styleName="{res.style.redText}" width="100%" text="."/>
+				    	
+				    	<g:Label width="100%" visible="false" horizontalAlignment="ALIGN_CENTER" styleName="{res.style.blackText}" ui:field="reports" text="Your Past Few Reports"/>				    	
+				    	
+				    	<g:Label styleName="{res.style.redText}" width="100%" text="."/>
+				    	
+				    	<g:HorizontalPanel>
+				    		<g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="3%"> 
+		    					<g:Label width="100%"/>
+		    				</g:cell>
+		    				<g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="94%">
+				    			<g:ScrollPanel width="100%" visible="false" ui:field="scroll"/>
+				    		</g:cell>
+				    		<g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="3%"> 
+		    					<g:Label width="100%"/>
+		    				</g:cell>
+				    	</g:HorizontalPanel>
+				    	
+			        </g:HTMLPanel>   
+				</g:west>
+					
+				<g:center>
+					<g:SimpleLayoutPanel styleName="{res.style.silver}" ui:field="map_canvas"/>
+				</g:center>	
+						
+				<g:east size="10">		    
+				    <g:ScrollPanel width="100%" styleName="{res.style.silver}">
+				        
+				        <g:HTMLPanel>
+					        <g:Label styleName="{res.style.redText}" width="100%" text="."/>
+					        
+					    	<g:HorizontalPanel>				    	    				    	    	    	    
+					    	    <g:cell horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="30px">
+					    	    	<g:Image width = "30px" url="harassment_low.png"/>
+					    	    </g:cell>
+					    	    <g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="100%">
+					    	    	<g:Label styleName="{res.style.blackText}" width="100%" text="Harassment"/>
+					    	    </g:cell>
+					    	</g:HorizontalPanel>
+					    	
+					    	<g:Label styleName="{res.style.redText}" width="100%" text="."/>
+					        
+					    	<g:HorizontalPanel>				    	    				    	    	    	    
+					    	    <g:cell horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="30px">
+					    	    	<g:Image width = "30px" url="gangrelatedactivity_low.png"/>
+					    	    </g:cell>
+					    	    <g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="100%">
+					    	    	<g:Label styleName="{res.style.blackText}" width="100%" text="Gang Activity"/>
+					    	    </g:cell>
+					    	</g:HorizontalPanel>
+					    	
+					    	<g:Label styleName="{res.style.redText}" width="100%" text="."/>
+					        
+					    	<g:HorizontalPanel>				    	    				    	    	    	    
+					    	    <g:cell horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="30px">
+					    	    	<g:Image width = "30px" url="arson_low.png"/>
+					    	    </g:cell>
+					    	    <g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="100%">
+					    	    	<g:Label styleName="{res.style.blackText}" width="100%" text="Arson"/>
+					    	    </g:cell>
+					    	</g:HorizontalPanel>
+					    	
+					    	<g:Label styleName="{res.style.redText}" width="100%" text="."/>
+					        
+					    	<g:HorizontalPanel>				    	    				    	    	    	    
+					    	    <g:cell horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="30px">
+					    	    	<g:Image width = "30px" url="bribe_low.png"/>
+					    	    </g:cell>
+					    	    <g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="100%">
+					    	    	<g:Label styleName="{res.style.blackText}" width="100%" text="Bribe"/>
+					    	    </g:cell>
+					    	</g:HorizontalPanel>
+					    	
+					    	<g:Label styleName="{res.style.redText}" width="100%" text="."/>
+					        
+					    	<g:HorizontalPanel>				    	    				    	    	    	    
+					    	    <g:cell horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="30px">
+					    	    	<g:Image width = "30px" url="theft_low.png"/>
+					    	    </g:cell>
+					    	    <g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="100%">
+					    	    	<g:Label styleName="{res.style.blackText}" width="100%" text="Theft"/>
+					    	    </g:cell>
+					    	</g:HorizontalPanel>
+					    	
+					    	<g:Label styleName="{res.style.redText}" width="100%" text="."/>
+					        
+					    	<g:HorizontalPanel>				    	    				    	    	    	    
+					    	    <g:cell horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="30px">
+					    	    	<g:Image width = "30px" url="physicalassault_low.png"/>
+					    	    </g:cell>
+					    	    <g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="100%">
+					    	    	<g:Label styleName="{res.style.blackText}" width="100%" text="Physical Assault"/>
+					    	    </g:cell>
+					    	</g:HorizontalPanel>
+					    	
+					    	<g:Label styleName="{res.style.redText}" width="100%" text="."/>
+					        
+					    	<g:HorizontalPanel>				    	    				    	    	    	    
+					    	    <g:cell horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="30px">
+					    	    	<g:Image width = "30px" url="unsafeatnight_low.png"/>
+					    	    </g:cell>
+					    	    <g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="100%">
+					    	    	<g:Label styleName="{res.style.blackText}" width="100%" text="Unsafe At Night"/>
+					    	    </g:cell>
+					    	</g:HorizontalPanel>
+					    	
+					    	<g:Label styleName="{res.style.redText}" width="100%" text="."/>
+					        
+					    	<g:HorizontalPanel>				    	    				    	    	    	    
+					    	    <g:cell horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="30px">
+					    	    	<g:Image width = "30px" url="landslide_low.png"/>
+					    	    </g:cell>
+					    	    <g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="100%">
+					    	    	<g:Label styleName="{res.style.blackText}" width="100%" text="Landslide"/>
+					    	    </g:cell>
+					    	</g:HorizontalPanel>
+					    	
+					    	<g:Label styleName="{res.style.redText}" width="100%" text="."/>
+					        
+					    	<g:HorizontalPanel>				    	    				    	    	    	    
+					    	    <g:cell horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="30px">
+					    	    	<g:Image width = "30px" url="tornado_low.png"/>
+					    	    </g:cell>
+					    	    <g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="100%">
+					    	    	<g:Label styleName="{res.style.blackText}" width="100%" text="Tornado"/>
+					    	    </g:cell>
+					    	</g:HorizontalPanel>
+					    	
+					    	<g:Label styleName="{res.style.redText}" width="100%" text="."/>
+					    	
+					        <g:HorizontalPanel>				    	    				    	    	    	    
+					    	    <g:cell horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="30px">
+					    	    	<g:Image width = "30px" url="biohazard_low.png"/>
+					    	    </g:cell>
+					    	    <g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="100%">
+					    	    	<g:Label styleName="{res.style.blackText}" width="100%" text="Bio Hazard"/>
+					    	    </g:cell>
+					    	</g:HorizontalPanel>
+				    	</g:HTMLPanel>		
+				    </g:ScrollPanel>	    
+				</g:east>
+			</g:DockLayoutPanel>
+			
+		</g:center>	
+	</g:DockLayoutPanel>
+</ui:UiBinder>

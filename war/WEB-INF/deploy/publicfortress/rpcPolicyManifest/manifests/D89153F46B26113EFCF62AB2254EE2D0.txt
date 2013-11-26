@@ -1,0 +1,2 @@
+serviceClass: com.fort.project.neighbourhoodwatch.client.MarkerService
+path: 40E538BFAE3E3B28D1E98A1F8A7CC3D0.gwt.rpc

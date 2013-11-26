@@ -1,0 +1,496 @@
+package com.fort.project.neighbourhoodwatch.client;
+
+import java.util.Date;
+
+import com.google.gwt.core.client.Callback;
+import com.google.gwt.core.shared.GWT;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.ScriptElement;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.geolocation.client.Geolocation;
+import com.google.gwt.geolocation.client.Position;
+import com.google.gwt.geolocation.client.Position.Coordinates;
+import com.google.gwt.geolocation.client.PositionError;
+import com.google.gwt.maps.client.events.place.PlaceChangeMapEvent;
+import com.google.gwt.maps.client.events.place.PlaceChangeMapHandler;
+import com.google.gwt.maps.client.placeslib.Autocomplete;
+import com.google.gwt.maps.client.placeslib.AutocompleteOptions;
+import com.google.gwt.maps.client.placeslib.PlaceResult;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.MenuBar;
+import com.google.gwt.user.client.ui.MenuItem;
+import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.SimpleLayoutPanel;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.maps.gwt.client.Animation;
+import com.google.maps.gwt.client.GoogleMap;
+import com.google.maps.gwt.client.InfoWindow;
+import com.google.maps.gwt.client.LatLng;
+import com.google.maps.gwt.client.MapOptions;
+import com.google.maps.gwt.client.MapTypeId;
+import com.google.maps.gwt.client.Marker;
+import com.google.maps.gwt.client.MarkerOptions;
+import com.google.maps.gwt.client.MouseEvent;
+import com.fort.project.neighbourhoodwatch.shared.Constants;
+
+public class GwtMaps extends Composite {
+
+	
+	static private GwtMaps _instance = null;
+	public static GwtMaps getInstance(){
+        if(null == _instance) {
+        	_instance = new GwtMaps();
+        }
+        return _instance;
+	}
+	interface LoginWidgetURLBinder extends UiBinder <DockLayoutPanel, GwtMaps> {	}	
+	private static LoginWidgetURLBinder uiBinder = GWT.create(LoginWidgetURLBinder.class);
+	
+	private GoogleMap map;
+	public LoginInfo loginInfo = null;
+	private LatLng initialLocation;	
+    String url= "";    
+
+	private MainDialogBox dialogBox = new MainDialogBox();
+    
+	private MarkerServiceAsync markerService = GWT.create(MarkerService.class);
+	private UserServiceAsync userService = GWT.create(UserService.class);
+
+	@UiField
+	Label label2, label3, reports;
+	
+	@UiField
+	ScrollPanel scroll;
+		
+	@UiField(provided = true)
+	final GwtMapsResources res;
+	
+	AsyncCallback<Date[]> getDate = new AsyncCallback<Date []>() {
+		
+		@Override
+		public void onSuccess(Date [] result) {
+			
+			if(result.length == 0) {
+				
+
+				label3.setText("Ready !");
+				return;
+			}
+
+			System.out.println("Dates received");
+			
+			Constants.temp = result;
+
+			label3.setText("Ready !");		
+
+			if(!Constants.userInfo[0].equals("NULL")) {				
+
+				MenuBar menu = new MenuBar(true);
+				menu.setAutoOpen(true);
+				menu.setWidth("100%");
+				menu.setAnimationEnabled(true);
+				System.out.println("TRYING TO ADD TO MENU");
+				for(int i=0; i<Constants.userInfo.length; i++) {
+					
+					if(i>10) break;
+					String element = Constants.userInfo[i];
+					Date date = Constants.temp[i];
+					String [] temp;
+					temp = element.split(" ");
+					if(temp.length!=3) continue;
+					String output=Constants.retranslate(temp[2])+", on "+date.toString();
+					final double lat = Double.parseDouble(temp[0]);
+					final double lng = Double.parseDouble(temp[1]);
+					System.out.println(lat+" "+lng+" "+output);
+					MenuItem item = new MenuItem(output, new Command() {
+					      @Override
+					      public void execute() {
+					         					    	  
+					    	  map.setZoom(17.0);
+					    	  map.setCenter(LatLng.create(lat, lng));
+					      }
+					});
+					item.setStyleName(res.style().menuItem());
+				    menu.addItem(item);
+				    menu.addSeparator();
+				}
+				
+				if(menu != null) {	
+					
+					reports.setVisible(true);
+					scroll.add(menu.asWidget());
+					scroll.setHeight("300px");
+					scroll.onResize();
+					scroll.setVisible(true);
+				}				
+			}		
+		}
+
+		@Override
+		public void onFailure(Throwable caught) {
+			
+			System.out.println(caught.getMessage());
+			Window.alert("User details fetching failed");
+			label3.setText("Ready !");
+		}
+	};
+	
+	AsyncCallback<String[]> getMarks = new AsyncCallback<String []>() {
+		
+		@Override
+		public void onSuccess(String [] result) {
+			
+			if(result[0].equals("NULL")) return;
+			Constants.getSymbols(result);
+			System.out.println("trying to mark with size" + Constants.symbols.size());
+			if(Constants.symbols.isEmpty()) return;
+			for(int i=0; i<Constants.symbols.size(); i++) {
+				
+				addMarker(Constants.symbols.get(i).location, 
+						  Constants.symbols.get(i).type, 
+						  Constants.symbols.get(i).strength,
+						  Constants.symbols.get(i).date,
+						  Constants.symbols.get(i).info);
+			}
+		}
+
+		@Override
+		public void onFailure(Throwable caught) {
+			
+			System.out.println(caught.getMessage());
+		}
+	};
+	
+	AsyncCallback<String[]> getUserDetails = new AsyncCallback<String []>() {
+		
+		@Override
+		public void onSuccess(String [] result) {
+
+			System.out.println("USer details received");
+			Constants.userInfo = result;	
+			label3.setText("Dodging the NSA....");
+			userService.getDate(getDate);
+		}
+
+		@Override
+		public void onFailure(Throwable caught) {
+			
+			System.out.println("ErROR BITCH");
+			System.out.println(caught.getMessage());
+			label3.setText("Ready !");
+		}
+	};
+	
+	AsyncCallback<Void> addMarks = new AsyncCallback<Void>() {
+		
+		@Override
+		public void onSuccess(Void result) {
+			
+			System.out.println("Added marks");
+		}
+
+		@Override
+		public void onFailure(Throwable caught) {
+			
+			System.out.println(caught.getMessage());
+		}
+	};
+
+	AsyncCallback<LoginInfo> login = new AsyncCallback<LoginInfo>() {
+		
+		public void onFailure(Throwable error) {
+			
+			System.out.println("ERROR ="+error.getMessage());
+		}
+
+		public void onSuccess(LoginInfo result) {
+			
+			System.out.println("RECEIVED USER= "+result.getNickname());
+			loginInfo = result;
+			if (loginInfo.isLoggedIn()) {
+				
+				Constants.setLoggenIn(true);
+				System.out.println("Calling get userdetails");
+				userService.getUser(loginInfo.getNickname(), getUserDetails);
+				label2.setText("Hello " + loginInfo.getNickname() + " !");
+				label3.setText("Preventing disasters....");
+			} else {
+				Constants.setLoggenIn(false);
+				label3.setText("Waiting for user signin....");
+			}
+			anchorHandler();				
+		}
+	};
+	
+	@UiField
+	Button home;
+	@UiHandler("home")
+	protected void onClickHandler(final ClickEvent event) {
+		//History.newItem("page2", true); 
+		map.setCenter(initialLocation);
+		
+	}
+	
+	@UiField
+	TextBox input;
+	
+	@UiField
+	SimpleLayoutPanel map_canvas;
+	
+	@UiField
+	Anchor signin;
+
+	
+	
+	public void userManager() {  
+		
+
+		System.out.println("Login initiated");
+		// (1) Check login status using login service.
+		LoginServiceAsync loginService = GWT.create(LoginService.class);
+		loginService.login(com.google.gwt.core.client.GWT.getHostPageBaseURL(), login);
+	}	
+	
+	public GwtMaps() {
+		
+		this.res = GWT.create(GwtMapsResources.class);
+		res.style().ensureInjected();		
+		
+		System.out.println("GwtMaps");
+		
+		initWidget(uiBinder.createAndBindUi(this));		
+		// Building the map
+		
+		MapOptions myOptions = MapOptions.create();
+	    myOptions.setZoom(17.0);
+	    myOptions.setStreetViewControl(false);	   
+	    myOptions.setMapTypeId(MapTypeId.ROADMAP);
+	    myOptions.setMinZoom(5.0);		
+	    map = GoogleMap.create(map_canvas.getElement(), myOptions);
+	    map.addClickListener(new GoogleMap.ClickHandler() {
+	        @Override
+	        public void handle(final MouseEvent event) {
+	        		       	        		        	
+	        	Date date = new Date();
+	        	long millis = 0;
+	        		       
+	        	if(!Constants.userInfo[0].equals("NULL"))
+	        		millis = date.getTime()-Constants.temp[0].getTime();
+	        	
+        		System.out.println(millis);
+        		
+	        	if(Constants.isLoggenIn() == false) {	        		
+	        		
+	        		Window.alert("Please signin to report");	        		
+	        	} 
+//	        	else if(Constants.thisSessionReport == true) {
+//	        		
+//	        		Window.alert("You have already reported this session");
+//	        	} else if(millis/86400000 < 1 && millis > 0) {
+//	        		
+//	        		System.out.println(millis);
+//	        		long hours = (86400000-millis)/3600000;
+//		        	String timeLeft = hours + " hours";
+//		        	Window.alert(timeLeft + " before you can report again");
+//	        	} else if(map.getZoom() < 14.0) {
+//	        		
+//	        		map.setZoom(14.0);
+//	        	} 
+	        	else {	
+
+	        		Constants.mapClick = event.getLatLng();
+	                dialogBox.center();
+	        	}
+	        }
+	    });	
+	    
+	    //Map built
+
+	    initialise();
+
+		final LatLng myLatLng = LatLng.create(28.60753,77.03505);
+	    if (Geolocation.isSupported()) {                // GEOLOCATION STARTS HERE !
+		       
+		      Geolocation.getIfSupported().getCurrentPosition(
+		          new Callback<Position, PositionError>() {
+		
+		            @Override
+		            public void onSuccess(Position result) {
+		            	
+			            Coordinates coords = result.getCoordinates();
+			            initialLocation = LatLng.create(coords.getLatitude(),
+			            coords.getLongitude());
+			            MarkerOptions newMarkerOpts2 = MarkerOptions.create();
+			      		newMarkerOpts2.setPosition(initialLocation);
+			      	    newMarkerOpts2.setMap(map); 
+					    newMarkerOpts2.setTitle("You are Here !");
+				      	newMarkerOpts2.setDraggable(false);
+				      	newMarkerOpts2.setAnimation(Animation.BOUNCE);
+				      	Marker.create(newMarkerOpts2);
+				        map.setCenter(initialLocation);		              
+			        }
+		
+		            public void onFailure(PositionError reason) {
+		            	
+		            	map.setZoom(14.0);
+		            	map.setCenter(myLatLng);
+		            }
+		 
+			          });
+			} else {
+				
+				initialLocation = myLatLng;
+				myOptions.setCenter(myLatLng);
+			}
+	  }
+	
+
+	  private void addMarker(LatLng location, final String uri, double strength, final String date, final String info) {
+		  
+		  	MarkerOptions newMarkerOpts = MarkerOptions.create();
+		    newMarkerOpts.setPosition(location);
+		    newMarkerOpts.setMap(map);
+		    newMarkerOpts.setTitle(Constants.retranslate(uri));
+		    newMarkerOpts.setDraggable(false);	    
+		    String temp = "_low.png";
+		    if(strength >= 90) temp = "_extreme.png";
+		    else if(strength >= 60) temp = "_high.png";
+		    else if(strength >= 30) temp = "_medium.png";
+		    else temp = "_low.png";
+		    newMarkerOpts.setIcon(url + uri + temp);		    
+		    System.out.println("Trying to create marker #SERVER");
+		    final Marker marker = Marker.create(newMarkerOpts);
+		    marker.addClickListener(new Marker.ClickHandler() {
+
+	            @Override
+	            public void handle(MouseEvent event) {
+	            	
+	            	MarkerDialogBox dialogBox = new MarkerDialogBox(date, info, uri);
+	                dialogBox.setGlassEnabled(true);
+	                dialogBox.setText(Constants.retranslate(uri));	
+	                dialogBox.center();
+	            }
+	        });
+		    
+	  }
+	  
+	  private void addMarker(LatLng location, double strength) {
+		  
+		  MarkerOptions newMarkerOpts = MarkerOptions.create();
+		  newMarkerOpts.setPosition(location);
+		  newMarkerOpts.setMap(map);
+		  newMarkerOpts.setTitle(Constants.retranslate(Constants.uri));
+		  newMarkerOpts.setDraggable(false);
+		  newMarkerOpts.setAnimation(Animation.BOUNCE);
+		  String temp = "_low.png";
+		  if(strength >= 90) temp = "_extreme.png";
+		  else if(strength >= 60) temp = "_high.png";
+		  else if(strength >= 30) temp = "_medium.png";
+		  else temp = "_low.png";
+		  newMarkerOpts.setIcon(url + Constants.uri + temp);
+		  System.out.println("Trying to create marker #USER" + Constants.uri);
+		  final Marker marker = Marker.create(newMarkerOpts);
+		    marker.addClickListener(new Marker.ClickHandler() {
+
+	            @Override
+	            public void handle(MouseEvent event) {
+	            	
+	            	marker.setAnimation(null);
+	            	marker.clearInstanceListeners();
+	            }
+	        });
+	  }
+  
+	  public void anchorHandler() {
+		  
+		  System.out.println("anchorHandler Called");
+		  
+			if(Constants.isLoggenIn() == false) {
+				
+				System.out.println("LOGIN");
+				signin.setText("SignIn Please");
+				signin.setHref(loginInfo.getLoginUrl());
+			} else {
+				
+				System.out.println("LOGOUT");
+				signin.setText("SignOut");
+				signin.setHref(loginInfo.getLogoutUrl());
+			}			
+	  }
+	  
+	  private void initialise() {	
+
+		 Constants.userInfo = new String[1];
+		 Constants.userInfo[0] = "NULL";
+		 
+		 userManager();
+			
+		 markerService.getMarks(getMarks);
+			
+		 label3.setText("Catching criminals....");
+		 input.setTitle("Search for locations.");
+		 home.setTitle("Click to zap to your location !");		 
+			
+		 final AutocompleteOptions options = AutocompleteOptions.newInstance();
+	     final Autocomplete autocomplete = Autocomplete.newInstance(input.getElement(), options);    
+	     final InfoWindow infowindow= InfoWindow.create();
+	     autocomplete.addPlaceChangeHandler(new PlaceChangeMapHandler(){
+
+			@Override
+			public void onEvent(PlaceChangeMapEvent event) {
+	    		PlaceResult place=autocomplete.getPlace();
+	    		String address=place.getAddress_Components().get(0).getShort_Name();
+	    		infowindow.setContent(place.getName()+", "+address);    	
+	    		LatLng latLng = LatLng.create(place.getGeometry().getLocation().getLatitude(), place.getGeometry().getLocation().getLongitude());
+	    			
+	    		map.setCenter(latLng);
+	    	    map.setZoom(17.0); 				
+			}
+	     });
+		 
+		 dialogBox.setGlassEnabled(true);
+		 dialogBox.setText("Enter Details"); 
+		 dialogBox.addCloseHandler(new CloseHandler<PopupPanel>() {
+			
+			@Override
+			public void onClose(CloseEvent<PopupPanel> event1) {
+				
+				if(event1.isAutoClosed())
+					reporting(Constants.uri, Constants.mapClick);
+			}
+		 }); 
+	  }
+	  
+	  private void reporting(String uri, LatLng loc) {
+		  
+		if(uri.equals(null) || uri.equals("")) return;
+  		Constants.thisSessionReport = true;
+  	    System.out.println(uri);	 
+  	    Constants.uri = uri;
+  	    System.out.println("DETAILS= "+loginInfo.getNickname()+" "+
+  	                       (new Date())+" "+
+  	                       loc+" "+
+  	                       Constants.uri);
+  	    
+		markerService.addMark(loc.lat()+"`"+
+							  loc.lng()+"`"+
+					          Constants.uri+"`"+
+							  "100.0"+"`"+Constants.date+"`"+Constants.info, loginInfo.getNickname(), addMarks);	
+		addMarker(loc, 100.0);
+	  }
+}

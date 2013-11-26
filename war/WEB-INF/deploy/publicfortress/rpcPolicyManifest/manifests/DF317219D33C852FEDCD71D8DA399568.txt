@@ -1,0 +1,2 @@
+serviceClass: com.fort.project.neighbourhoodwatch.client.LoginService
+path: 13240DCBAC2D28206D352DE94D6F4B9E.gwt.rpc

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+	<cron>
+		<url>/publicfortress/gaejcronjob</url>
+		<description>GAEJ Cron Job that reduces % by 10 every 1/2 hour</description>
+		<schedule>every day 00:00</schedule>
+	</cron>
+</cronentries>

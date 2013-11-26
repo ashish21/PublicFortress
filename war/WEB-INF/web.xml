@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee">
+
+<!-- Servlets -->
+  
+  <servlet>
+    <servlet-name>userServlet</servlet-name>
+    <servlet-class>com.fort.project.neighbourhoodwatch.server.UserServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>userServlet</servlet-name>
+    <url-pattern>/publicfortress/user</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>markerServlet</servlet-name>
+    <servlet-class>com.fort.project.neighbourhoodwatch.server.MarkerServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>markerServlet</servlet-name>
+    <url-pattern>/publicfortress/mark</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>loginServlet</servlet-name>
+    <servlet-class>com.fort.project.neighbourhoodwatch.server.LoginServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>loginServlet</servlet-name>
+    <url-pattern>/publicfortress/login</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+      <servlet-name>GAEJCronServlet</servlet-name>
+      <servlet-class>com.fort.project.neighbourhoodwatch.server.GAEJCronServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>GAEJCronServlet</servlet-name>
+      <url-pattern>/publicfortress/gaejcronjob</url-pattern>
+  </servlet-mapping>
+
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>PublicFortress.html</welcome-file>
+  </welcome-file-list>
+
+</web-app>
