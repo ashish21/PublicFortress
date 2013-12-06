@@ -1,11 +1,10 @@
 package com.fort.project.neighbourhoodwatch.client;
 
+
 import java.util.Date;
 
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.shared.GWT;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.ScriptElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
@@ -13,11 +12,24 @@ import com.google.gwt.geolocation.client.Geolocation;
 import com.google.gwt.geolocation.client.Position;
 import com.google.gwt.geolocation.client.Position.Coordinates;
 import com.google.gwt.geolocation.client.PositionError;
+import com.google.gwt.maps.client.MapOptions;
+import com.google.gwt.maps.client.MapTypeId;
+import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.base.LatLng;
+import com.google.gwt.maps.client.events.click.ClickMapEvent;
+import com.google.gwt.maps.client.events.click.ClickMapHandler;
 import com.google.gwt.maps.client.events.place.PlaceChangeMapEvent;
 import com.google.gwt.maps.client.events.place.PlaceChangeMapHandler;
+import com.google.gwt.maps.client.overlays.Animation;
+import com.google.gwt.maps.client.overlays.InfoWindow;
+import com.google.gwt.maps.client.overlays.InfoWindowOptions;
+import com.google.gwt.maps.client.overlays.Marker;
+import com.google.gwt.maps.client.overlays.MarkerOptions;
 import com.google.gwt.maps.client.placeslib.Autocomplete;
 import com.google.gwt.maps.client.placeslib.AutocompleteOptions;
 import com.google.gwt.maps.client.placeslib.PlaceResult;
+import com.google.gwt.maps.utility.markerclustererplus.client.MarkerClusterer;
+import com.google.gwt.maps.utility.markerclustererplus.client.MarkerClustererOptions;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -28,8 +40,6 @@ import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
@@ -37,15 +47,9 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimpleLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.maps.gwt.client.Animation;
-import com.google.maps.gwt.client.GoogleMap;
-import com.google.maps.gwt.client.InfoWindow;
-import com.google.maps.gwt.client.LatLng;
-import com.google.maps.gwt.client.MapOptions;
-import com.google.maps.gwt.client.MapTypeId;
-import com.google.maps.gwt.client.Marker;
-import com.google.maps.gwt.client.MarkerOptions;
-import com.google.maps.gwt.client.MouseEvent;
+
+
+
 import com.fort.project.neighbourhoodwatch.shared.Constants;
 
 public class GwtMaps extends Composite {
@@ -60,8 +64,9 @@ public class GwtMaps extends Composite {
 	}
 	interface LoginWidgetURLBinder extends UiBinder <DockLayoutPanel, GwtMaps> {	}	
 	private static LoginWidgetURLBinder uiBinder = GWT.create(LoginWidgetURLBinder.class);
+	private MapWidget map;
+	private MarkerClusterer mc;
 	
-	private GoogleMap map;
 	public LoginInfo loginInfo = null;
 	private LatLng initialLocation;	
     String url= "";    
@@ -121,8 +126,8 @@ public class GwtMaps extends Composite {
 					      @Override
 					      public void execute() {
 					         					    	  
-					    	  map.setZoom(17.0);
-					    	  map.setCenter(LatLng.create(lat, lng));
+					    	  map.setZoom(17);
+					    	  map.setCenter(LatLng.newInstance(lat, lng));
 					      }
 					});
 					item.setStyleName(res.style().menuItem());
@@ -276,15 +281,24 @@ public class GwtMaps extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));		
 		// Building the map
 		
-		MapOptions myOptions = MapOptions.create();
-	    myOptions.setZoom(17.0);
+		MapOptions myOptions = MapOptions.newInstance();
+	    myOptions.setZoom(17);
 	    myOptions.setStreetViewControl(false);	   
 	    myOptions.setMapTypeId(MapTypeId.ROADMAP);
-	    myOptions.setMinZoom(5.0);		
-	    map = GoogleMap.create(map_canvas.getElement(), myOptions);
-	    map.addClickListener(new GoogleMap.ClickHandler() {
-	        @Override
-	        public void handle(final MouseEvent event) {
+	    myOptions.setMinZoom(5);
+	    
+	    
+	    
+	    map = new MapWidget(myOptions);
+	  
+	    MarkerClustererOptions mo= MarkerClustererOptions.newInstance();
+	    mc=MarkerClusterer.newInstance(map, mo);
+	    
+	
+
+	    map_canvas.add(map);
+	    map.addClickHandler(new ClickMapHandler() {
+	        public void onEvent(final ClickMapEvent event) {
 	        		       	        		        	
 	        	Date date = new Date();
 	        	long millis = 0;
@@ -313,7 +327,7 @@ public class GwtMaps extends Composite {
 //	        	} 
 	        	else {	
 
-	        		Constants.mapClick = event.getLatLng();
+	        		Constants.mapClick = event.getMouseEvent().getLatLng();
 	                dialogBox.center();
 	        	}
 	        }
@@ -323,7 +337,7 @@ public class GwtMaps extends Composite {
 
 	    initialise();
 
-		final LatLng myLatLng = LatLng.create(28.60753,77.03505);
+		final LatLng myLatLng = LatLng.newInstance(28.60753,77.03505);
 	    if (Geolocation.isSupported()) {                // GEOLOCATION STARTS HERE !
 		       
 		      Geolocation.getIfSupported().getCurrentPosition(
@@ -333,21 +347,21 @@ public class GwtMaps extends Composite {
 		            public void onSuccess(Position result) {
 		            	
 			            Coordinates coords = result.getCoordinates();
-			            initialLocation = LatLng.create(coords.getLatitude(),
+			            initialLocation = LatLng.newInstance(coords.getLatitude(),
 			            coords.getLongitude());
-			            MarkerOptions newMarkerOpts2 = MarkerOptions.create();
+			            MarkerOptions newMarkerOpts2 = MarkerOptions.newInstance();
 			      		newMarkerOpts2.setPosition(initialLocation);
 			      	    newMarkerOpts2.setMap(map); 
 					    newMarkerOpts2.setTitle("You are Here !");
 				      	newMarkerOpts2.setDraggable(false);
 				      	newMarkerOpts2.setAnimation(Animation.BOUNCE);
-				      	Marker.create(newMarkerOpts2);
+				      	Marker.newInstance(newMarkerOpts2);
 				        map.setCenter(initialLocation);		              
 			        }
 		
 		            public void onFailure(PositionError reason) {
 		            	
-		            	map.setZoom(14.0);
+		            	map.setZoom(14);
 		            	map.setCenter(myLatLng);
 		            }
 		 
@@ -358,11 +372,10 @@ public class GwtMaps extends Composite {
 				myOptions.setCenter(myLatLng);
 			}
 	  }
-	
 
 	  private void addMarker(LatLng location, final String uri, double strength, final String date, final String info) {
 		  
-		  	MarkerOptions newMarkerOpts = MarkerOptions.create();
+		  	MarkerOptions newMarkerOpts = MarkerOptions.newInstance();
 		    newMarkerOpts.setPosition(location);
 		    newMarkerOpts.setMap(map);
 		    newMarkerOpts.setTitle(Constants.retranslate(uri));
@@ -374,11 +387,16 @@ public class GwtMaps extends Composite {
 		    else temp = "_low.png";
 		    newMarkerOpts.setIcon(url + uri + temp);		    
 		    System.out.println("Trying to create marker #SERVER");
-		    final Marker marker = Marker.create(newMarkerOpts);
-		    marker.addClickListener(new Marker.ClickHandler() {
+		    final Marker marker = Marker.newInstance(newMarkerOpts);
+		
+		   
+		    mc.addMarker(marker);
+		    
+		    
+		    marker.addClickHandler(new ClickMapHandler() {
 
 	            @Override
-	            public void handle(MouseEvent event) {
+	            public void onEvent(ClickMapEvent event) {
 	            	
 	            	MarkerDialogBox dialogBox = new MarkerDialogBox(date, info, uri);
 	                dialogBox.setGlassEnabled(true);
@@ -391,7 +409,7 @@ public class GwtMaps extends Composite {
 	  
 	  private void addMarker(LatLng location, double strength) {
 		  
-		  MarkerOptions newMarkerOpts = MarkerOptions.create();
+		  MarkerOptions newMarkerOpts = MarkerOptions.newInstance();
 		  newMarkerOpts.setPosition(location);
 		  newMarkerOpts.setMap(map);
 		  newMarkerOpts.setTitle(Constants.retranslate(Constants.uri));
@@ -404,14 +422,14 @@ public class GwtMaps extends Composite {
 		  else temp = "_low.png";
 		  newMarkerOpts.setIcon(url + Constants.uri + temp);
 		  System.out.println("Trying to create marker #USER" + Constants.uri);
-		  final Marker marker = Marker.create(newMarkerOpts);
-		    marker.addClickListener(new Marker.ClickHandler() {
+		  final Marker marker = Marker.newInstance(newMarkerOpts);
+		  marker.addClickHandler(new ClickMapHandler() {
 
-	            @Override
-	            public void handle(MouseEvent event) {
+		    	@Override
+	            public void onEvent(ClickMapEvent event) {
 	            	
 	            	marker.setAnimation(null);
-	            	marker.clearInstanceListeners();
+	            	//marker.clearInstanceListeners();
 	            }
 	        });
 	  }
@@ -448,7 +466,8 @@ public class GwtMaps extends Composite {
 			
 		 final AutocompleteOptions options = AutocompleteOptions.newInstance();
 	     final Autocomplete autocomplete = Autocomplete.newInstance(input.getElement(), options);    
-	     final InfoWindow infowindow= InfoWindow.create();
+	     final InfoWindowOptions infoopts= InfoWindowOptions.newInstance();
+	     final InfoWindow infowindow= InfoWindow.newInstance(infoopts);
 	     autocomplete.addPlaceChangeHandler(new PlaceChangeMapHandler(){
 
 			@Override
@@ -456,10 +475,10 @@ public class GwtMaps extends Composite {
 	    		PlaceResult place=autocomplete.getPlace();
 	    		String address=place.getAddress_Components().get(0).getShort_Name();
 	    		infowindow.setContent(place.getName()+", "+address);    	
-	    		LatLng latLng = LatLng.create(place.getGeometry().getLocation().getLatitude(), place.getGeometry().getLocation().getLongitude());
+	    		LatLng latLng = LatLng.newInstance(place.getGeometry().getLocation().getLatitude(), place.getGeometry().getLocation().getLongitude());
 	    			
 	    		map.setCenter(latLng);
-	    	    map.setZoom(17.0); 				
+	    	    map.setZoom(17); 				
 			}
 	     });
 		 
@@ -487,8 +506,8 @@ public class GwtMaps extends Composite {
   	                       loc+" "+
   	                       Constants.uri);
   	    
-		markerService.addMark(loc.lat()+"`"+
-							  loc.lng()+"`"+
+		markerService.addMark(loc.getLatitude()+"`"+
+							  loc.getLongitude()+"`"+
 					          Constants.uri+"`"+
 							  "100.0"+"`"+Constants.date+"`"+Constants.info, loginInfo.getNickname(), addMarks);	
 		addMarker(loc, 100.0);

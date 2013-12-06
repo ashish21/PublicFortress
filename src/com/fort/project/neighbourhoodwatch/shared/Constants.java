@@ -3,7 +3,7 @@ package com.fort.project.neighbourhoodwatch.shared;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.google.maps.gwt.client.LatLng;
+import com.google.gwt.maps.client.base.LatLng;
 
 public class Constants {
 
@@ -13,7 +13,7 @@ public class Constants {
 	public static Date [] temp;
 	public static String [] userInfo;
 	public static boolean thisSessionReport = false;
-	public static LatLng mapClick = LatLng.create(0.0, 0.0);
+	public static LatLng mapClick = LatLng.newInstance(0.0, 0.0);
 	
 	static public void getSymbols(String[] Symbols) {
 			
@@ -26,7 +26,7 @@ public class Constants {
 			String arr[] = temp.split("`");
 			System.out.println(arr.length);
 			if(arr.length != 6) continue;
-			bundle tempVar = new bundle(LatLng.create(Double.parseDouble(arr[0]), 
+			bundle tempVar = new bundle(LatLng.newInstance(Double.parseDouble(arr[0]), 
 													  Double.parseDouble(arr[1])), 
 													  arr[2], 
 													  Double.parseDouble(arr[3]),
