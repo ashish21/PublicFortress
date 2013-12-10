@@ -6,7 +6,7 @@
    	</ui:with>
 	<g:DockLayoutPanel unit = "EM">
 	
-		<g:south size="5">
+		<g:south size="4">
 		    <g:HTMLPanel styleName="{res.style.carbon}"> 
 		        <g:Label styleName="{res.style.redText}" width="100%" text="."/>
 		        
@@ -43,7 +43,7 @@
 		    </g:HTMLPanel>
 		</g:south>
 		
-		<g:north size="6">
+		<g:north size="5">
 		    <g:HTMLPanel styleName="{res.style.carbon}">		    	
 		    	<g:HorizontalPanel>
 		    	
@@ -51,8 +51,8 @@
 		    			<g:Label width="100%"/>
 		    		</g:cell>
 		    		
-		    		<g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="152px">
-		    			<g:Image width="152px" url="pf_logo.png"/>		    			
+		    		<g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" >
+		    			<g:Image  url="pf_logo.png"/>		    			
 		    		</g:cell>
 		    		
 		    		<g:cell width="6%"> 

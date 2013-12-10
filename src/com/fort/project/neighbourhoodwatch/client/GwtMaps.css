@@ -162,7 +162,6 @@
 }
 .button2:hover { background-color: #1a74d3; }
 .button {
-  height: 30px;
   cursor: hand;
   cursor: pointer;
   display: inline-block;
