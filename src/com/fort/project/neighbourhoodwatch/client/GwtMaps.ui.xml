@@ -4,12 +4,10 @@
 	xmlns:res="urn:with:com.fort.project.neighbourhoodwatch.client.GwtMapsResources">
     <ui:with type="com.fort.project.neighbourhoodwatch.client.GwtMapsResources" field="res">
    	</ui:with>
-
 	<g:DockLayoutPanel unit = "EM">
 	
 		<g:south size="5">
 		    <g:HTMLPanel styleName="{res.style.carbon}"> 
-		        
 		        <g:Label styleName="{res.style.redText}" width="100%" text="."/>
 		        
 		        <g:HorizontalPanel width="100%">
@@ -99,12 +97,35 @@
 				        <g:Label styleName="{res.style.redText}" width="100%" text="."/>
 				         
 				    	<g:HorizontalPanel>
-				    	    <g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="80px">
-		    					<g:Image width="80px" url="home.png"/>		    			
+<!-- 				    	    <g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="80px"> -->
+<!-- 		    					<g:Image width="80px" url="home.png"/>		    			 -->
+<!-- 		    				</g:cell> -->
+		    				<g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="10px">
+
+		    				<g:Label styleName="{res.style.redText}" width="100%" text="."/>
+							</g:cell>
+		    				<g:cell  horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" >
+<!-- 		    				    <g:Button styleName="{res.style.button}" width="80%" text="Home" ui:field="home"/>  -->
+
+<g:PushButton ui:field='home' enabled='true' styleName="{res.style.togglebutton}" >
+   <g:upFace image='{res.homebtn}' >
+     
+   </g:upFace>
+<!--    <g:upHoveringFace image='{res.logo2}'> -->
+     
+<!--    </g:upHoveringFace> -->
+
+
+ </g:PushButton>
 		    				</g:cell>
-		    				<g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="100%">
-		    				    <g:Button styleName="{res.style.button}" width="80%" text="Home" ui:field="home"/> 
-		    				</g:cell>
+		    				<g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="35px">
+
+		    				<g:Label styleName="{res.style.redText}" width="100%" text="."/>
+							</g:cell>
+		    				<g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="80px">
+
+							<g:Button styleName="{res.style.button2}"  text="Clustered View" ui:field="toggle" />
+							</g:cell>
 				    	</g:HorizontalPanel>
 				    	
 				    	<g:Label styleName="{res.style.redText}" width="100%" text="."/>

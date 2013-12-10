@@ -1,11 +1,26 @@
 package com.fort.project.neighbourhoodwatch.client;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 
+
+
+
+
+
+
+
+
+
+import com.google.gwt.ajaxloader.client.ArrayHelper;
 import com.google.gwt.core.client.Callback;
-import com.google.gwt.core.shared.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.geolocation.client.Geolocation;
@@ -28,6 +43,8 @@ import com.google.gwt.maps.client.overlays.MarkerOptions;
 import com.google.gwt.maps.client.placeslib.Autocomplete;
 import com.google.gwt.maps.client.placeslib.AutocompleteOptions;
 import com.google.gwt.maps.client.placeslib.PlaceResult;
+import com.google.gwt.maps.client.visualizationlib.HeatMapLayer;
+import com.google.gwt.maps.client.visualizationlib.HeatMapLayerOptions;
 import com.google.gwt.maps.utility.markerclustererplus.client.MarkerClusterer;
 import com.google.gwt.maps.utility.markerclustererplus.client.MarkerClustererOptions;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -44,6 +61,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimpleLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -65,12 +83,13 @@ public class GwtMaps extends Composite {
 	interface LoginWidgetURLBinder extends UiBinder <DockLayoutPanel, GwtMaps> {	}	
 	private static LoginWidgetURLBinder uiBinder = GWT.create(LoginWidgetURLBinder.class);
 	private MapWidget map;
+	private JsArray<LatLng> dataPoints= JavaScriptObject.createArray().cast();
 	private MarkerClusterer mc;
-	
+	private ArrayList<Marker> al = new ArrayList<Marker>();
 	public LoginInfo loginInfo = null;
 	private LatLng initialLocation;	
     String url= "";    
-
+    int t;
 	private MainDialogBox dialogBox = new MainDialogBox();
     
 	private MarkerServiceAsync markerService = GWT.create(MarkerService.class);
@@ -172,6 +191,7 @@ public class GwtMaps extends Composite {
 						  Constants.symbols.get(i).date,
 						  Constants.symbols.get(i).info);
 			}
+			mc.addMarkers(al);
 		}
 
 		@Override
@@ -243,13 +263,17 @@ public class GwtMaps extends Composite {
 	};
 	
 	@UiField
-	Button home;
+	PushButton home;
+	
 	@UiHandler("home")
 	protected void onClickHandler(final ClickEvent event) {
 		//History.newItem("page2", true); 
 		map.setCenter(initialLocation);
 		
 	}
+	
+	
+	
 	
 	@UiField
 	TextBox input;
@@ -260,7 +284,8 @@ public class GwtMaps extends Composite {
 	@UiField
 	Anchor signin;
 
-	
+	@UiField
+	Button toggle;
 	
 	public void userManager() {  
 		
@@ -283,7 +308,7 @@ public class GwtMaps extends Composite {
 		
 		MapOptions myOptions = MapOptions.newInstance();
 	    myOptions.setZoom(17);
-	    myOptions.setStreetViewControl(false);	   
+	    myOptions.setStreetViewControl(true);	   
 	    myOptions.setMapTypeId(MapTypeId.ROADMAP);
 	    myOptions.setMinZoom(5);
 	    
@@ -291,12 +316,30 @@ public class GwtMaps extends Composite {
 	    
 	    map = new MapWidget(myOptions);
 	  
-	    MarkerClustererOptions mo= MarkerClustererOptions.newInstance();
-	    mc=MarkerClusterer.newInstance(map, mo);
+	    final MarkerClustererOptions mo= MarkerClustererOptions.newInstance();
+	    mc=MarkerClusterer.newInstance(map,mo);
+	 
+	     
+	   
 	    
-	
-
 	    map_canvas.add(map);
+	    
+	    
+	    
+	    final HeatMapLayerOptions options = HeatMapLayerOptions.newInstance();
+	    options.setOpacity(1);
+	    options.setRadius(5);
+	    options.setGradient(getSampleGradient());
+	    
+
+	    final HeatMapLayer heatMapLayer = HeatMapLayer.newInstance(options);
+	    
+	    
+	    
+	    heatMapLayer.setData(dataPoints);
+	    
+	    
+	    
 	    map.addClickHandler(new ClickMapHandler() {
 	        public void onEvent(final ClickMapEvent event) {
 	        		       	        		        	
@@ -371,7 +414,53 @@ public class GwtMaps extends Composite {
 				initialLocation = myLatLng;
 				myOptions.setCenter(myLatLng);
 			}
+	    t=0;
+	    toggle.addClickHandler(new ClickHandler(){
+	        @Override
+	        public void onClick(ClickEvent event) {
+	        	heatMapLayer.setMap(heatMapLayer.getMap() != null ? null : map);
+	        	if(t==0)
+	        	{
+	        	clear();
+	        	mc.removeMarkers(al);
+	        	t=1;
+	        	toggle.setText("HeatMap View");
+	        	}
+	        	else
+	        	{
+	        	show();
+	        	mc.addMarkers(al);
+	    	    t=0;
+	    	    toggle.setText("Clustered View");
+	        	}
+	           }
+
+	    });
+	    
+	    
 	  }
+		
+	private void clear()
+	{
+		for(int i=0;i<al.size();i++)
+    	{
+    		al.get(i).setVisible(false);
+    	}
+	}
+	private void show()
+	{
+		for(int i=0;i<al.size();i++)
+    	{
+    		al.get(i).setVisible(true);
+    	}
+	}
+	private JsArrayString getSampleGradient() {
+		    String[] sampleColors = new String[] { "rgba(0, 255, 255, 0)", "rgba(0, 255, 255, 1)", "rgba(0, 191, 255, 1)",
+		        "rgba(0, 127, 255, 1)", "rgba(0, 63, 255, 1)", "rgba(0, 0, 255, 1)", "rgba(0, 0, 223, 1)",
+		        "rgba(0, 0, 191, 1)", "rgba(0, 0, 159, 1)", "rgba(0, 0, 127, 1)", "rgba(63, 0, 91, 1)", "rgba(127, 0, 63, 1)",
+		        "rgba(191, 0, 31, 1)", "rgba(255, 0, 0, 1)" };
+		    return ArrayHelper.toJsArrayString(sampleColors);
+		  }
 
 	  private void addMarker(LatLng location, final String uri, double strength, final String date, final String info) {
 		  
@@ -390,8 +479,10 @@ public class GwtMaps extends Composite {
 		    final Marker marker = Marker.newInstance(newMarkerOpts);
 		
 		   
-		    mc.addMarker(marker);
 		    
+		    al.add(marker);
+		    
+		    dataPoints.push(location);
 		    
 		    marker.addClickHandler(new ClickMapHandler() {
 
