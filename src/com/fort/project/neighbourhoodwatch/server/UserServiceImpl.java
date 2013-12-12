@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fort.project.neighbourhoodwatch.client.NotLoggedInException;
+import com.fort.project.neighbourhoodwatch.client.UserService;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -12,8 +14,6 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.fort.project.neighbourhoodwatch.client.NotLoggedInException;
-import com.fort.project.neighbourhoodwatch.client.UserService;
 
 public class UserServiceImpl extends RemoteServiceServlet implements UserService {
 	

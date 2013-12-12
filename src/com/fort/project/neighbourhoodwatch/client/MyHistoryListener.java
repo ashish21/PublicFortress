@@ -10,16 +10,16 @@ public class MyHistoryListener implements ValueChangeHandler<String> {
 	public void onValueChange(ValueChangeEvent<String> event) {
 		System.out.println("Current State : " + event.getValue());
 		
-		if (event.getValue().equals("GwtMaps")){
+		if (event.getValue().equals("Home")){
     		RootLayoutPanel.get().clear();
-    		RootLayoutPanel.get().add(GwtMaps.getInstance());
-		} else if (event.getValue().equals("contactus")){
+    		RootLayoutPanel.get().add(Home.getInstance());
+		} else if (event.getValue().equals("Contactus")){
 			RootLayoutPanel.get().clear();
-			RootLayoutPanel.get().add(Page2.getInstance());
-		} else if (event.getValue().equals("aboutus")){
+			RootLayoutPanel.get().add(ContactUs.getInstance());
+		} else if (event.getValue().equals("Aboutus")){
 			RootLayoutPanel.get().clear();
 			RootLayoutPanel.get().add(AboutUs.getInstance());
-		} else if (event.getValue().equals("privacy")){
+		} else if (event.getValue().equals("Privacy")){
 			RootLayoutPanel.get().clear();
 			RootLayoutPanel.get().add(Privacy.getInstance());
 		}	

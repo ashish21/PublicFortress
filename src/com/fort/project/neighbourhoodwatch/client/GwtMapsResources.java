@@ -2,22 +2,26 @@ package com.fort.project.neighbourhoodwatch.client;
 
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.TextResource;
 
 public interface GwtMapsResources extends ClientBundle {
 
    public interface MyCss extends CssResource {
 	  
-	   
-	String togglebutton();
-	   String blackText();
-
-     
+      String blackText();
+      
+      String button2();
+      
+      String white();
+      
+      String newfont();
+   
+      String lowerback();
+      
       String redText();
 
       String button();
-      String button2();
+
       String box();
       
       String background();
@@ -30,14 +34,16 @@ public interface GwtMapsResources extends ClientBundle {
       
       String trans_white();
       
-      String menu();
+      String menuLegend(); String menu();
       
-      String menuItem();
+      String menuItem(); String menuItemLegend(); String menuItemDetails();
       
       String heading();
+            
+      String menuItemTop();
    }
 
-   @Source("GwtMaps.css")
+   @Source("Home.css")
    MyCss style();
    
    @Source("aboutustext.txt")
@@ -45,11 +51,4 @@ public interface GwtMapsResources extends ClientBundle {
    
    @Source("privacytext.txt")
    TextResource text1();
-   
-   @Source("g+button.png")
-   ImageResource logo();
-   @Source("g+button2.png")
-   ImageResource logo2();
-   @Source("home2.png")
-   ImageResource homebtn();
 }

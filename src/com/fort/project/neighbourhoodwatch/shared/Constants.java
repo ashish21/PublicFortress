@@ -2,7 +2,6 @@ package com.fort.project.neighbourhoodwatch.shared;
 
 import java.util.ArrayList;
 import java.util.Date;
-
 import com.google.gwt.maps.client.base.LatLng;
 
 public class Constants {
@@ -14,6 +13,8 @@ public class Constants {
 	public static String [] userInfo;
 	public static boolean thisSessionReport = false;
 	public static LatLng mapClick = LatLng.newInstance(0.0, 0.0);
+	public static String[] legend={"Harassment", "Theft", "Gang Related Activity", "Unsafe at Night", "Physical Assault",
+		"Bribe", "Arson", "Landslide", "BioHazard"};
 	
 	static public void getSymbols(String[] Symbols) {
 			
@@ -74,7 +75,6 @@ public class Constants {
 		if(name.equals("theft")) return "Theft" ;
 		if(name.equals("gangrelatedactivity")) return "Gang Related Activity" ;
 		if(name.equals("landside")) return "Landslide" ;
-		if(name.equals("tornado")) return "Tornado" ;
 		if(name.equals("biohazard")) return "Bio Hazard" ;
 		if(name.equals("physicalassault")) return "Physical Assault" ;
 		if(name.equals("unsafeatnight")) return "Unsafe At Night" ;

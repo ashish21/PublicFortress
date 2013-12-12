@@ -1,0 +1,433 @@
+
+@CHARSET "UTF-8";
+
+.white{
+	
+	
+  		color: white;
+}
+.lowerback{
+	background: url(pixel_weave_dark.png) repeat;	
+	
+}
+/* ----------------------------------------------
+-- SILVER BORDER
+---------------------------------------------- */
+.button2 {
+  
+  width: 150px;
+  cursor: hand;
+  cursor: pointer;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;   
+  font-color: white;
+  text-color: white;
+  font: bold; 
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px #72100d;
+  background-color: #247edd;
+  background-clip: padding-box;
+  border: 1px solid;
+  border-color: #1c65b2 #18589c #18589c;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+}
+.button2:hover { background-color: #1a74d3; }
+.silver {
+	
+	    	background: url(pixel_weave.png) repeat;			
+
+}
+
+/* ----------------------------------------------
+-- CARBON BORDER
+---------------------------------------------- */
+
+.carbon {
+
+	/* drop shadows. */
+	-moz-box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2); /* standard version at last */
+	/* general */
+	border-color: #000;
+
+	/* background color (for non css3 browsers) and gradient */
+	background-color: #2d2d2d;
+	background: -moz-linear-gradient(top,
+		#404040,
+		#2d2d2d 50%,
+		#000
+	);
+	background: -webkit-gradient(linear, left top, left bottom,
+		from(#404040),
+		color-stop(0.5, #2d2d2d),
+		to(#000)
+	);
+
+	/* linear gradient for IE 5.5+ */
+	filter: progid:DXImageTransform.Microsoft.gradient(StartColorStr='#404040', EndColorStr='#000000');
+}
+
+/* ----------------------------------------------
+-- TRANSPARENT WHITE BORDER
+---------------------------------------------- */
+
+.trans_white {
+
+	/* drop shadows. */
+	-moz-box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2); /* standard version at last */
+	/* general */
+	border-color: #fff;
+	
+	/* BACKGROUND COLOR */
+	background-color: rgba(255,255,255,0.4);
+	/background-color: #fff; /* FOR IE */
+}
+
+.fortress {	
+	
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #E6E6FA;
+    font-size: 18px; 
+    
+	-webkit-border-radius: 5px; 
+    border-radius: 5px;
+  	
+	background: #708090;	
+	-moz-box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2);
+}
+
+.blackText {
+   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   font-size: 18px;   
+   font: bold; 
+}
+
+.heading {
+   font-family: Tahoma, Geneva, sans-serif;
+   font-size: 25px;   
+   font: bold; 
+   
+}
+
+
+.redText {	
+
+	   font-family: Arial, Sans-serif;
+   	   font-size: 4px;
+}
+
+.button {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  overflow: hidden;
+  min-width: 96px;
+  line-height: 46px;
+  padding: 0 24px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;   
+  font-color: white;
+  text-color: white;
+  font: bold; 
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px #72100d;
+  background-color: #247edd;
+  background-clip: padding-box;
+  border: 1px solid;
+  border-color: #1c65b2 #18589c #18589c;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+}
+
+.button:before {
+  content: '';
+  position: absolute;
+  top: -25%;
+  bottom: -25%;
+  left: -20%;
+  right: -20%;
+  border-radius: 50%;
+  background: transparent;
+  -webkit-box-shadow: inset 0 0 38px rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 0 38px rgba(255, 255, 255, 0.5);
+}
+
+.button:hover { background-color: #1a74d3; }
+
+.button:active {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 -1px #154c86;
+  background: #1f71c8;
+  border-color: #113f70 #154c86 #1c65b2;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px rgba(255, 255, 255, 0.4);
+  background-image: -webkit-linear-gradient(top, #1a5da5, #3a8be0);
+  background-image: -moz-linear-gradient(top, #1a5da5, #3a8be0);
+  background-image: -o-linear-gradient(top, #1a5da5, #3a8be0);
+  background-image: linear-gradient(to bottom, #1a5da5, #3a8be0);
+}
+
+.button:active:before {
+  top: -50%;
+  bottom: -125%;
+  left: -15%;
+  right: -15%;
+  -webkit-box-shadow: inset 0 0 96px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 96px rgba(0, 0, 0, 0.2);
+}
+
+.newfont{
+  font: bold 16px/23px sans-serif;
+  font-color: #b3b3b3 ;
+  text-color: #b3b3b3;
+  color: #b3b3b3;
+  background: transparent;
+  outline: none;
+  border: none;
+   cursor: hand;
+  cursor: pointer;
+}
+.newfont:hover {
+	
+	font-color: white;
+  		text-color: white;
+  		color: white;
+}
+.box {
+   border: 2px solid #AACCEE;
+   display: block;
+   font-size: 17px;
+   margin: 0 0 5px;
+}
+
+.menuItemTop {
+	
+  outline: none;
+  cursor: hand;
+  cursor: pointer;
+  font: bold 18px/25px sans-serif;
+  font-color: #b3b3b3 ;
+  text-color: #b3b3b3;
+  color: #b3b3b3;
+  display: inline-block;
+  margin-right: -7px;
+  padding: 2px 2px;
+  position: relative;
+  
+  
+/* drop shadows. */
+	-moz-box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2); /* standard version at last */
+	/* general */
+	
+  border: 1px solid;
+  border-color: #000000 #000000 #000000;
+
+	/* background color (for non css3 browsers) and gradient */
+	background-color: #2d2d2d;
+	background: -moz-linear-gradient(top,
+		#404040,
+		#2d2d2d 50%,
+		#000
+	);
+	background: -webkit-gradient(linear, left top, left bottom,
+		from(#404040),
+		color-stop(0.5, #2d2d2d),
+		to(#000)
+	);
+
+	/* linear gradient for IE 5.5+ */
+	filter: progid:DXImageTransform.Microsoft.gradient(StartColorStr='#404040', EndColorStr='#000000');
+
+  
+  
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.menuItemTop:hover {
+	
+	   font-color: white;
+  		text-color: white;
+  		color: white;
+  		
+  		  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.menu {
+}
+.menuItem {
+	
+	cursor: hand;
+  cursor: pointer;
+	font: 15px/18px sans-serif;
+    -webkit-border-radius: 2px;
+      -mozborder-radius: 2px;
+          border-radius: 2px;
+          
+                     border: 1px outset;                     
+                               
+	  -webkit-transition: all 0.2s;
+	  -moz-transition: all 0.2s;
+	  -ms-transition: all 0.2s;
+	  -o-transition: all 0.2s;
+	  transition: all 0.2s;
+  
+}
+
+.menuItem:hover {
+	
+	color: white;
+	font-color: white;
+	text-color: white;
+	
+	           border: 1px inset;
+  
+  	background: url(sexy.png) repeat-x 0 0;
+  
+		  -webkit-transition: all 0.2s;
+	  -moz-transition: all 0.2s;
+	  -ms-transition: all 0.2s;
+	  -o-transition: all 0.2s;
+	  transition: all 0.2s;
+x	
+}
+
+
+.menuItemDetails {
+	
+	font: 18px/20px sans-serif;
+  padding: 2px 2px;
+  /* drop shadows. */
+	-moz-box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2); /* standard version at last */
+
+	/* background color (for non css3 browsers) and gradient */
+	background-color: #dfdfdf;
+	background: -moz-linear-gradient(top,
+		#fff,
+		#dfdfdf 50%,
+		#cecece
+	);
+	background: -webkit-gradient(linear, left top, left bottom,
+		from(#fff),
+		color-stop(0.5, #dfdfdf),
+		to(#cecece)
+	);
+	
+	/* linear gradient for IE 5.5+ */
+	filter: progid:DXImageTransform.Microsoft.gradient(StartColorStr='#FFFFFF', EndColorStr='#CECECE');
+  
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.menuLegend {
+	
+  display: inline;
+  /* drop shadows. */
+	-moz-box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2); /* standard version at last */
+		
+	/* background color (for non css3 browsers) and gradient */
+	background-color: #dfdfdf;
+	background: -moz-linear-gradient(top,
+		#fff,
+		#dfdfdf 50%,
+		#cecece
+	);
+	background: -webkit-gradient(linear, left top, left bottom,
+		from(#fff),
+		color-stop(0.5, #dfdfdf),
+		to(#cecece)
+	);
+	
+	/* linear gradient for IE 5.5+ */
+	filter: progid:DXImageTransform.Microsoft.gradient(StartColorStr='#FFFFFF', EndColorStr='#CECECE');
+}
+
+.menuItemLegend {
+	
+	/* drop shadows. */
+	-moz-box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2); /* standard version at last */
+
+    	text-align: center;
+ 		font-weight: bold;
+ 		font-family: Arial Black, Arial, Helvetica, sans-serif;
+ 		font-size: 23px;
+ 		color: #8e4600;
+ 		font-color: #8e4600;
+ 		text-color: #8e4600; 		
+  		padding: 4px 4px 4px 4px;
+    	-webkit-border-radius: 2px;
+    	-moz-border-radius: 2px;
+    	border-radius: 2px;
+    	background: url(orange_pattern.png) repeat-x 0 0;    	  
+	  cursor: pointer;
+	  -webkit-transition: all 0.2s;
+	  -moz-transition: all 0.2s;
+	  -ms-transition: all 0.2s;
+	  -o-transition: all 0.2s;
+	  transition: all 0.2s;
+}
+
+.menuItemLegend:hover {
+	
+    /* drop shadows. */
+    color: #ffffff;
+ 	font-color: #ffffff;
+ 	text-color: #ffffff;
+ 	text-shadow: 1px 1px 0px rgba(255,255,255, .2);
+	-moz-box-shadow: 3px 3px 10px rgba(0,0,0,0.45), 3px 6px 7px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 3px 3px 10px rgba(0,0,0,0.45), 3px 6px 7px rgba(0,0,0,0.2);
+	box-shadow: 3px 3px 10px rgba(0,0,0,0.45), 3px 6px 7px rgba(0,0,0,0.2); /* standard version at last */
+	  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.background {
+   background-color: #999999;
+   border: 1px none transparent;
+   color: #000000;
+   font-size: 11px;
+   margin-left: -8px;
+   margin-top: 5px;
+   padding: 6px;
+}

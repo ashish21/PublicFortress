@@ -39,7 +39,7 @@ public class MainDialogBox extends DialogBox {
 	  
 	  @UiField TextBox input;
 	  
-	  @UiField MenuItem theft, harassment, unsafe, assault, landSlide, tornado, bio, gang, bribe, arson, sub;
+	  @UiField MenuItem theft, harassment, unsafe, assault, landSlide, bio, gang, bribe, arson, sub;
 	  
 	  @UiHandler("okButton")	  
 	  void onSubmit(ClickEvent e) {
@@ -162,15 +162,6 @@ public class MainDialogBox extends DialogBox {
 		    	}
 		  };
 		  landSlide.setScheduledCommand(cmdBtnLandslide);
-		  ////////////---------------////////////
-		  Command cmdBtnTornado = new Command() {
-			  public void execute() {
-		    		
-		    		uri = tornado.getText().replaceAll(" ", "").toLowerCase();
-		    		sub.setText(tornado.getText());
-		    	}
-		  };
-		  tornado.setScheduledCommand(cmdBtnTornado);
 		  ////////////---------------////////////
 		  Command cmdBtnBio = new Command() {
 			  public void execute() {

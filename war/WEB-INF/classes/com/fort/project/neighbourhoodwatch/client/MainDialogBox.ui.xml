@@ -218,8 +218,6 @@
 		        				<g:MenuItemSeparator />		        				
 		        				<g:MenuItem styleName="{style.menuItem}" ui:field="landSlide">Land Slide</g:MenuItem>
 		        				<g:MenuItemSeparator />
-		        				<g:MenuItem styleName="{style.menuItem}" ui:field="tornado">Tornado</g:MenuItem>
-		        				<g:MenuItemSeparator />
 		        				<g:MenuItem styleName="{style.menuItem}" ui:field="bio">Bio Hazard</g:MenuItem>	
 	        				</g:MenuBar>
         				</g:MenuItem>  					
