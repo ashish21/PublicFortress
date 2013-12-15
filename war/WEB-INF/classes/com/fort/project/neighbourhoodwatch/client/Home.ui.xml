@@ -33,7 +33,7 @@ border-radius: 2px;
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
-    color: #b6b07c;
+    color: #000000;
 
     	-webkit-border-radius: 2px;
     	-moz-border-radius: 2px;
@@ -119,25 +119,25 @@ border-radius: 2px;
 <g:ScrollPanel width="100%" styleName="{res.style.silver}" >
     <g:FlowPanel width="100%" >
         
-        <g:HorizontalPanel styleName="{res.style.carbon}" width="100%" height="60px">	    	
+        <g:HorizontalPanel styleName="{res.style.carbon}" width="100%" >	    	
     		<g:cell width="5%"> 
     			<g:Label width="100%"/>
     		</g:cell>
     		
     		<g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" >
-    			<g:Image url="pf_logo.png"/>		    			
+    			<g:Image url="pf_logo.png" height="90%"/>		    			
     		</g:cell>
     		
     		<g:cell width="5%"> 
     			<g:Label width="100%"></g:Label>
     		</g:cell>
     		
-    		<g:cell height="100%" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_BOTTOM">  
+    		<g:cell height="100%" horizontalAlignment="ALIGN_CENTER" >  
     		    <g:HTMLPanel>                  
-      				<g:Button height="65px" text="How it works" styleName="{res.style.menuItemTop}" ui:field="works"/>
-      				<g:Button height="65px" text="About Us" styleName="{res.style.menuItemTop}" ui:field="about"/>
-      				<g:Button height="65px" text="Contact Us" styleName="{res.style.menuItemTop}" ui:field="contact"/>
-      				<g:Button height="65px" text="SignIn" styleName="{res.style.menuItemTop}" ui:field="signin"/>
+      				<g:Button text="How it works" styleName="{res.style.menuItemTop}" ui:field="works"/>
+      				<g:Button text="About Us" styleName="{res.style.menuItemTop}" ui:field="about"/>
+      				<g:Button text="Contact Us" styleName="{res.style.menuItemTop}" ui:field="contact"/>
+      				<g:Button text="SignIn" styleName="{res.style.menuItemTop}" ui:field="signin"/>
      			</g:HTMLPanel>	   			
   			</g:cell>
   				
@@ -146,19 +146,33 @@ border-radius: 2px;
     		</g:cell>		 
         </g:HorizontalPanel>
         
-        <g:HTMLPanel width="100%" height="5px"/>
+        
         
         <g:FlowPanel width="100%">
 
-	        <g:HorizontalPanel width="100%" >	 
-            <g:TextBox width="99%" ui:field="input" styleName="{res.style.box}"/>   
-            <g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="80px">
+	        <g:HorizontalPanel styleName="{res.style.homeback}" ui:field="mapoverlay" width="99.8%" >	 
+	        
+	        <g:cell horizontalAlignment="ALIGN_LEFT" verticalAlignment="ALIGN_MIDDLE" width="40px">           
+            <g:PushButton ui:field='home' enabled='true' styleName="{res.style.buttonh}" height="48px" width="48px">
+   			<g:upFace image='{res.homebtn}' >   
+  			</g:upFace>
+  			  <g:upHoveringFace image='{res.homebtn2}'>
 
-							<g:Button styleName="{res.style.button2}"  text="Clustered View" ui:field="toggle" />
-							</g:cell>
+   			</g:upHoveringFace>
+ 			</g:PushButton>
+ 			</g:cell>       
+ 			<g:cell width="5%"> 
+    			<g:Label width="100%"></g:Label>
+    		</g:cell>
+ 			<g:cell  horizontalAlignment="ALIGN_LEFT"  verticalAlignment="ALIGN_MIDDLE">        
+            <g:TextBox  ui:field="input" styleName="{res.style.box}" width="390px"/>   
+            </g:cell>
+            <g:cell   verticalAlignment="ALIGN_MIDDLE" width="250px">
+			<g:Button styleName="{res.style.button2}"  text="Clustered View" ui:field="toggle" />
+			</g:cell>
             </g:HorizontalPanel>     
             
-        	<g:SimpleLayoutPanel height="400px" width="100%" ui:field="map_canvas"/>
+        	<g:SimpleLayoutPanel height="400px" styleName="{style.button}" width="99.7%" ui:field="map_canvas" />
 	        <g:HTMLPanel width="100%" height="5px" />
 	        
 	        <g:HorizontalPanel width="100%" >	 
@@ -255,13 +269,16 @@ border-radius: 2px;
 	    			<g:Label width="100%"></g:Label>
 	    		</g:cell>
 		 	    <g:cell height="100%" width="30%" horizontalAlignment="ALIGN_LEFT" verticalAlignment="ALIGN_MIDDLE"> 
-					 <g:ScrollPanel width="100%" visible="false" ui:field="scroll"/>		 	        
+					 <g:VerticalPanel   width="100%">
+					 <g:Label  styleName="{res.style.blackText}">Your Past Reports</g:Label>
+					 <g:ScrollPanel width="100%" visible="false" ui:field="scroll" styleName="{style.button}" />		 	
+					 </g:VerticalPanel>        
 	    		</g:cell> 	    		
 		 	   	<g:cell height="100%" width="1%"> 
 	    			<g:Label width="100%"></g:Label>
 	    		</g:cell>
 	 	    </g:HorizontalPanel>
-	   		
+	   		<g:HTMLPanel width="100%" height="5px" />
 	 	    <!-- DONE TILL HERE YO -->	   		
 	 	    
 	 	    	  <g:HTMLPanel width="100%" height="10px" styleName="{res.style.lowerback}" />
@@ -271,9 +288,9 @@ border-radius: 2px;
 	            <g:cell width="1%"> 
 		   			<g:Label width="100%"></g:Label>
 		   		</g:cell>
-	            <g:cell horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">
-		            <g:HTMLPanel height="580px" styleName="{style.button}">
-		            	<iframe width="100%" src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fneighbourhoodwatchrocks&amp;width&amp;height=590&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=true&amp;show_border=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:580px;" allowTransparency="true"></iframe>
+	            <g:cell horizontalAlignment='ALIGN_LEFT' verticalAlignment="ALIGN_MIDDLE">
+		            <g:HTMLPanel height="500px" width="300px" styleName="{style.button}">
+		            	<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fneighbourhoodwatchrocks&amp;width&amp;height=500&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=true&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:500px;" allowTransparency="true"></iframe>
 					</g:HTMLPanel>
 				</g:cell>
 				<g:cell width="5%"> 
@@ -283,36 +300,17 @@ border-radius: 2px;
 				    
 					<g:FlowPanel width="100%">							    			    
 					    <g:HorizontalPanel height="280px" width="100%" >
-					        <g:cell height="100%" width="45%" horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">					            	
-	    						<g:HTMLPanel height="250px" width="100%" styleName="{style.button}">
-	    							<iframe height="250px" width="100%" src="//www.youtube.com/embed/NiAhk2HfaOg?rel=0" frameborder="0" allowfullscreen="true"/>
+					        <g:cell height="270px" width="480px" horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">					            	
+	    						<g:HTMLPanel height="270px" width="480px" styleName="{style.button}">
+	    							<iframe  height="270px" width="480px"  src="//www.youtube.com/embed/NiAhk2HfaOg?rel=0" frameborder="0" allowfullscreen="true"/>
 	    						</g:HTMLPanel>	
 					        </g:cell>
 					        <g:cell width="1%"> 
 	    						<g:Label width="100%"/>
 	    					</g:cell>	    					
-		   					<g:cell height="100%" horizontalAlignment='ALIGN_RIGHT' verticalAlignment="ALIGN_MIDDLE">
-		   					    <g:HTMLPanel>
-		   					    <g:Label styleName="{res.style.white}">
-		   					        Safety by Awareness
-		   					    </g:Label>
-		   					    <g:Label styleName="{res.style.white}">
-		   					        - Neighbourhood Watch Motto
-		   					    </g:Label>
-		   					    </g:HTMLPanel>
-		   					</g:cell>
-					        <g:cell height='100%' horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE"> 
-	 							<g:HTMLPanel width="180px" styleName="{style.button}">
-				        	        <div class="g-page" data-width="180" data-href="https://plus.google.com/102192205824377892093" data-rel="publisher">
-									    <script type="text/javascript">
-										  (function() {
-										    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-										    po.src = 'https://apis.google.com/js/platform.js';
-										    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-										  })();
-										</script>
-									</div>
-			       				</g:HTMLPanel>
+		   					<g:cell height="100%" horizontalAlignment='ALIGN_RIGHT' verticalAlignment="ALIGN_MIDDLE"> 
+	 							<g:HorizontalPanel width="200px" styleName="{style.button}" ui:field="badge">
+			       				</g:HorizontalPanel>
 		   					</g:cell>
 		   					<g:cell width="1%"> 
 	    						<g:Label width="100%"/>
@@ -323,21 +321,21 @@ border-radius: 2px;
 		 				
 		 				<g:HorizontalPanel width="550px">
 		 				    <g:cell width="250px" horizontalAlignment='ALIGN_LEFT' verticalAlignment="ALIGN_MIDDLE">
-		 				        <g:FlowPanel styleName="{style.button}" width="100%">
-		 				            <g:Label width="100%" >
-		 				                Neighbourhood Watch Android App
-		 				            </g:Label>	
-		 				            <g:HorizontalPanel width="100%">
-		 				                <g:cell horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">
-		 				                    <g:Image url='android.png' height='150px'/>
-		 				                </g:cell>
-		 				                <g:cell horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">
-		 				                    <g:Label>Download our Android app or use the website to submit reports.</g:Label>
-		 				                </g:cell>		 				                    
-		 				            </g:HorizontalPanel>
+		 				        <g:FlowPanel  width="100%">
+<!-- 		 				            <g:Label width="100%"  styleName="{res.style.bigbtn}" > -->
+<!-- 		 				                Android App -->
+<!-- 		 				            </g:Label>	 -->
+<!-- 		 				            <g:HorizontalPanel width="100%"> -->
+<!-- 		 				                <g:cell horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE"> -->
+<!-- 		 				                    <g:Image url='android.png' height='100px'/> -->
+<!-- 		 				                </g:cell> -->
+<!-- 		 				                <g:cell horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE"> -->
+<!-- 		 				                    <g:Label>Download our Android app or use the website to submit reports.</g:Label> -->
+<!-- 		 				                </g:cell>		 				                     -->
+<!-- 		 				            </g:HorizontalPanel> -->
 		 				        	<g:HorizontalPanel width="100%">	
 		 				                <g:cell width="100%" horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">
-		 				            		<g:Button ui:field='android'>Coming Soon!</g:Button>
+		 				            		<g:Button ui:field='android' styleName="{res.style.bigbtn2}">Neighbourhood Watch's Android App Coming Soon!</g:Button>
 		 				            	</g:cell>
 		 				            </g:HorizontalPanel>
 		 				        </g:FlowPanel>			        
@@ -347,21 +345,22 @@ border-radius: 2px;
 	    					</g:cell>
 		 				    <g:cell width="280px" horizontalAlignment='ALIGN_RIGHT' verticalAlignment="ALIGN_MIDDLE">
 		 				        <g:FlowPanel styleName="{style.button}" width="100%">
-		 				            <g:Label width="100%">
+		 				            <g:Label width="100%" styleName="{res.style.bigbtn}" >
 		 				                Support our Efforts
 		 				            </g:Label>	
 		 				            <g:HorizontalPanel width="100%">		 				                
 		 				                <g:cell horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">
-		 				                    <g:Label>There are many ways in which you<br/>can help us. For example, tell<br/>your friends about this web-app !</g:Label>
+		 				                    <g:Label>There are many ways in which you can help us. For example, tell your friends about this web-app !</g:Label>
 		 				                </g:cell>	
 		 				                <g:cell horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">
-		 				                    <g:Image url='support.png' height='150px'/>
+		 				                    <g:Image url='support.png' height='100px'/>
 		 				                </g:cell>	 				                    
 		 				            </g:HorizontalPanel>
 		 				        	<g:HorizontalPanel width="100%">	
-		 				                <g:cell width="100%" horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">
-		 				            		<g:Button ui:field='support'>Coming Soon!</g:Button>
+		 				                <g:cell width="100%" horizontalAlignment='ALIGN_CENTER' >
+		 				            		<g:Button ui:field='support' styleName="{res.style.button2}">Coming Soon!</g:Button>
 		 				            	</g:cell>
+		 				            	
 		 				            </g:HorizontalPanel>
 		 				        </g:FlowPanel>
 		 				    </g:cell>
@@ -376,17 +375,17 @@ border-radius: 2px;
         <!-- FOOTER -->
         
                 
-        <g:HorizontalPanel styleName="{res.style.carbon}" width="100%" height="40px">    
+        <g:HorizontalPanel  width="100%"  styleName="{res.style.footer}">    
             <g:cell width="5%"> 
 	    			<g:Label width="100%"/>
 	    	</g:cell>
 	    	                   
             <g:cell width="40%" height="100%" horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_BOTTOM">  
 	    		<g:FlowPanel>                  
-	      			<g:Button height="45px" text="Privacy" styleName="{res.style.newfont}" ui:field="privacy"/>
-					<g:Button height="45px" text="About Us" styleName="{res.style.newfont}" ui:field="about2"/>
-					<g:Button height="45px" text="Contact Us" styleName="{res.style.newfont}" ui:field="contact2"/>      								
-					<g:Button height="45px" text="Blog" styleName="{res.style.newfont}" ui:field="blog"/>
+	      			<g:Button  text="Privacy" styleName="{res.style.footer}" ui:field="privacy"/>
+					<g:Button  text="About Us" styleName="{res.style.footer}" ui:field="about2"/>
+					<g:Button  text="Contact Us" styleName="{res.style.footer}" ui:field="contact2"/>      								
+					<g:Button  text="Blog" styleName="{res.style.footer}" ui:field="blog"/>
 				</g:FlowPanel>	   			
    			</g:cell>
    			<g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" width="40%">

@@ -2,6 +2,7 @@ package com.fort.project.neighbourhoodwatch.client;
 
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.TextResource;
 
 public interface GwtMapsResources extends ClientBundle {
@@ -10,7 +11,17 @@ public interface GwtMapsResources extends ClientBundle {
 	  
       String blackText();
       
+      String bigbtn();
+      
+      String footer();
+      
+      String bigbtn2();
+      
+      String homeback();
+      
       String button2();
+      
+      String buttonh();
       
       String white();
       
@@ -51,4 +62,9 @@ public interface GwtMapsResources extends ClientBundle {
    
    @Source("privacytext.txt")
    TextResource text1();
+   
+   @Source("Home-icon.png")
+   ImageResource homebtn();
+   @Source("Home-icon2.png")
+   ImageResource homebtn2();
 }

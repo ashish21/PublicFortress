@@ -1,6 +1,7 @@
 	package com.fort.project.neighbourhoodwatch.client;
 
 import java.util.Date;
+
 import com.fort.project.neighbourhoodwatch.shared.Constants;
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;
@@ -14,9 +15,12 @@ import com.google.gwt.geolocation.client.PositionError;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.events.place.PlaceChangeMapEvent;
 import com.google.gwt.maps.client.events.place.PlaceChangeMapHandler;
+import com.google.gwt.maps.client.events.visible.VisibleChangeMapEvent;
+import com.google.gwt.maps.client.events.visible.VisibleChangeMapHandler;
 import com.google.gwt.maps.client.placeslib.Autocomplete;
 import com.google.gwt.maps.client.placeslib.AutocompleteOptions;
 import com.google.gwt.maps.client.placeslib.PlaceResult;
+import com.google.gwt.maps.client.streetview.StreetViewPanoramaImpl;
 import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
@@ -29,17 +33,25 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DeckPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimpleLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
+
 import java.util.ArrayList;
+
 import com.google.gwt.ajaxloader.client.ArrayHelper;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.ScriptElement;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapTypeId;
@@ -53,6 +65,7 @@ import com.google.gwt.maps.client.overlays.Marker;
 import com.google.gwt.maps.client.overlays.MarkerOptions;
 import com.google.gwt.maps.client.visualizationlib.HeatMapLayer;
 import com.google.gwt.maps.client.visualizationlib.HeatMapLayerOptions;
+import com.google.gwt.maps.utility.markerclustererplus.client.ClusterIconStyle;
 import com.google.gwt.maps.utility.markerclustererplus.client.MarkerClusterer;
 import com.google.gwt.maps.utility.markerclustererplus.client.MarkerClustererOptions;
 
@@ -94,6 +107,10 @@ public class Home extends Composite {
 	@UiField
 	SimpleLayoutPanel map_canvas;	
 	@UiField
+	HorizontalPanel badge;
+	@UiField
+	HorizontalPanel mapoverlay;
+	@UiField
 	MenuBar legend;
 	@UiField
 	Button works, about, contact, signin, privacy, about2, contact2, blog, android, support;
@@ -129,13 +146,13 @@ public class Home extends Composite {
 				MenuBar menu = new MenuBar(true);
 				menu.setStyleName(res.style().menu());
 				System.out.println("TRYING TO ADD TO MENU");
-				MenuItem item = new MenuItem("Your Past Reports", new Command() {
+				MenuItem item = new MenuItem("", new Command() {
 				      @Override
 				      public void execute() {
 				      }
 				});
-				item.setStyleName(res.style().blackText());
-			    menu.addItem(item);
+//				item.setStyleName(res.style().blackText());
+//			    menu.addItem(item);
 				for(int i=0; i<Constants.userInfo.length; i++) {
 					
 					if(i>10) break;
@@ -144,7 +161,7 @@ public class Home extends Composite {
 					String [] temp;
 					temp = element.split(" ");
 					if(temp.length!=3) continue;
-					String output=Constants.retranslate(temp[2])+", on "+date.toString();
+					String output=Constants.retranslate(temp[2])+" on "+date.toString();
 					final double lat = Double.parseDouble(temp[0]);
 					final double lng = Double.parseDouble(temp[1]);
 					
@@ -153,7 +170,19 @@ public class Home extends Composite {
 							   SafeHtmlUtils.fromString(output)), new Command() {
 					      @Override
 					      public void execute() {
-					    	  LatLng latlong=LatLng.newInstance(lat, lng);					    	  
+					    	  LatLng latlong=LatLng.newInstance(lat, lng);	
+					    	  for(int i=0;i<dataPoints.length();i++)
+					    	  {
+					    		  
+					    		  if(latlong.equals(dataPoints.get(i)))
+					    		  {
+					    			 
+					    			  
+					    			  al.get(i).setAnimation(Animation.BOUNCE);
+					    			  
+					    			 
+					    		  }
+					    	  }
 					    	  map.setZoom(18);
 					    	  map.setCenter(latlong);
 					    	  
@@ -265,13 +294,13 @@ public class Home extends Composite {
 		}
 	};
 	
-//	@UiField
-//	Button home;
-//	@UiHandler("home")
-//	protected void onClickHandler(final ClickEvent event) {
-//		map.setCenter(initialLocation);
-//		
-//	}
+	@UiField
+	PushButton home;
+	@UiHandler("home")
+	protected void onClickHandler(final ClickEvent event) {
+		map.setCenter(initialLocation);
+		
+	}
 
 	public void userManager() {  
 		
@@ -292,6 +321,8 @@ public class Home extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));		
 		// Building the map
 		
+	    
+		drawBadge();
 		MapOptions myOptions = MapOptions.newInstance();
 	    myOptions.setZoom(17);
 	    myOptions.setStreetViewControl(true);	   
@@ -300,6 +331,13 @@ public class Home extends Composite {
 	    map = new MapWidget(myOptions);
 	    
 	    final MarkerClustererOptions mo= MarkerClustererOptions.newInstance();
+	    ClusterIconStyle cis=ClusterIconStyle.newInstance();
+	    cis.setUrl("cluster.png");
+	    cis.setHeight(37);
+	    cis.setWidth(32);
+	    cis.setTextSize(15);
+	    cis.setTextColor("white");
+	    mo.setStyle(cis);
 	    mc=MarkerClusterer.newInstance(map,mo);
 	    
 	    map_canvas.add(map);
@@ -353,7 +391,20 @@ public class Home extends Composite {
 	    });	
 	    
 	    //Map built
-
+	    final StreetViewPanoramaImpl streetview =map.getStreetView();
+	    streetview.addVisibleChangeHandler(new VisibleChangeMapHandler(){
+	    	public void onEvent(VisibleChangeMapEvent E)
+	    	{
+	    		if(streetview.getVisible())
+	    		{
+	    			mapoverlay.setVisible(false);
+	    		}
+	    		else
+	    		{
+	    			mapoverlay.setVisible(true);
+	    		}
+	    	}
+	    });
 	    initialise();
 
 		final LatLng myLatLng = LatLng.newInstance(28.60753,77.03505);
@@ -376,11 +427,13 @@ public class Home extends Composite {
 				      	newMarkerOpts2.setAnimation(Animation.BOUNCE);
 				      	newMarkerOpts2.setIcon("home-2.png");
 				      	Marker.newInstance(newMarkerOpts2);
-				        map.setCenter(initialLocation);		              
+				        map.setCenter(initialLocation);		 
+				        
 			        }
 		
 		            public void onFailure(PositionError reason) {
 		            	
+		            	Window.alert("Your location could not be determined");
 		            	map.setZoom(14);
 		            	map.setCenter(myLatLng);
 		            }
@@ -388,6 +441,7 @@ public class Home extends Composite {
 			          });
 			} else {
 				
+				Window.alert("Sorry! Geolocation is not supported or is disabled by your Browser");
 				initialLocation = myLatLng;
 				myOptions.setCenter(myLatLng);
 			}
@@ -414,7 +468,20 @@ public class Home extends Composite {
 
 	    });
 	  }
-	
+	private void drawBadge() {
+	    
+		String s = "<g:page width=\"200\" href=\"https://plus.google.com/102192205824377892093\" rel=\"publisher\"></g:page>";
+	    HTML h = new HTML(s);
+	    badge.add(h);
+	    
+	    // You can insert a script tag this way or via your .gwt.xml
+	    Document doc = Document.get();
+	    ScriptElement script = doc.createScriptElement();
+	    script.setSrc("https://apis.google.com/js/platform.js");
+	    script.setType("text/javascript");
+	    script.setLang("javascript");
+	    doc.getBody().appendChild(script);
+	  }
 	private void clear()
 	{
 		for(int i=0;i<al.size();i++)
@@ -547,7 +614,8 @@ public class Home extends Composite {
 		 
 		 legendDetails.setAnimationEnabled(true);
 		 legendDetails.showWidget(0);
-		 
+		 home.setTitle("Click to zap to your location !");		
+		 toggle.setTitle("Toggle between Clustered and HeatMap View");
 		 final AutocompleteOptions options = AutocompleteOptions.newInstance();
 	     final Autocomplete autocomplete = Autocomplete.newInstance(input.getElement(), options);    
 	     final InfoWindowOptions infoopts= InfoWindowOptions.newInstance();
