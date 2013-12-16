@@ -44,7 +44,10 @@ public class MainDialogBox extends DialogBox {
 	  @UiHandler("okButton")	  
 	  void onSubmit(ClickEvent e) {
 		  
-		  if(uri.equals(null) || uri.equals("") || date.equals(null)) return;
+		  if(uri.equals(null) || uri.equals("") || date.equals(null)) 
+			  {
+			  return;
+			  }
 		  Constants.uri = uri;
 		  String parser = date.getValue().toString();
 		  String [] split = parser.split(" ");

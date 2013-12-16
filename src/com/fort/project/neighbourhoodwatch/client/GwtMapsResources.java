@@ -11,6 +11,12 @@ public interface GwtMapsResources extends ClientBundle {
 	  
       String blackText();
       
+      String footerback();
+      
+      String box1();
+      
+      String box2();
+      
       String bigbtn();
       
       String footer();
@@ -20,6 +26,8 @@ public interface GwtMapsResources extends ClientBundle {
       String homeback();
       
       String button2();
+      
+      String button3();
       
       String buttonh();
       
@@ -57,14 +65,19 @@ public interface GwtMapsResources extends ClientBundle {
    @Source("Home.css")
    MyCss style();
    
-   @Source("aboutustext.txt")
+   @Source("aboutustxt.txt")
    TextResource text();
    
-   @Source("privacytext.txt")
+   @Source("privacytxt.txt")
    TextResource text1();
+   
+   @Source("workstxt.txt")
+   TextResource text2();
    
    @Source("Home-icon.png")
    ImageResource homebtn();
    @Source("Home-icon2.png")
    ImageResource homebtn2();
+   @Source("pf_logo.png")
+   ImageResource logoimg();
 }

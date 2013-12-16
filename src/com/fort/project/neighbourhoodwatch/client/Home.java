@@ -28,6 +28,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -35,7 +36,6 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -114,6 +114,7 @@ public class Home extends Composite {
 	MenuBar legend;
 	@UiField
 	Button works, about, contact, signin, privacy, about2, contact2, blog, android, support;
+	
 	@UiField
 	DeckPanel legendDetails;
 	@UiField
@@ -293,7 +294,8 @@ public class Home extends Composite {
 			anchorHandler();				
 		}
 	};
-	
+	@UiField
+	PushButton logo;
 	@UiField
 	PushButton home;
 	@UiHandler("home")
@@ -321,7 +323,62 @@ public class Home extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));		
 		// Building the map
 		
-	    
+		about.addClickHandler(new ClickHandler(){
+	        @Override
+	        public void onClick(ClickEvent event) {
+	        	History.newItem("About");
+	           }
+
+	    });
+	 about2.addClickHandler(new ClickHandler(){
+	        @Override
+	        public void onClick(ClickEvent event) {
+	        	History.newItem("About");
+	           }
+
+	    }); 
+		contact.addClickHandler(new ClickHandler(){
+		        @Override
+		        public void onClick(ClickEvent event) {
+		        	History.newItem("Contact");
+		           }
+
+		    });
+		 contact2.addClickHandler(new ClickHandler(){
+		        @Override
+		        public void onClick(ClickEvent event) {
+		        	History.newItem("Contact");
+		           }
+
+		    });
+		 privacy.addClickHandler(new ClickHandler(){
+		        @Override
+		        public void onClick(ClickEvent event) {
+		        	History.newItem("Privacy");
+		           }
+
+		    });
+		 blog.addClickHandler(new ClickHandler(){
+		        @Override
+		        public void onClick(ClickEvent event) {
+		        	Window.open("http://publicfortress.blogspot.in/","_blank","");
+		           }
+
+		    });
+		 logo.addClickHandler(new ClickHandler(){
+		        @Override
+		        public void onClick(ClickEvent event) {
+		        	History.newItem("Home");
+		           }
+
+		    });
+		 works.addClickHandler(new ClickHandler(){
+		        @Override
+		        public void onClick(ClickEvent event) {
+		        	History.newItem("Works");
+		           }
+
+		    });
 		drawBadge();
 		MapOptions myOptions = MapOptions.newInstance();
 	    myOptions.setZoom(17);
@@ -528,7 +585,9 @@ public class Home extends Composite {
 	            public void onEvent(ClickMapEvent event) {
 	            	
 	            	MarkerDialogBox dialogBox = new MarkerDialogBox(date, info, uri);
-	                dialogBox.setGlassEnabled(true);
+	            	dialogBox.setStyleName(res.style().box2());
+	            	
+	            	dialogBox.setGlassEnabled(true);
 	                dialogBox.setText(Constants.retranslate(uri));	
 	                dialogBox.center();
 	            }
@@ -589,7 +648,8 @@ public class Home extends Composite {
 			
 		 markerService.getMarks(getMarks);
 		 
-		 final SlideAnimation animation = new SlideAnimation(legendDetails);
+		 @SuppressWarnings("unused")
+		final SlideAnimation animation = new SlideAnimation(legendDetails);
 		 
 		 for(int i=0; i<Constants.legend.length; i++) {
 			 
@@ -634,8 +694,9 @@ public class Home extends Composite {
 			}
 	     });
 		 
-		 dialogBox.setGlassEnabled(true);
-		 dialogBox.setText("Enter Details"); 
+		 dialogBox.setStyleName(res.style().box1());
+	     dialogBox.setGlassEnabled(true);
+		 //dialogBox.setText("Enter Details"); 
 		 dialogBox.addCloseHandler(new CloseHandler<PopupPanel>() {
 			
 			@Override

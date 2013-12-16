@@ -46,7 +46,14 @@
       <servlet-name>GAEJCronServlet</servlet-name>
       <url-pattern>/publicfortress/gaejcronjob</url-pattern>
   </servlet-mapping>
-
+<servlet>
+    <servlet-name>MailServlet</servlet-name>
+    <servlet-class>com.fort.project.neighbourhoodwatch.server.MailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MailServlet</servlet-name>
+    <url-pattern>/publicfortress/mailservlet</url-pattern>
+    </servlet-mapping>
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>PublicFortress.html</welcome-file>

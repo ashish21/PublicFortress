@@ -1,7 +1,12 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
-    
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'
+    xmlns:dp="urn:import:com.google.gwt.user.datepicker.client" 
+   	xmlns:res="urn:with:com.fort.project.neighbourhoodwatch.client.GwtMapsResources">
+   	
+    <ui:with type="com.fort.project.neighbourhoodwatch.client.GwtMapsResources" field="res">
+   	</ui:with>
+   	
     
     <ui:style>
 
@@ -12,14 +17,14 @@
    border: 2px solid #AACCEE;
    display: block;
    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-   font-size: 15px;   
+   font-size: 16px;   
    font: bold; 
    margin: 0 0 3px;
 }  
 
 .blackText {
    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-   font-size: 18px;   
+   font-size: 17px;   
    font: bold; 
 }
 
@@ -92,14 +97,17 @@
     </ui:style>
     
     <g:SimplePanel ui:field="mainPanel" styleName="{style.panel}">
-        <g:HTMLPanel>
+        <g:VerticalPanel>
         	<g:Image ui:field="image"></g:Image>                
             <g:Label styleName="{style.blackText}" text="Happened on:"></g:Label>
             <g:TextBox styleName="{style.box}" ui:field="dateBox"></g:TextBox>
             <g:Label styleName="{style.blackText}" text="Information provided by user:"></g:Label>
             <g:TextBox styleName="{style.box}" ui:field="infoBox"></g:TextBox>
-            <g:Button styleName="{style.button_red}" ui:field="close" text="Close"></g:Button>
-        </g:HTMLPanel>
+            <g:HTMLPanel width="100%" height="15px" />
+            <g:cell  horizontalAlignment="ALIGN_CENTER">
+            <g:Button width="150px" styleName="{res.style.button2}" ui:field="close" text="Close"></g:Button>
+            </g:cell>
+        </g:VerticalPanel>
     </g:SimplePanel>
     
 </ui:UiBinder>

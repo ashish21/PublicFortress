@@ -13,15 +13,18 @@ public class MyHistoryListener implements ValueChangeHandler<String> {
 		if (event.getValue().equals("Home")){
     		RootLayoutPanel.get().clear();
     		RootLayoutPanel.get().add(Home.getInstance());
-		} else if (event.getValue().equals("Contactus")){
+		} else if (event.getValue().equals("Contact")){
 			RootLayoutPanel.get().clear();
-			RootLayoutPanel.get().add(ContactUs.getInstance());
-		} else if (event.getValue().equals("Aboutus")){
+			RootLayoutPanel.get().add(Contact.getInstance());
+		} else if (event.getValue().equals("About")){
 			RootLayoutPanel.get().clear();
-			RootLayoutPanel.get().add(AboutUs.getInstance());
+			RootLayoutPanel.get().add(About.getInstance());
 		} else if (event.getValue().equals("Privacy")){
 			RootLayoutPanel.get().clear();
 			RootLayoutPanel.get().add(Privacy.getInstance());
+		} else if (event.getValue().equals("Works")){
+			RootLayoutPanel.get().clear();
+			RootLayoutPanel.get().add(Works.getInstance());
 		}	
 	}
 
