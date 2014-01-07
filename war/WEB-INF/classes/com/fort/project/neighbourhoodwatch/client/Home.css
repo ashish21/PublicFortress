@@ -58,13 +58,17 @@ padding: 20px 20px 20px 20px;
   background:#ffffff;
   position:relative;
   box-shadow:0px 0px 8px #d5d5d5;
-  
-  font-weight: bold;
+ 
 float: left;
 display: block;
 line-height: 24px;
 
 
+}
+.boxtxt{
+	 font-family: arial, helvetica, sans-serif;
+ font-size:15px;
+ font-weight:bold;
 }
 .footerback
 {

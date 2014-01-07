@@ -1,21 +1,18 @@
 <p>&nbsp;</p>
-<p><span style="font-size: x-large;"><strong>Features</strong></span></p>
+<p><span style="font-size: 20px; font-family: arial, helvetica, sans-serif;"><strong>Features</strong></span></p>
+<p><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Report crimes,bribes,disaters on Google Map</span></p>
+<p><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Login feature through Google Account</span></p>
+<p><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Search for places with autocomplete feature</span></p>
+<p><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Option to toggle between Clustering based Map and Heatmap based Map</span></p>
+<p><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Filter Crimes on Map among different types of crimes</span></p>
+<p><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Details of latest reports within user's city</span></p>
+<p><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">View Details of reports, comment on it with thumbs up/down option and flag wrong reports</span></p>
+<p><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Details of user's past crimes and also crimes near user's location</span></p>
 <p>&nbsp;</p>
-<p><span style="font-size: medium;">Report crimes,bribes,disaters on Google Map</span></p>
-<p><span style="font-size: medium;">Login feature through Google Account</span></p>
-<p><span style="font-size: medium;">Search for places with autocomplete feature</span></p>
-<p><span style="font-size: medium;">Option to toggle between Clustering based Map and Heatmap based Map</span></p>
-<p><span style="font-size: medium;">Filter Crimes on Map among different types of crimes</span></p>
-<p><span style="font-size: medium;">Details of latest reports within user's city</span></p>
-<p><span style="font-size: medium;">View Details of reports, comment on it with thumbs up/down option and flag wrong reports</span></p>
-<p><span style="font-size: medium;">Details of user's past crimes and also crimes near user's location</span></p>
+<p><span style="font-size: 20px; font-family: arial, helvetica, sans-serif;"><strong>Techstack</strong></span></p>
+<p><span style="font-size: 18px; font-family: arial, helvetica, sans-serif;"><strong>Developed using:</strong></span></p>
+<p><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Google Web Toolkit for Java</span><br /><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Google App Engine for Java</span></p>
 <p>&nbsp;</p>
-<p>&nbsp;</p>
-<p><span style="font-size: x-large;"><strong>Techstack</strong></span></p>
-<p>&nbsp;</p>
-<p><span style="font-size: large;"><strong>Developed using:</strong></span></p>
-<p><span style="font-size: medium;">Google Web Toolkit for Java</span><br /><span style="font-size: medium;">Google App Engine for Java</span></p>
-<p>&nbsp;</p>
-<p><span style="font-size: large;"><strong>Usage of API's including:</strong></span></p>
-<p><span style="font-size: medium;">Google Maps API</span><br /><span style="font-size: medium;">(including Places,Geometry,Visualization libraries)</span><br /><span style="font-size: medium;">Google Accounts API</span><br /><span style="font-size: medium;">Datastore API</span><br /><span style="font-size: medium;">Google WebFonts API</span><br /><span style="font-size: medium;">JavaMail API</span><br /><span style="font-size: medium;">Facebook API</span><br /><span style="font-size: medium;">Youtube API</span><br /><span style="font-size: medium;">Google Plus API</span><br /><span style="font-size: medium;">Twitter API</span></p>
-<p><span style="font-size: medium;">&nbsp;</span></p>
+<p><span style="font-size: 18px; font-family: arial, helvetica, sans-serif;"><strong>Usage of API's including:</strong></span></p>
+<p><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Google Maps API</span><br /><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">(including Places,Geometry,Visualization libraries)</span><br /><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Google Accounts API</span><br /><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Datastore API</span><br /><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Google WebFonts API</span><br /><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">JavaMail API</span><br /><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Facebook API</span><br /><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Youtube API</span><br /><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Google Plus API</span><br /><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Twitter API</span></p>
+<p><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">&nbsp;</span></p>

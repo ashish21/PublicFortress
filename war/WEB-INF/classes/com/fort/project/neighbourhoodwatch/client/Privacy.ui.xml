@@ -280,7 +280,7 @@ box-shadow: -4px -4px 0px #f7f7f7, 4px 4px 0px #f7f7f7, 4px -4px 0px #f7f7f7, -4
 		 				            </g:Label>	
 		 				            <g:HorizontalPanel width="100%">		 				                
 		 				                <g:cell horizontalAlignment='ALIGN_LEFT' verticalAlignment="ALIGN_MIDDLE">
-		 				                    <g:Label>There are many ways in which you can help us. Tell your friends about our Website and click the button below to give feedback and help improve the site.</g:Label>
+		 				                    <g:Label styleName="{res.style.boxtxt}" >There are many ways in which you can help us. Tell your friends about our Website and click the button below to give feedback and help improve the site.</g:Label>
 		 				                </g:cell>	
 		 				                <g:cell width="20px"> 
 	    						<g:Label width="100%"/>

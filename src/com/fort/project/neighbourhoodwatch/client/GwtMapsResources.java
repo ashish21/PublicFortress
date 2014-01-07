@@ -13,6 +13,8 @@ public interface GwtMapsResources extends ClientBundle {
       
       String slogan();
       
+      String boxtxt();
+      
       String footerback();
       
       String box1();
