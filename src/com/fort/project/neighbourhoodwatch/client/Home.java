@@ -509,8 +509,8 @@ public class Home extends Composite {
 	           }
 
 	    });
-	    
-	 
+	    home.setTitle("Click to go to zap to your location");
+	    toggle.setTitle("Click to toggle between Cluster and Heatmap view");
 	  }
 	
 	protected void performCrimeVicinityTest(final LatLng initialLocation2) {

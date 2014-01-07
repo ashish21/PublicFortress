@@ -461,6 +461,9 @@ public class Report extends Composite {
 							      magic, setCounter);
 					} 
 				 });
+			 up.setTitle("Click if the report is correct");
+			 down.setTitle("Click if the report is incorrect");
+			 flag.setTitle("Click if you think this is a false report");
 		 }
 		 
 		 Timer timer = new Timer() {
