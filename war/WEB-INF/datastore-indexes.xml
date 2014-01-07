@@ -4,5 +4,7 @@
     <datastore-index kind="Parent" ancestor="true" source="manual">
         <property name="date" direction="desc"/>
     </datastore-index>
+    <datastore-index kind="Counter" ancestor="true" source="manual">
+    </datastore-index>
     
 </datastore-indexes>

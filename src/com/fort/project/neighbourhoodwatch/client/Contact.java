@@ -24,7 +24,7 @@ public class Contact extends Composite {
 	@UiField(provided = true)
 	final GwtMapsResources res;	
 	@UiField
-	HorizontalPanel badge;
+	HorizontalPanel badge,twitter;
 	@UiField
 	Button submit;
 	@UiField
@@ -36,7 +36,7 @@ public class Contact extends Composite {
 	@UiField
 	TextArea msg;
 	@UiField
-	Button works, about, contact, signin, privacy, about2, contact2, blog, android, support;
+	Button works, about, contact, homepage, privacy, about2, contact2, blog, android, support;
 	@UiField
 	PushButton logo;
 	private static AbotUiBinder uiBinder = GWT.create(AbotUiBinder.class);
@@ -49,6 +49,7 @@ public class Contact extends Composite {
 		res.style().ensureInjected();	
 		initWidget(uiBinder.createAndBindUi(this));
 		drawBadge();
+		drawTwitter();
 		about.addClickHandler(new ClickHandler(){
 	        @Override
 	        public void onClick(ClickEvent event) {
@@ -105,6 +106,20 @@ public class Contact extends Composite {
 		           }
 
 		    });
+		 homepage.addClickHandler(new ClickHandler(){
+		        @Override
+		        public void onClick(ClickEvent event) {
+		        	History.newItem("Home");
+		           }
+
+		    });
+		 support.addClickHandler(new ClickHandler(){
+		        @Override
+		        public void onClick(ClickEvent event) {
+		        	History.newItem("Contact");
+		           }
+
+		    });
 		submit.addClickHandler(new ClickHandler(){
 	        @Override
 	        public void onClick(ClickEvent event) {
@@ -125,6 +140,7 @@ public class Contact extends Composite {
 	           }
 
 	    });
+	
 	}
 		
 	public static Contact getInstance(){
@@ -148,5 +164,22 @@ public class Contact extends Composite {
 	    script.setLang("javascript");
 	    doc.getBody().appendChild(script);
 	  }
+private void drawTwitter() {
+	    
+		
+		String s = "<a class=\"twitter-timeline\" width=\"520\" height=\"320\" href=\"https://twitter.com/NWatch_gcdc\" data-widget-id=\"418124860338864128\">Tweets by @NWatch_gcdc</a>";
+
+	   
+		HTML h = new HTML(s);
+		    twitter.add(h);
+		    
+		    // You can insert a script tag this way or via your .gwt.xml
+		    Document doc = Document.get();
+		    ScriptElement script = doc.createScriptElement();
+		    script.setSrc("https://platform.twitter.com/widgets.js");
+		    script.setType("text/javascript");
+		    script.setLang("javascript");
+		    doc.getBody().appendChild(script);
+		  }
 
 }

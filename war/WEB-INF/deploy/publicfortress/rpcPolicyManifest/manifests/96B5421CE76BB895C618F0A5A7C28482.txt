@@ -1,0 +1,2 @@
+serviceClass: com.fort.project.neighbourhoodwatch.client.CounterService
+path: EA05305DA99B253668841897FCF4C290.gwt.rpc

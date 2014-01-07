@@ -22,10 +22,13 @@ public class MyHistoryListener implements ValueChangeHandler<String> {
 		} else if (event.getValue().equals("Privacy")){
 			RootLayoutPanel.get().clear();
 			RootLayoutPanel.get().add(Privacy.getInstance());
-		} else if (event.getValue().equals("Works")){
+		} else if (event.getValue().equals("Report")){
+			RootLayoutPanel.get().clear();
+			RootLayoutPanel.get().add(new Report());
+		}  else if (event.getValue().equals("Works")){
 			RootLayoutPanel.get().clear();
 			RootLayoutPanel.get().add(Works.getInstance());
-		}	
+		} 
 	}
 
 }

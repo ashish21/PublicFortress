@@ -1,26 +1,59 @@
 	package com.fort.project.neighbourhoodwatch.client;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 
 import com.fort.project.neighbourhoodwatch.shared.Constants;
+import com.fort.project.neighbourhoodwatch.shared.Constants.bundle;
+import com.google.gwt.ajaxloader.client.ArrayHelper;
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.ScriptElement;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.geolocation.client.Geolocation;
 import com.google.gwt.geolocation.client.Position;
 import com.google.gwt.geolocation.client.Position.Coordinates;
 import com.google.gwt.geolocation.client.PositionError;
+import com.google.gwt.maps.client.MapOptions;
+import com.google.gwt.maps.client.MapTypeId;
+import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.base.LatLng;
+import com.google.gwt.maps.client.events.click.ClickMapEvent;
+import com.google.gwt.maps.client.events.click.ClickMapHandler;
+import com.google.gwt.maps.client.events.mouseout.MouseOutMapEvent;
+import com.google.gwt.maps.client.events.mouseout.MouseOutMapHandler;
+import com.google.gwt.maps.client.events.mouseover.MouseOverMapEvent;
+import com.google.gwt.maps.client.events.mouseover.MouseOverMapHandler;
 import com.google.gwt.maps.client.events.place.PlaceChangeMapEvent;
 import com.google.gwt.maps.client.events.place.PlaceChangeMapHandler;
-import com.google.gwt.maps.client.events.visible.VisibleChangeMapEvent;
-import com.google.gwt.maps.client.events.visible.VisibleChangeMapHandler;
+import com.google.gwt.maps.client.geometrylib.SphericalUtils;
+import com.google.gwt.maps.client.overlays.Animation;
+import com.google.gwt.maps.client.overlays.InfoWindow;
+import com.google.gwt.maps.client.overlays.InfoWindowOptions;
+import com.google.gwt.maps.client.overlays.Marker;
+import com.google.gwt.maps.client.overlays.MarkerOptions;
 import com.google.gwt.maps.client.placeslib.Autocomplete;
 import com.google.gwt.maps.client.placeslib.AutocompleteOptions;
 import com.google.gwt.maps.client.placeslib.PlaceResult;
-import com.google.gwt.maps.client.streetview.StreetViewPanoramaImpl;
+import com.google.gwt.maps.client.services.Geocoder;
+import com.google.gwt.maps.client.services.GeocoderRequest;
+import com.google.gwt.maps.client.services.GeocoderRequestHandler;
+import com.google.gwt.maps.client.services.GeocoderResult;
+import com.google.gwt.maps.client.services.GeocoderStatus;
+import com.google.gwt.maps.client.visualizationlib.HeatMapLayer;
+import com.google.gwt.maps.client.visualizationlib.HeatMapLayerOptions;
+import com.google.gwt.maps.utility.markerclustererplus.client.ClusterIconStyle;
+import com.google.gwt.maps.utility.markerclustererplus.client.MarkerClusterer;
+import com.google.gwt.maps.utility.markerclustererplus.client.MarkerClustererOptions;
 import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
@@ -32,10 +65,13 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -43,34 +79,7 @@ import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimpleLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
-
-import java.util.ArrayList;
-
-import com.google.gwt.ajaxloader.client.ArrayHelper;
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.JsArray;
-import com.google.gwt.core.client.JsArrayString;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.ScriptElement;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.maps.client.MapOptions;
-import com.google.gwt.maps.client.MapTypeId;
-import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.events.click.ClickMapEvent;
-import com.google.gwt.maps.client.events.click.ClickMapHandler;
-import com.google.gwt.maps.client.overlays.Animation;
-import com.google.gwt.maps.client.overlays.InfoWindow;
-import com.google.gwt.maps.client.overlays.InfoWindowOptions;
-import com.google.gwt.maps.client.overlays.Marker;
-import com.google.gwt.maps.client.overlays.MarkerOptions;
-import com.google.gwt.maps.client.visualizationlib.HeatMapLayer;
-import com.google.gwt.maps.client.visualizationlib.HeatMapLayerOptions;
-import com.google.gwt.maps.utility.markerclustererplus.client.ClusterIconStyle;
-import com.google.gwt.maps.utility.markerclustererplus.client.MarkerClusterer;
-import com.google.gwt.maps.utility.markerclustererplus.client.MarkerClustererOptions;
-
-
-
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Home extends Composite {
 	
@@ -81,51 +90,89 @@ public class Home extends Composite {
         }
         return _instance;
 	}
+	
+	
 	interface LoginWidgetURLBinder extends UiBinder <ScrollPanel, Home> {	}	
 	private static LoginWidgetURLBinder uiBinder = GWT.create(LoginWidgetURLBinder.class);
 	
-	private MapWidget map;
-	private JsArray<LatLng> dataPoints= JavaScriptObject.createArray().cast();
-	private MarkerClusterer mc;
-	private ArrayList<Marker> al = new ArrayList<Marker>();
-	public LoginInfo loginInfo = null;
+	public static MapWidget map;    
+    	
+	private MarkerClusterer cluster;
+	private HeatMapLayer heatMapLayer;
+	
+	private HashMap<String, ArrayList<Marker>> markerMap = new HashMap<String, ArrayList<Marker>>();
+	private HashMap<String, JsArray<LatLng>> dataMap = new HashMap<String, JsArray<LatLng>>();
+	
+	private final ArrayList<holder> sortedOrder = new ArrayList<holder>();
+	
+	private int [] toShow = new int[Constants.legend.length];
+	private String address = "?", addressOfUser="?";
+	public static LoginInfo loginInfo = null;
 	private LatLng initialLocation;	
     String url= "", link="";    
-    int t;
+    private int t;
 	private MainDialogBox dialogBox = new MainDialogBox();
     
 	private MarkerServiceAsync markerService = GWT.create(MarkerService.class);
-	private UserServiceAsync userService = GWT.create(UserService.class);
 	private MyTemplate template = GWT.create(MyTemplate.class);
 	
 	@UiField
-	ScrollPanel scroll;		
+	ScrollPanel scrollPast, scrollRecent, scrollNear;	
 	@UiField(provided = true)
 	final GwtMapsResources res;	
 	@UiField
 	TextBox input;	
 	@UiField
-	SimpleLayoutPanel map_canvas;	
+	SimpleLayoutPanel map_canvas;
 	@UiField
 	HorizontalPanel badge;
+	@UiField
+	HorizontalPanel twitter;
 	@UiField
 	HorizontalPanel mapoverlay;
 	@UiField
 	MenuBar legend;
 	@UiField
-	Button works, about, contact, signin, privacy, about2, contact2, blog, android, support;
-	
+	Button works, about, contact, signin, privacy, about2, contact2, blog, android, support, toggle, past, nearby, latest, customize;
 	@UiField
-	DeckPanel legendDetails;
+	DeckPanel legendDetails, togglePanel;
 	@UiField
-	Button toggle;
-	
-	
+	VerticalPanel checkBoxes;
+	@UiField
+	PushButton logo;
+	@UiField
+	PushButton home;
+	@UiHandler("home")
+	protected void onClickHandler(final ClickEvent event) {
+		map.setCenter(initialLocation);
+		
+	}
 	
 	@UiHandler("signin")
 	void singin(ClickEvent e) {
 
 		Window.open(link, "replace", "");
+	}
+	
+	@UiHandler("past")
+	void past(ClickEvent e) {
+
+		togglePanel.showWidget(1);
+	}
+	@UiHandler("nearby")
+	void nearby(ClickEvent e) {
+
+		togglePanel.showWidget(3);
+	}
+	@UiHandler("latest")
+	void latest(ClickEvent e) {
+
+		togglePanel.showWidget(2);
+	}
+	@UiHandler("customize")
+	void customize(ClickEvent e) {
+
+		togglePanel.showWidget(0);
 	}
 	
 	AsyncCallback<Date[]> getDate = new AsyncCallback<Date []>() {
@@ -147,13 +194,13 @@ public class Home extends Composite {
 				MenuBar menu = new MenuBar(true);
 				menu.setStyleName(res.style().menu());
 				System.out.println("TRYING TO ADD TO MENU");
-				MenuItem item = new MenuItem("", new Command() {
+				MenuItem item = new MenuItem("Your Past Reports", new Command() {
 				      @Override
 				      public void execute() {
 				      }
-				});
-//				item.setStyleName(res.style().blackText());
-//			    menu.addItem(item);
+				});				
+				item.setStyleName(res.style().blackText());
+			    menu.addItem(item);
 				for(int i=0; i<Constants.userInfo.length; i++) {
 					
 					if(i>10) break;
@@ -162,7 +209,7 @@ public class Home extends Composite {
 					String [] temp;
 					temp = element.split(" ");
 					if(temp.length!=3) continue;
-					String output=Constants.retranslate(temp[2])+" on "+date.toString();
+					String output=Constants.retranslate(temp[2])+", on "+date.toString();
 					final double lat = Double.parseDouble(temp[0]);
 					final double lng = Double.parseDouble(temp[1]);
 					
@@ -171,19 +218,7 @@ public class Home extends Composite {
 							   SafeHtmlUtils.fromString(output)), new Command() {
 					      @Override
 					      public void execute() {
-					    	  LatLng latlong=LatLng.newInstance(lat, lng);	
-					    	  for(int i=0;i<dataPoints.length();i++)
-					    	  {
-					    		  
-					    		  if(latlong.equals(dataPoints.get(i)))
-					    		  {
-					    			 
-					    			  
-					    			  al.get(i).setAnimation(Animation.BOUNCE);
-					    			  
-					    			 
-					    		  }
-					    	  }
+					    	  LatLng latlong=LatLng.newInstance(lat, lng);					    	  
 					    	  map.setZoom(18);
 					    	  map.setCenter(latlong);
 					    	  
@@ -195,10 +230,9 @@ public class Home extends Composite {
 				
 				if(menu != null) {	
 					
-					scroll.add(menu.asWidget());
-					scroll.setHeight("250px");
-					scroll.onResize();
-					scroll.setVisible(true);
+					scrollPast.add(menu.asWidget());
+					scrollPast.setHeight("250px");
+					past.setVisible(true);
 				}				
 			}		
 		}
@@ -226,9 +260,30 @@ public class Home extends Composite {
 						  Constants.symbols.get(i).type, 
 						  Constants.symbols.get(i).strength,
 						  Constants.symbols.get(i).date,
-						  Constants.symbols.get(i).info);
+						  Constants.symbols.get(i).info,
+						  Constants.symbols.get(i).tups,
+						  Constants.symbols.get(i).tdwns,
+						  Constants.symbols.get(i).flags,
+						  Constants.symbols.get(i).address,
+						  Constants.symbols.get(i).id);
 			}
-			mc.addMarkers(al);
+			
+        	clear();
+        	cluster.clearMarkers();
+			for(ArrayList<Marker> a : markerMap.values()) {
+				
+				cluster.addMarkers(a);
+			}			
+	        JsArray<LatLng> dataPoints = JavaScriptObject.createArray().cast();
+		    for(JsArray<LatLng> a : dataMap.values()) {
+		    	
+		    	for(int i=0; i<a.length(); i++) {
+		    		
+		    		dataPoints.push(a.get(i));
+		    	}
+		    }
+		    show();
+		    heatMapLayer.setData(dataPoints);
 		}
 
 		@Override
@@ -245,7 +300,6 @@ public class Home extends Composite {
 
 			System.out.println("USer details received");
 			Constants.userInfo = result;	
-			userService.getDate(getDate);
 		}
 
 		@Override
@@ -286,7 +340,6 @@ public class Home extends Composite {
 				
 				Constants.setLoggenIn(true);
 				System.out.println("Calling get userdetails");
-				userService.getUser(loginInfo.getNickname(), getUserDetails);
 			
 			} else {
 				Constants.setLoggenIn(false);
@@ -294,15 +347,14 @@ public class Home extends Composite {
 			anchorHandler();				
 		}
 	};
-	@UiField
-	PushButton logo;
-	@UiField
-	PushButton home;
-	@UiHandler("home")
-	protected void onClickHandler(final ClickEvent event) {
-		map.setCenter(initialLocation);
-		
-	}
+	
+//	@UiField
+//	Button home;
+//	@UiHandler("home")
+//	protected void onClickHandler(final ClickEvent event) {
+//		map.setCenter(initialLocation);
+//		
+//	}
 
 	public void userManager() {  
 		
@@ -316,70 +368,11 @@ public class Home extends Composite {
 	public Home() {
 		
 		this.res = GWT.create(GwtMapsResources.class);
-		res.style().ensureInjected();		
-		
-		System.out.println("GwtMaps");
+		res.style().ensureInjected();	
 		
 		initWidget(uiBinder.createAndBindUi(this));		
 		// Building the map
 		
-		about.addClickHandler(new ClickHandler(){
-	        @Override
-	        public void onClick(ClickEvent event) {
-	        	History.newItem("About");
-	           }
-
-	    });
-	 about2.addClickHandler(new ClickHandler(){
-	        @Override
-	        public void onClick(ClickEvent event) {
-	        	History.newItem("About");
-	           }
-
-	    }); 
-		contact.addClickHandler(new ClickHandler(){
-		        @Override
-		        public void onClick(ClickEvent event) {
-		        	History.newItem("Contact");
-		           }
-
-		    });
-		 contact2.addClickHandler(new ClickHandler(){
-		        @Override
-		        public void onClick(ClickEvent event) {
-		        	History.newItem("Contact");
-		           }
-
-		    });
-		 privacy.addClickHandler(new ClickHandler(){
-		        @Override
-		        public void onClick(ClickEvent event) {
-		        	History.newItem("Privacy");
-		           }
-
-		    });
-		 blog.addClickHandler(new ClickHandler(){
-		        @Override
-		        public void onClick(ClickEvent event) {
-		        	Window.open("http://publicfortress.blogspot.in/","_blank","");
-		           }
-
-		    });
-		 logo.addClickHandler(new ClickHandler(){
-		        @Override
-		        public void onClick(ClickEvent event) {
-		        	History.newItem("Home");
-		           }
-
-		    });
-		 works.addClickHandler(new ClickHandler(){
-		        @Override
-		        public void onClick(ClickEvent event) {
-		        	History.newItem("Works");
-		           }
-
-		    });
-		drawBadge();
 		MapOptions myOptions = MapOptions.newInstance();
 	    myOptions.setZoom(17);
 	    myOptions.setStreetViewControl(true);	   
@@ -387,29 +380,26 @@ public class Home extends Composite {
 	    myOptions.setMinZoom(5);		
 	    map = new MapWidget(myOptions);
 	    
-	    final MarkerClustererOptions mo= MarkerClustererOptions.newInstance();
-	    ClusterIconStyle cis=ClusterIconStyle.newInstance();
+	    initialise();
+	    
+	    ClusterIconStyle cis= ClusterIconStyle.newInstance();
 	    cis.setUrl("cluster.png");
-	    cis.setHeight(37);
-	    cis.setWidth(32);
+	    cis.setHeight(40);
+	    cis.setWidth(40);
 	    cis.setTextSize(15);
 	    cis.setTextColor("white");
+	    
+	    final MarkerClustererOptions mo= MarkerClustererOptions.newInstance();	    
 	    mo.setStyle(cis);
-	    mc=MarkerClusterer.newInstance(map,mo);
+	    cluster=MarkerClusterer.newInstance(map, mo);
 	    
 	    map_canvas.add(map);
 	    
 	    final HeatMapLayerOptions options = HeatMapLayerOptions.newInstance();
 	    options.setOpacity(1);
-	    options.setRadius(5);
+	    options.setRadius(3);
 	    options.setGradient(getSampleGradient());
-	    
-
-	    final HeatMapLayer heatMapLayer = HeatMapLayer.newInstance(options);
-	    
-	    
-	    
-	    heatMapLayer.setData(dataPoints);
+	    heatMapLayer = HeatMapLayer.newInstance(options);
 	    
 	    map.addClickHandler(new ClickMapHandler() {
 	        public void onEvent(final ClickMapEvent event) {
@@ -448,21 +438,6 @@ public class Home extends Composite {
 	    });	
 	    
 	    //Map built
-	    final StreetViewPanoramaImpl streetview =map.getStreetView();
-	    streetview.addVisibleChangeHandler(new VisibleChangeMapHandler(){
-	    	public void onEvent(VisibleChangeMapEvent E)
-	    	{
-	    		if(streetview.getVisible())
-	    		{
-	    			mapoverlay.setVisible(false);
-	    		}
-	    		else
-	    		{
-	    			mapoverlay.setVisible(true);
-	    		}
-	    	}
-	    });
-	    initialise();
 
 		final LatLng myLatLng = LatLng.newInstance(28.60753,77.03505);
 	    if (Geolocation.isSupported()) {                // GEOLOCATION STARTS HERE !
@@ -472,6 +447,8 @@ public class Home extends Composite {
 		
 		            @Override
 		            public void onSuccess(Position result) {
+		            	
+		            	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		            	
 			            Coordinates coords = result.getCoordinates();
 			            initialLocation = LatLng.newInstance(coords.getLatitude(),
@@ -484,74 +461,320 @@ public class Home extends Composite {
 				      	newMarkerOpts2.setAnimation(Animation.BOUNCE);
 				      	newMarkerOpts2.setIcon("home-2.png");
 				      	Marker.newInstance(newMarkerOpts2);
-				        map.setCenter(initialLocation);		 
-				        
+
+		            	map.setZoom(14);
+				        map.setCenter(initialLocation);						        
+
+				        System.out.println(initialLocation);
+				        performCrimeVicinityTest(initialLocation);				        
 			        }
 		
 		            public void onFailure(PositionError reason) {
 		            	
-		            	Window.alert("Your location could not be determined");
 		            	map.setZoom(14);
-		            	map.setCenter(myLatLng);
+						initialLocation = myLatLng;
+				        map.setCenter(initialLocation);		
 		            }
 		 
 			          });
 			} else {
 				
-				Window.alert("Sorry! Geolocation is not supported or is disabled by your Browser");
 				initialLocation = myLatLng;
 				myOptions.setCenter(myLatLng);
 			}
-	    t=0;
-	    toggle.addClickHandler(new ClickHandler(){
+	    t=0;	    
+	    
+	    toggle.addClickHandler(new ClickHandler() {
 	        @Override
 	        public void onClick(ClickEvent event) {
 	        	heatMapLayer.setMap(heatMapLayer.getMap() != null ? null : map);
 	        	if(t==0)
 	        	{
 	        	clear();
-	        	mc.removeMarkers(al);
+	        	cluster.clearMarkers();
 	        	t=1;
 	        	toggle.setText("HeatMap View");
 	        	}
 	        	else
 	        	{
 	        	show();
-	        	mc.addMarkers(al);
+	        	for(int i=0; i<toShow.length; i++) {
+
+	    	    	if(toShow[i] == 1)
+	    	    		cluster.addMarkers(markerMap.get(getPath(Constants.legend[i])));
+	    	    }	
 	    	    t=0;
 	    	    toggle.setText("Clustered View");
 	        	}
 	           }
 
 	    });
-	  }
-	private void drawBadge() {
 	    
-		String s = "<g:page width=\"200\" href=\"https://plus.google.com/102192205824377892093\" rel=\"publisher\"></g:page>";
-	    HTML h = new HTML(s);
-	    badge.add(h);
-	    
-	    // You can insert a script tag this way or via your .gwt.xml
-	    Document doc = Document.get();
-	    ScriptElement script = doc.createScriptElement();
-	    script.setSrc("https://apis.google.com/js/platform.js");
-	    script.setType("text/javascript");
-	    script.setLang("javascript");
-	    doc.getBody().appendChild(script);
+	 
 	  }
+	
+	protected void performCrimeVicinityTest(final LatLng initialLocation2) {
+		
+		final GeocoderRequest request = GeocoderRequest.newInstance();
+	    request.setLocation(initialLocation2);
+	    Geocoder geocoder = Geocoder.newInstance();				    
+	    geocoder.geocode(request, new GeocoderRequestHandler() {
+
+			@Override
+			public void onCallback(JsArray<GeocoderResult> results,
+					GeocoderStatus status) {
+				
+				if(status.toString().equals("OK")) {
+					
+					addressOfUser = results.get(0).getFormatted_Address().trim();
+					if(addressOfUser.equals("?")) return;    
+				    String country="", state="", city="";
+				    String [] splitter;
+				    splitter = addressOfUser.split(",");
+				    if(splitter.length>0)
+				    country = extracter(splitter[splitter.length-1]).trim();
+				    if(splitter.length>1)
+				    state = extracter(splitter[splitter.length-2]).trim();
+				    if(splitter.length>2)
+				    city = extracter(splitter[splitter.length-3]).trim();	    
+				    
+				    System.out.println(Constants.symbols.size());
+				    
+				    for(int i=0; i<Constants.symbols.size(); i++) {
+				    	
+				    	System.out.println("TRYING TO ACCESS BULLSHIT");
+				    					    	
+				    	String toCheck = Constants.symbols.get(i).address.trim(), City="", State="", Country="";
+				    	
+				    	System.out.println(i + " " + Constants.symbols.size());
+				    	
+				    	if(toCheck.equals("?")) {
+				    		
+				    		System.out.println("AAAAA" + toCheck);
+				    		continue;
+				    	}
+				    	String [] splitter1;
+				    	splitter1 = toCheck.split(",");
+
+				    	if(splitter1.length>0)
+			    	    Country = extracter(splitter1[splitter1.length-1]).trim();
+			    	    if(splitter1.length>1)
+			    	    State = extracter(splitter1[splitter1.length-2]).trim();
+			    	    if(splitter1.length>2)
+			    	    City = extracter(splitter1[splitter1.length-3]).trim();			    
+			    	    
+			    	    if(Country.equals(country) && City.equals(city) && State.equals(state)) {			    	    
+
+			    	    	
+			    	    	holder temp = new holder(Constants.symbols.get(i).type,
+			    	    							 Constants.symbols.get(i).info,
+			    	    							 Constants.symbols.get(i).date,
+			    	    							 SphericalUtils.computeDistanceBetween(initialLocation2, Constants.symbols.get(i).location),
+			    	    							 Constants.symbols.get(i).location);
+			    	    	
+
+			    	    	sortedOrder.add(temp);
+			    	    	System.out.println(Constants.symbols.get(i).address);
+			    	    	System.out.println(addressOfUser);
+			    	    }
+				    }	
+				    
+				    System.out.println(sortedOrder.size());
+				    
+				    //MAKING THE MENUS
+				    
+				    if(sortedOrder.size()>0) {				
+
+						MenuBar menu = new MenuBar(true);
+						menu.setStyleName(res.style().menu());
+				    	
+						MenuItem item = new MenuItem("Recent Reports", new Command() {
+						      @Override
+						      public void execute() {						    	  
+						      }
+						});
+						item.setStyleName(res.style().blackText());
+					    menu.addItem(item);
+						System.out.println("TRYING TO ADD TO MENU");						
+						for(int i=0; i<sortedOrder.size(); i++) {
+							
+							if(i>10) break;
+							
+							final int counter = i;
+							
+							String output=Constants.retranslate(sortedOrder.get(i).type)+", on "+sortedOrder.get(i).date;
+							
+							item = new MenuItem(template.createItem(getPath(sortedOrder.get(i).type)+"_low.png",
+									   SafeHtmlUtils.fromString(output)), new Command() {
+							      @Override
+							      public void execute() {
+							    	  
+							    	  map.setZoom(18);
+							    	  map.setCenter(sortedOrder.get(counter).loc);
+							    	  
+							      }
+							});
+							item.setStyleName(res.style().menuItem());
+						    menu.addItem(item);
+						}				
+						
+						if(menu != null) {	
+							
+							scrollRecent.add(menu.asWidget());
+							scrollRecent.setHeight("250px");
+							scrollRecent.onResize();
+							latest.setVisible(true);
+							scrollRecent.setVisible(true);
+						}				
+					}		
+				    
+				    //MENUS FINISHED
+				    
+				    Collections.sort(sortedOrder);
+				    
+				    //MAKING THE MENUS
+				    
+				    if(sortedOrder.size()>0) {				
+
+						MenuBar menu = new MenuBar(true);
+						menu.setStyleName(res.style().menu());
+						MenuItem item = new MenuItem("Nearby Reports", new Command() {
+						      @Override
+						      public void execute() {						    	  
+						      }
+						});
+						item.setStyleName(res.style().blackText());
+					    menu.addItem(item);
+						System.out.println("TRYING TO ADD TO MENU");						
+						for(int i=0; i<sortedOrder.size(); i++) {
+							
+							if(i>10) break;
+							
+							final int counter = i;
+							
+							String output=Constants.retranslate(sortedOrder.get(i).type)+", on "+sortedOrder.get(i).date;
+							
+							item = new MenuItem(template.createItem(getPath(sortedOrder.get(i).type)+"_low.png",
+									   SafeHtmlUtils.fromString(output)), new Command() {
+							      @Override
+							      public void execute() {
+							    	  
+							    	  map.setZoom(18);
+							    	  map.setCenter(sortedOrder.get(counter).loc);
+							    	  
+							      }
+							});
+							item.setStyleName(res.style().menuItem());
+						    menu.addItem(item);
+						}				
+						
+						if(menu != null) {	
+							
+							scrollNear.add(menu.asWidget());
+							scrollNear.setHeight("250px");
+							scrollNear.onResize();
+							nearby.setVisible(true);
+							scrollNear.setVisible(true);
+
+						}				
+					}		
+				    
+				    //MENUS FINISHED
+				    
+				    //MAKING THE MENUS
+				    
+				    if(Constants.symbols.size()>0 && loginInfo.isLoggedIn()) {				
+
+						MenuBar menu = new MenuBar(true);
+						menu.setStyleName(res.style().menu());
+						MenuItem item = new MenuItem("Your Past Reports", new Command() {
+						      @Override
+						      public void execute() {						    	  
+						      }
+						});
+						item.setStyleName(res.style().blackText());
+					    menu.addItem(item);
+						System.out.println("TRYING TO ADD TO MENU");
+					    int Counter=0;
+						for(int i=0; i<Constants.symbols.size(); i++) {
+							
+							if(Counter>10) break;
+							
+							if(!(Constants.symbols.get(i).user.equals(loginInfo.getNickname()))) continue;
+							
+							Counter++;
+							final int counter = i;
+							
+							String output=Constants.retranslate(Constants.symbols.get(i).type)+", on "+Constants.symbols.get(i).date;
+							
+							item = new MenuItem(template.createItem(getPath(Constants.symbols.get(i).type)+"_low.png",
+									   SafeHtmlUtils.fromString(output)), new Command() {
+							      @Override
+							      public void execute() {
+							    	  
+							    	  map.setZoom(18);
+							    	  map.setCenter(Constants.symbols.get(counter).location);
+							    	  
+							      }
+							});
+							item.setStyleName(res.style().menuItem());
+						    menu.addItem(item);
+						}				
+						
+						if(menu != null) {	
+							
+							scrollPast.add(menu.asWidget());
+							scrollPast.setHeight("250px");
+							scrollPast.onResize();
+							past.setVisible(true);
+							scrollPast.setVisible(true);
+						}				
+					}		
+				    
+				    //MENUS FINISHED
+				    
+				    for(int i=0; i<sortedOrder.size(); i++) {
+				    	
+				    	System.out.println(sortedOrder.get(i).distance);
+				    }
+				    
+				    
+				} 
+			}
+	    });	
+	}
+	
+	private String extracter(String a) {
+		
+		a=a.trim();	
+		String [] splitter;		
+		splitter = a.split(" ");		
+		String output="";
+		for(String test : splitter) {
+			
+			test=test.trim();
+			if(!Character.isDigit(test.charAt(0))) output+=test+" ";
+		}	
+		return output.trim();
+	}
+
 	private void clear()
 	{
-		for(int i=0;i<al.size();i++)
-    	{
-    		al.get(i).setVisible(false);
-    	}
+		for(ArrayList<Marker> a : markerMap.values()) {
+			
+			for(Marker b  : a) {
+				b.setVisible(false);
+			}
+		}
 	}
 	private void show()
 	{
-		for(int i=0;i<al.size();i++)
-    	{
-    		al.get(i).setVisible(true);
-    	}
+		for(ArrayList<Marker> a : markerMap.values()) {
+			
+			for(Marker b  : a) {
+				b.setVisible(true);
+			}
+		}
 	}
 	private JsArrayString getSampleGradient() {
 		    String[] sampleColors = new String[] { "rgba(0, 255, 255, 0)", "rgba(0, 255, 255, 1)", "rgba(0, 191, 255, 1)",
@@ -561,12 +784,12 @@ public class Home extends Composite {
 		    return ArrayHelper.toJsArrayString(sampleColors);
 		  }
 	
-	  private void addMarker(LatLng location, final String uri, double strength, final String date, final String info) {
+	  private void addMarker(final LatLng location, final String uri, final double strength, final String date, final String info, final int tups, final int tdwns, final int flags,final String address, final long id) {
 		  
 		  	MarkerOptions newMarkerOpts = MarkerOptions.newInstance();
 		    newMarkerOpts.setPosition(location);
 		    newMarkerOpts.setMap(map);
-		    newMarkerOpts.setTitle(Constants.retranslate(uri));
+		    newMarkerOpts.setTitle("Click for more info");
 		    newMarkerOpts.setDraggable(false);	    
 		    String temp = "_low.png";
 		    if(strength >= 90) temp = "_extreme.png";
@@ -576,23 +799,46 @@ public class Home extends Composite {
 		    newMarkerOpts.setIcon(url + uri + temp);		    
 		    System.out.println("Trying to create marker #SERVER");
 		    final Marker marker = Marker.newInstance(newMarkerOpts);
-		    al.add(marker);
+		    System.out.println("TESTING FOR ERROR= "+uri);
 		    
-		    dataPoints.push(location);
-		    marker.addClickHandler(new ClickMapHandler() {
+		    final InfoWindowOptions iwo=InfoWindowOptions.newInstance();
+		    final InfoWindow iw=InfoWindow.newInstance(iwo);
+		    final HorizontalPanel vi=new HorizontalPanel();
+		    final HTMLPanel hi=new HTMLPanel(Constants.retranslate(uri)+"</br></br>"+date);
+		    vi.setWidth("100px");
+		    vi.add(hi);	
+		    
+		    markerMap.get(uri).add(marker);		    
+		    dataMap.get(uri).push(location);
+		    
+		    marker.addMouseOverHandler(new MouseOverMapHandler() {
 
-	            @Override
+				@Override
+				public void onEvent(MouseOverMapEvent event) {
+					
+	            	iw.setContent(vi);	            	
+	            	iw.open(map, marker);
+				}	    	
+		    });
+		    
+		    marker.addMouseOutMoveHandler(new MouseOutMapHandler() {
+
+				@Override
+				public void onEvent(MouseOutMapEvent event) {
+           	
+	            	iw.close();
+				}
+		    });
+        	marker.addClickHandler(new ClickMapHandler() {
+
+		    	@Override
 	            public void onEvent(ClickMapEvent event) {
 	            	
-	            	MarkerDialogBox dialogBox = new MarkerDialogBox(date, info, uri);
-	            	dialogBox.setStyleName(res.style().box2());
-	            	
-	            	dialogBox.setGlassEnabled(true);
-	                dialogBox.setText(Constants.retranslate(uri));	
-	                dialogBox.center();
-	            }
+	            	marker.setAnimation(Animation.STOPANIMATION);
+	            	System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA!!");
+	            	openMarkerDetails(location, uri, strength, date, info, tups, tdwns, flags, address, id); 
+		    	}
 	        });
-		    
 	  }
 	  
 	  private void addMarker(LatLng location, double strength) {
@@ -600,7 +846,7 @@ public class Home extends Composite {
 		  MarkerOptions newMarkerOpts = MarkerOptions.newInstance();
 		  newMarkerOpts.setPosition(location);
 		  newMarkerOpts.setMap(map);
-		  newMarkerOpts.setTitle(Constants.retranslate(Constants.uri));
+		  newMarkerOpts.setTitle("Click for more info");
 		  newMarkerOpts.setDraggable(false);
 		  newMarkerOpts.setAnimation(Animation.BOUNCE);
 		  String temp = "_low.png";
@@ -616,7 +862,7 @@ public class Home extends Composite {
 		    	@Override
 	            public void onEvent(ClickMapEvent event) {
 	            	
-	            	marker.setAnimation(null);
+	            	marker.setAnimation(Animation.STOPANIMATION);
 	            	//marker.clearInstanceListeners();
 	            }
 	        });
@@ -639,23 +885,168 @@ public class Home extends Composite {
 			}			
 	  }
 	  
+	  private void drawBadge() {
+		    
+			String s = "<g:page width=\"200\" href=\"https://plus.google.com/102192205824377892093\" rel=\"publisher\"></g:page>";
+		    HTML h = new HTML(s);
+		    badge.add(h);
+		    
+		    // You can insert a script tag this way or via your .gwt.xml
+		    Document doc = Document.get();
+		    ScriptElement script = doc.createScriptElement();
+		    script.setSrc("https://apis.google.com/js/platform.js");
+		    script.setType("text/javascript");
+		    script.setLang("javascript");
+		    doc.getBody().appendChild(script);
+		  }
+	private void drawTwitter() {
+		    
+		
+		String s = "<a class=\"twitter-timeline\" width=\"520\" height=\"320\" href=\"https://twitter.com/NWatch_gcdc\" data-widget-id=\"418124860338864128\">Tweets by @NWatch_gcdc</a>";
+
+	   
+		HTML h = new HTML(s);
+		    twitter.add(h);
+		    
+		    // You can insert a script tag this way or via your .gwt.xml
+		    Document doc = Document.get();
+		    ScriptElement script = doc.createScriptElement();
+		    script.setSrc("https://platform.twitter.com/widgets.js");
+		    script.setType("text/javascript");
+		    script.setLang("javascript");
+		    doc.getBody().appendChild(script);
+		  }
+	  
+	  @SuppressWarnings("unchecked")
 	  private void initialise() {	
 
+		  drawBadge();
+			drawTwitter(); 
+		  about.addClickHandler(new ClickHandler(){
+		        @Override
+		        public void onClick(ClickEvent event) {
+		        	History.newItem("About");
+		           }
+
+		    });
+		 about2.addClickHandler(new ClickHandler(){
+		        @Override
+		        public void onClick(ClickEvent event) {
+		        	History.newItem("About");
+		           }
+
+		    }); 
+			contact.addClickHandler(new ClickHandler(){
+			        @Override
+			        public void onClick(ClickEvent event) {
+			        	History.newItem("Contact");
+			           }
+
+			    });
+			 contact2.addClickHandler(new ClickHandler(){
+			        @Override
+			        public void onClick(ClickEvent event) {
+			        	History.newItem("Contact");
+			           }
+
+			    });
+			 privacy.addClickHandler(new ClickHandler(){
+			        @Override
+			        public void onClick(ClickEvent event) {
+			        	History.newItem("Privacy");
+			        	
+			           }
+
+			    });
+			 blog.addClickHandler(new ClickHandler(){
+			        @Override
+			        public void onClick(ClickEvent event) {
+			        	Window.open("http://publicfortress.blogspot.in/","_blank","");
+			           }
+
+			    });
+			 logo.addClickHandler(new ClickHandler(){
+			        @Override
+			        public void onClick(ClickEvent event) {
+			        	History.newItem("Home");
+			           }
+
+			    });
+			 works.addClickHandler(new ClickHandler(){
+			        @Override
+			        public void onClick(ClickEvent event) {
+			        	History.newItem("Works");
+			           }
+
+			    });
+			 support.addClickHandler(new ClickHandler(){
+			        @Override
+			        public void onClick(ClickEvent event) {
+			        	History.newItem("Contact");
+			           }
+			 });
+			
+		  
+		  
 		 Constants.userInfo = new String[1];
 		 Constants.userInfo[0] = "NULL";
 		 
-		 userManager();
+		 userManager();		 
+
+		 for(String a : Constants.legend) {
+			 
+			 dataMap.put(getPath(a), (JsArray<LatLng>) JavaScriptObject.createArray().cast());
+			 System.out.println("EXPECTED = " + getPath(a));
+			 markerMap.put(getPath(a), new ArrayList<Marker>());
+		 }
 			
 		 markerService.getMarks(getMarks);
-		 
-		 @SuppressWarnings("unused")
-		final SlideAnimation animation = new SlideAnimation(legendDetails);
+		 Label text = new Label("Customize Map");
+		 text.setStyleName(res.style().blackText());
+		 checkBoxes.add(text);
 		 
 		 for(int i=0; i<Constants.legend.length; i++) {
 			 
-
+			 toShow[i] = 1;
 	    	  final int temp = i;
-   	  
+	    	  
+	    	  final CheckBox checkbox = new CheckBox(Constants.legend[i]);
+	    	  checkbox.addClickHandler(new ClickHandler() {
+
+				@Override
+				public void onClick(ClickEvent event) {
+					
+					if(checkbox.getValue())
+					toShow[temp] = 1;
+					else toShow[temp] = 0;	
+					
+					clear();
+			    	cluster.clearMarkers();
+			        JsArray<LatLng> dataPoints = JavaScriptObject.createArray().cast();
+			    	
+				    for(int i=0; i<toShow.length; i++) {
+
+				    	if(toShow[i] == 1) {
+				    		
+				    		System.out.println(getPath(Constants.legend[i]));
+				    		cluster.addMarkers(markerMap.get(getPath(Constants.legend[i])));		
+				    		JsArray<LatLng> temp = JavaScriptObject.createArray().cast();
+				    		temp = dataMap.get(getPath(Constants.legend[i]));
+				    		for(int j=0; j<temp.length(); j++) {
+				    			
+				    			System.out.println(temp.get(j));
+				    			dataPoints.push(temp.get(j));
+				    		}
+				    	}
+				    }	
+				    show();
+				    heatMapLayer.setData(dataPoints);
+				}
+	    	  });	
+	    	  checkbox.setWidth("100%");
+	    	  checkbox.setValue(true);
+	    	  checkBoxes.add(checkbox);
+	    	  
 	    	  MenuItem item = new MenuItem(template.createItem(getPath(Constants.legend[i])+"_low.png",
 	    			    									   SafeHtmlUtils.fromString(Constants.legend[i])), 
 	    			    				   new Command() {	
@@ -674,8 +1065,8 @@ public class Home extends Composite {
 		 
 		 legendDetails.setAnimationEnabled(true);
 		 legendDetails.showWidget(0);
-		 home.setTitle("Click to zap to your location !");		
-		 toggle.setTitle("Toggle between Clustered and HeatMap View");
+		 togglePanel.setAnimationEnabled(true);
+		 togglePanel.showWidget(0);
 		 final AutocompleteOptions options = AutocompleteOptions.newInstance();
 	     final Autocomplete autocomplete = Autocomplete.newInstance(input.getElement(), options);    
 	     final InfoWindowOptions infoopts= InfoWindowOptions.newInstance();
@@ -694,9 +1085,8 @@ public class Home extends Composite {
 			}
 	     });
 		 
-		 dialogBox.setStyleName(res.style().box1());
-	     dialogBox.setGlassEnabled(true);
-		 //dialogBox.setText("Enter Details"); 
+		 dialogBox.setGlassEnabled(true);
+		 dialogBox.setText("Enter Details"); 
 		 dialogBox.addCloseHandler(new CloseHandler<PopupPanel>() {
 			
 			@Override
@@ -706,9 +1096,11 @@ public class Home extends Composite {
 					reporting(Constants.uri, Constants.mapClick);
 			}
 		 }); 
+		 
+		
 	  }
 	  
-	  private void reporting(String uri, LatLng loc) {
+	  private void reporting(String uri, final LatLng loc) {
 		  
 		if(uri.equals(null) || uri.equals("")) return;
   		Constants.thisSessionReport = true;
@@ -719,14 +1111,41 @@ public class Home extends Composite {
   	                       loc+" "+
   	                       Constants.uri);
   	    
-		markerService.addMark(loc.getLatitude()+"`"+
+  	    final GeocoderRequest request = GeocoderRequest.newInstance();
+	    request.setLocation(loc);
+	    Geocoder geocoder = Geocoder.newInstance();
+	    geocoder.geocode(request, new GeocoderRequestHandler() {
+
+			@Override
+			public void onCallback(JsArray<GeocoderResult> results,
+					GeocoderStatus status) {
+				
+				if(status.toString().equals("OK")) {
+					
+					address = results.get(0).getFormatted_Address();
+					markerService.addMark(loc.getLatitude()+"`"+
 				  			  loc.getLongitude()+"`"+
-					          Constants.uri+"`"+
-							  "100.0"+"`"+Constants.date+"`"+Constants.info, loginInfo.getNickname(), addMarks);	
-		addMarker(loc, 100.0);
+					          Constants.uri+"`"+   //type
+							  "100.0"+"`"+    //strength
+					          Constants.date+"`"+
+							  Constants.info+"`"+   //user provided information
+					          "0"+"`"   //thumbs up
+							  +"0"+"`"  //thumbs down
+					          +"0"+"`" //flags
+					          +address, //address
+					          loginInfo.getNickname(), addMarks);	
+					addMarker(loc, 100.0);
+					for(int k=0; k<results.length(); k++) {
+						
+						System.out.println(results.get(k).getFormatted_Address());
+					}
+				} 
+				System.out.println(status.toString());
+			}
+	    });
 	  }
 	  
-	  private String getPath(String source) {
+	  public static String getPath(String source) {
 		  
 			 String imageSource = new String(source);
 
@@ -741,8 +1160,38 @@ public class Home extends Composite {
 	    	  return out;		  
 	  }
 	  
+	  public void openMarkerDetails(LatLng location, String uri, double strength, String date, String info, int tups, int tdwns, int flags, String address2, long id) {
+		  
+		  Constants.dataPass = new bundle(location, uri, strength, date, info, tups, tdwns, flags, address2, id, "blank");
+		  System.out.println(Constants.dataPass.id);
+		  History.newItem("Report");
+		 
+	  }
+	  
 	  public interface MyTemplate extends SafeHtmlTemplates {
 		  @Template("<table><tr><td><img src='{0}' height='30px' vertical-align='middle'/></td><td><span>{1}</span></td></tr></table>")
 		  SafeHtml createItem(String imageSource, SafeHtml message);
+	  }
+	  
+	  public final static class holder implements Comparable<holder>{
+		  
+		  String type, info, date;
+		  double distance;
+		  LatLng loc;
+		  
+		  public holder(String type, String info, String date, double distance, LatLng loc) {
+			  
+			  this.type = type;
+			  this.info = info;
+			  this.date = date;
+			  this.distance = distance;
+			  this.loc = loc;
+		  }
+
+		@Override
+		public int compareTo(holder o) {
+			
+			return Double.compare(this.distance, o.distance);
+		}
 	  }
 }

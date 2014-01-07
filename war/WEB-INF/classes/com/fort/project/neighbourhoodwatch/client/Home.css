@@ -1,6 +1,14 @@
 
 @CHARSET "UTF-8";
-
+.slogan{
+text-align: center;
+font-size: 42px;
+color: #000000;
+font-style: oblique;
+font-family: Georgia,serif;
+text-shadow: #b5b5b5 0 1px 0;
+background: url(feedback-shadow.png)
+}
 .button3 {
 	outline: 0;
 width: 180px;	
@@ -94,7 +102,7 @@ line-height: 50px;
 	  outline:0;
 	  border:0;
   list-style:none;
-  width:300px;
+  width:280px;
   display:block;
   box-shadow:0px 0px 8px #222222;
     margin:0 30px 0 0;
@@ -103,17 +111,13 @@ line-height: 50px;
   color:#ffffff;
   text-decoration:none;
   font-size:16px;
-  background:#80c140 url(apps-android.png) 17px center no-repeat;
+  background:#6fb030 url(apps-android.png) 17px center no-repeat;
   text-shadow:#59872d 0 -1px 0;
   
  font-family: 'Open Sans Condensed';
 
 }
-.bigbtn2:hover{
-	cursor:pointer;
-	  background-color:#6fb030;
 
-}
 .white{
 	
 	float:right;
@@ -130,7 +134,7 @@ line-height: 50px;
 .homeback{
 	
 	background: url(bribemap-header-background.png) center top repeat-x;
-	position:absolute;
+	
   top:1;
   width:100%;
   height:60px;
@@ -146,9 +150,6 @@ line-height: 50px;
 }
 
 .button2 {
-
- 
-	
 	
 outline: 0;
 width: 180px;	
@@ -168,48 +169,6 @@ font-size: 17px;
 font-family: 'Open Sans Condensed';
 text-shadow: #a43520 0 -1px 0;
 box-shadow: 0px 0px 8px #b0b0b0;
-/*   float: right; */
-/* margin: 10px 0 0 0; */
-/* width: 180px; */
-
-/* background: #ea4a2a; */
-/* border: 1px solid #d03a1d; */
-
-/* display: inline-block; */
-/* text-decoration: none; */
-/* text-transform: uppercase; */
-/* color: #ffffff; */
-/* line-height: 32px; */
-/* height: 32px; */
-/* padding: 0 20px; */
-/* position: relative; */
-/* text-align: center; */
-/* font-size: 17px; */
-/* font-family: 'Open Sans Condensed'; */
-/* text-shadow: #a43520 0 -1px 0; */
-/* box-shadow: 0px 0px 8px #b0b0b0; */
-/*  width: 150px; */
-/*   cursor: hand; */
-/*   cursor: pointer; */
-/*   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
-/*   font-size: 18px;    */
-/*   font-color: white; */
-/*   text-color: white; */
-/*   font: bold;  */
-/*   color: white; */
-/*   text-align: center; */
-/*   text-shadow: 0 1px #72100d; */
-/*   background-color: #247edd; */
-/*   background-clip: padding-box; */
-/*   border: 1px solid; */
-/*   border-color: #1c65b2 #18589c #18589c; */
-/*   border-radius: 4px; */
-/*   -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2); */
-/*   box-shadow: inset 0 1px rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2); */
-/*   background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04)); */
-/*   background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04)); */
-/*   background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04)); */
-/*   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04)); */
 }
 .button2:hover { 
 /* 	background-color: #1a74d3; } */
@@ -576,10 +535,8 @@ x
 .menuLegend {
 	
 	font-weight: bold;
-	 text-transform:uppercase;
-	  font-size:16px;
- font-family: sans-serif;
-  display: inline;
+	
+	 display: inline;
   /* drop shadows. */
 	-moz-box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2);
 	-webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.45), 0px 1px 2px rgba(0,0,0,0.2);
@@ -611,8 +568,8 @@ x
 
     	text-align: center;
  		font-weight: bold;
- 		font-family: Arial Black, Arial, Helvetica, sans-serif;
- 		font-size: 23px;
+ 		font-family: 'Open Sans Condensed',Arial Black, Arial, Helvetica, sans-serif;
+ 		font-size: 25px;
  		
  		color: #F2F2F2;
  		font-color: #8e4600;

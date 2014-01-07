@@ -39,7 +39,9 @@ public class MainDialogBox extends DialogBox {
 	  
 	  @UiField TextBox input;
 	  
-	  @UiField MenuItem theft, harassment, unsafe, assault, landSlide, bio, gang, bribe, arson, sub;
+	  @UiField MenuItem theft, harassment, unsafe, assault, landSlide, bio, 
+
+gang, bribe, arson, sub;	  
 	  
 	  @UiHandler("okButton")	  
 	  void onSubmit(ClickEvent e) {
@@ -54,13 +56,19 @@ public class MainDialogBox extends DialogBox {
 		  
 		  Constants.date = split[0]+", "+split[1]+" "+split[2]+" "+split[5];
 		  Constants.date.trim();
-		  if(Constants.date.equals(null ) || Constants.date.equals("")) Constants.date = "undisclosed" ;
+		  if(Constants.date.equals(null ) || Constants.date.equals("")) 
+
+Constants.date = "undisclosed" ;
 		  
 		  Constants.info=input.getText();
 		  Constants.info.trim();
-		  if(Constants.info.equals(null ) || Constants.info.equals("")) Constants.info = "undisclosed" ;
+		  if(Constants.info.equals(null ) || Constants.info.equals("")) 
+
+Constants.info = "undisclosed" ;
 		  
-		  System.out.println("BOX STUFF= "+Constants.date + "YO" + Constants.info);
+		  System.out.println("BOX STUFF= "+Constants.date + "YO" + 
+
+Constants.info);
 		  this.hide(true);
 	  }
 	  
@@ -75,11 +83,15 @@ public class MainDialogBox extends DialogBox {
 
 	  public MainDialogBox() {
 		  
-		  super.setWidget(GWT.<Binder> create(Binder.class).createAndBindUi(this));	
+		  super.setWidget(GWT.<Binder> create
+
+(Binder.class).createAndBindUi(this));	
 		  input.setVisibleLength(100);		  
 		  date.addValueChangeHandler(new ValueChangeHandler<Date>() {
 		      @Override
-		      public void onValueChange(final ValueChangeEvent<Date> dateValueChangeEvent) {
+		      public void onValueChange(final ValueChangeEvent<Date> 
+
+dateValueChangeEvent) {
 		          if (dateValueChangeEvent.getValue().after(today())) {
 		              date.setValue(today(), false);
 		          }
@@ -88,7 +100,9 @@ public class MainDialogBox extends DialogBox {
 		  
 		  date.addShowRangeHandler(new ShowRangeHandler<Date>() {
 		      @Override
-		      public void onShowRange(final ShowRangeEvent<Date> dateShowRangeEvent) {
+		      public void onShowRange(final ShowRangeEvent<Date> 
+
+dateShowRangeEvent) {
 		          final Date today = today();
 		          d = zeroTime(dateShowRangeEvent.getStart());
 		          while (d.after(today))
@@ -107,11 +121,15 @@ public class MainDialogBox extends DialogBox {
 
 	  /** this is important to get rid of the time portion, including ms */
 	  private static Date zeroTime(final Date date) {
-	      return DateTimeFormat.getFormat("yyyyMMdd").parse(DateTimeFormat.getFormat("yyyyMMdd").format(date));
+	      return DateTimeFormat.getFormat("yyyyMMdd").parse
+
+(DateTimeFormat.getFormat("yyyyMMdd").format(date));
 	  }
 
 	  private static void nextDay(final Date date) {
-	     com.google.gwt.user.datepicker.client.CalendarUtil.addDaysToDate(d, 1);
+	     com.google.gwt.user.datepicker.client.CalendarUtil.addDaysToDate(d, 
+
+1);
 	  }
 	  
 	  public void initialise() {
@@ -124,7 +142,9 @@ public class MainDialogBox extends DialogBox {
 		  Command cmdBtnTheft = new Command() {
 			  public void execute() {
 		    		
-		    		uri = theft.getText().replaceAll(" ", "").toLowerCase();
+		    		uri = theft.getText().replaceAll(" ", 
+
+"").toLowerCase();
 		    		sub.setText(theft.getText());
 		    	}
 		  };
@@ -133,7 +153,9 @@ public class MainDialogBox extends DialogBox {
 		  Command cmdBtnHarassment = new Command() {
 			  public void execute() {
 		    		
-		    		uri = harassment.getText().replaceAll(" ", "").toLowerCase();
+		    		uri = harassment.getText().replaceAll(" ", 
+
+"").toLowerCase();
 		    		sub.setText(harassment.getText());
 		    	}
 		  };
@@ -142,7 +164,9 @@ public class MainDialogBox extends DialogBox {
 		  Command cmdBtnUnsafe = new Command() {
 			  public void execute() {
 		    		
-		    		uri = unsafe.getText().replaceAll(" ", "").toLowerCase();
+		    		uri = unsafe.getText().replaceAll(" ", 
+
+"").toLowerCase();
 		    		sub.setText(unsafe.getText());
 		    	}
 		  };
@@ -151,7 +175,9 @@ public class MainDialogBox extends DialogBox {
 		  Command cmdBtnAssault = new Command() {
 			  public void execute() {
 		    		
-		    		uri = assault.getText().replaceAll(" ", "").toLowerCase();
+		    		uri = assault.getText().replaceAll(" ", 
+
+"").toLowerCase();
 		    		sub.setText(assault.getText());
 		    	}
 		  };
@@ -160,7 +186,9 @@ public class MainDialogBox extends DialogBox {
 		  Command cmdBtnLandslide = new Command() {
 			  public void execute() {
 		    		
-		    		uri = landSlide.getText().replaceAll(" ", "").toLowerCase();
+		    		uri = landSlide.getText().replaceAll(" ", 
+
+"").toLowerCase();
 		    		sub.setText(landSlide.getText());
 		    	}
 		  };
@@ -169,7 +197,9 @@ public class MainDialogBox extends DialogBox {
 		  Command cmdBtnBio = new Command() {
 			  public void execute() {
 		    		
-		    		uri = bio.getText().replaceAll(" ", "").toLowerCase();
+		    		uri = bio.getText().replaceAll(" ", 
+
+"").toLowerCase();
 		    		sub.setText(bio.getText());
 		    	}
 		  };
@@ -178,7 +208,9 @@ public class MainDialogBox extends DialogBox {
 		  Command cmdBtnGang = new Command() {
 			  public void execute() {
 		    		
-		    		uri = gang.getText().replaceAll(" ", "").toLowerCase();
+		    		uri = gang.getText().replaceAll(" ", 
+
+"").toLowerCase();
 		    		sub.setText(gang.getText());
 		    	}
 		  };
@@ -187,7 +219,9 @@ public class MainDialogBox extends DialogBox {
 		  Command cmdBtnBribe = new Command() {
 			  public void execute() {
 		    		
-		    		uri = bribe.getText().replaceAll(" ", "").toLowerCase();
+		    		uri = bribe.getText().replaceAll(" ", 
+
+"").toLowerCase();
 		    		sub.setText(bribe.getText());
 		    	}
 		  };
@@ -196,7 +230,9 @@ public class MainDialogBox extends DialogBox {
 		  Command cmdBtnArson = new Command() {
 			  public void execute() {
 		    		
-		    		uri = arson.getText().replaceAll(" ", "").toLowerCase();
+		    		uri = arson.getText().replaceAll(" ", 
+
+"").toLowerCase();
 		    		sub.setText(arson.getText());
 		    	}
 		  };

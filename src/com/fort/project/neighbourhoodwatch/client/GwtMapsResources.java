@@ -11,6 +11,8 @@ public interface GwtMapsResources extends ClientBundle {
 	  
       String blackText();
       
+      String slogan();
+      
       String footerback();
       
       String box1();
@@ -31,6 +33,7 @@ public interface GwtMapsResources extends ClientBundle {
       
       String buttonh();
       
+     
       String white();
       
       String newfont();
@@ -48,7 +51,8 @@ public interface GwtMapsResources extends ClientBundle {
       String fortress();
       
       String silver();
-      
+           
+  
       String carbon();
       
       String trans_white();
@@ -80,4 +84,17 @@ public interface GwtMapsResources extends ClientBundle {
    ImageResource homebtn2();
    @Source("pf_logo.png")
    ImageResource logoimg();
+   
+   @Source("up0.png")
+   ImageResource up0();
+   @Source("up1.png")
+   ImageResource up1();
+   @Source("down0.png")
+   ImageResource down0();
+   @Source("down1.png")
+   ImageResource down1();
+   @Source("flagon.png")
+   ImageResource flagon();
+   @Source("flagoff.png")
+   ImageResource flagoff();
 }

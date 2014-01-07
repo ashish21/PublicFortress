@@ -192,7 +192,7 @@ box-shadow: -4px -4px 0px #f7f7f7, 4px 4px 0px #f7f7f7, 4px -4px 0px #f7f7f7, -4
     		</g:cell>
     		
     		<g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" >
- <g:PushButton ui:field='logo' enabled='true' styleName="{res.style.buttonh}" height="56px" width="364px">
+ <g:PushButton ui:field='logo' enabled='true' styleName="{res.style.buttonh}" height="56px" width="217px">
     		<g:upFace image='{res.logoimg}' >   
   			</g:upFace>			 
  			</g:PushButton>    		</g:cell>
@@ -203,10 +203,10 @@ box-shadow: -4px -4px 0px #f7f7f7, 4px 4px 0px #f7f7f7, 4px -4px 0px #f7f7f7, -4
     		
     		<g:cell height="100%" horizontalAlignment="ALIGN_CENTER" >  
     		    <g:HTMLPanel>                  
+      				<g:Button text="Home" styleName="{res.style.menuItemTop}" ui:field="homepage"/>
       				<g:Button text="How it works" styleName="{res.style.menuItemTop}" ui:field="works"/>
       				<g:Button text="About Us" styleName="{res.style.menuItemTop}" ui:field="about"/>
       				<g:Button text="Contact Us" styleName="{res.style.menuItemTop}" ui:field="contact"/>
-      				<g:Button text="SignIn" styleName="{res.style.menuItemTop}" ui:field="signin"/>
      			</g:HTMLPanel>	   			
   			</g:cell>
   				
@@ -224,7 +224,12 @@ box-shadow: -4px -4px 0px #f7f7f7, 4px 4px 0px #f7f7f7, 4px -4px 0px #f7f7f7, -4
     			<g:Label width="100%"></g:Label>
     		</g:cell>	
 		<g:VerticalPanel width="800px" styleName="{style.box1}" >
-		     
+		     		     <g:HTMLPanel styleName="{style.label1}" >
+		    <p><span style="font-size: x-large;"><strong>How to Use the Website</strong></span></p>
+</g:HTMLPanel>
+<g:HTMLPanel height="480px" width="720px" styleName="{style.button}">
+	    							<iframe  height="480px" width="720px"  src="//www.youtube.com/embed/rvWHorPvQ80?rel=0" frameborder="0" allowfullscreen="true"/>
+	    						</g:HTMLPanel>	
 		     <g:HTMLPanel styleName="{style.label1}" ui:field="boxtxt"/>
 		     
 		     
@@ -234,46 +239,22 @@ box-shadow: -4px -4px 0px #f7f7f7, 4px 4px 0px #f7f7f7, 4px -4px 0px #f7f7f7, -4
 	   		<g:HTMLPanel width="100%" height="25px" />
 	 	    <!-- DONE TILL HERE YO -->	   		
 	 	    
-	 	    	  <g:HTMLPanel width="100%" height="10px" styleName="{res.style.lowerback}" />
+	 	    	   <g:HTMLPanel width="100%" height="80px" />
 	                      
-	 	    
-	        <g:HorizontalPanel  width="100%" styleName="{res.style.lowerback}">
-	            <g:cell width="1%"> 
-		   			<g:Label width="100%"></g:Label>
-		   		</g:cell>
-	            <g:cell horizontalAlignment='ALIGN_LEFT' verticalAlignment="ALIGN_MIDDLE">
-		            <g:HTMLPanel height="500px" width="300px" styleName="{style.button}">
-		            	<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fneighbourhoodwatchrocks&amp;width&amp;height=500&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=true&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:500px;" allowTransparency="true"></iframe>
-					</g:HTMLPanel>
-				</g:cell>
-				<g:cell width="5%"> 
-		   			<g:Label width="100%"></g:Label>
-		   		</g:cell>
-				<g:cell horizontalAlignment='ALIGN_LEFT' verticalAlignment="ALIGN_MIDDLE">
-				    
-					<g:FlowPanel width="100%">							    			    
-					    <g:HorizontalPanel height="280px" width="100%" >
-					        <g:cell height="270px" width="480px" horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">					            	
-	    						<g:HTMLPanel height="270px" width="480px" styleName="{style.button}">
-	    							<iframe  height="270px" width="480px"  src="//www.youtube.com/embed/NiAhk2HfaOg?rel=0" frameborder="0" allowfullscreen="true"/>
-	    						</g:HTMLPanel>	
-					        </g:cell>
-					        <g:cell width="1%"> 
-	    						<g:Label width="100%"/>
-	    					</g:cell>	    					
-		   					<g:cell height="100%" horizontalAlignment='ALIGN_RIGHT' verticalAlignment="ALIGN_MIDDLE"> 
-	 							<g:HorizontalPanel width="200px" styleName="{style.button}" ui:field="badge">
-			       				</g:HorizontalPanel>
-		   					</g:cell>
-		   					<g:cell width="1%"> 
+	        					 <g:HorizontalPanel width="100%"  >  
+	        					     <g:cell horizontalAlignment='ALIGN_CENTER' > 
+	    		
+					    <g:Label  width="960px" height="167px" styleName="{res.style.slogan}" text="'Safety by Awareness'"/>
+        					</g:cell>  
+        					 
+        						 </g:HorizontalPanel>
+        						<g:HTMLPanel width="100%" height="10px" />
+		 				
+		 				<g:HorizontalPanel width="100%" >
+		 				     <g:cell width="20%"> 
 	    						<g:Label width="100%"/>
 	    					</g:cell>
-					    </g:HorizontalPanel> 					    
-					    
-        				<g:HTMLPanel width="100%" height="5px"/>				
-		 				
-		 				<g:HorizontalPanel width="550px">
-		 				    <g:cell width="250px" horizontalAlignment='ALIGN_LEFT' verticalAlignment="ALIGN_MIDDLE">
+		 				    <g:cell width="250px"  horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">
 		 				        <g:FlowPanel  width="100%">
 <!-- 		 				            <g:Label width="100%"  styleName="{res.style.bigbtn}" > -->
 <!-- 		 				                Android App -->
@@ -286,24 +267,25 @@ box-shadow: -4px -4px 0px #f7f7f7, 4px 4px 0px #f7f7f7, 4px -4px 0px #f7f7f7, -4
 <!-- 		 				                    <g:Label>Download our Android app or use the website to submit reports.</g:Label> -->
 <!-- 		 				                </g:cell>		 				                     -->
 <!-- 		 				            </g:HorizontalPanel> -->
-		 				        	<g:HorizontalPanel width="100%">	
+
+		 				        	<g:HorizontalPanel width="100%" >	
 		 				                <g:cell width="100%" horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">
-		 				            		<g:Button ui:field='android' styleName="{res.style.bigbtn2}">Neighbourhood Watch's Android App Coming Soon!</g:Button>
+		 				            		<g:Button height="150px" width="350px" ui:field='android' styleName="{res.style.bigbtn2}">Neighbourhood Watch's Android App Coming Soon! Stay tuned for Updates </g:Button>
 		 				            	</g:cell>
 		 				            </g:HorizontalPanel>
 		 				        </g:FlowPanel>			        
 		 				    </g:cell>
-		 				    <g:cell width="20px"> 
+		 				    <g:cell width="40px"> 
 	    						<g:Label width="100%"/>
 	    					</g:cell>
-		 				    <g:cell horizontalAlignment='ALIGN_RIGHT' verticalAlignment="ALIGN_MIDDLE">
-		 				        <g:FlowPanel styleName="{res.style.box2}" width="280px" >
+		 				    <g:cell horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">
+		 				        <g:FlowPanel styleName="{res.style.box2}" width="350px" >
 		 				            <g:Label width="100%" styleName="{res.style.bigbtn}" >
 		 				                Support our Efforts
 		 				            </g:Label>	
 		 				            <g:HorizontalPanel width="100%">		 				                
 		 				                <g:cell horizontalAlignment='ALIGN_LEFT' verticalAlignment="ALIGN_MIDDLE">
-		 				                    <g:Label>There are many ways in which you can help us. For example, tell your friends about this web-app !</g:Label>
+		 				                    <g:Label>There are many ways in which you can help us. Tell your friends about our Website and click the button below to give feedback and help improve the site.</g:Label>
 		 				                </g:cell>	
 		 				                <g:cell width="20px"> 
 	    						<g:Label width="100%"/>
@@ -315,25 +297,65 @@ box-shadow: -4px -4px 0px #f7f7f7, 4px 4px 0px #f7f7f7, 4px -4px 0px #f7f7f7, -4
 		 				        	<g:HorizontalPanel height="50px" width="100%">	
 		 				        	    
 		 				                <g:cell width="100%" horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_BOTTOM">
-		 				            		<g:Button ui:field='support' styleName="{res.style.button2}">Coming Soon!</g:Button>
+		 				            		<g:Button ui:field='support' styleName="{res.style.button2}">Get Involved!</g:Button>
 		 				            	</g:cell>
 		 				            	
-		 				            	
 		 				            </g:HorizontalPanel>
+		 				            
 		 				        </g:FlowPanel>
 		 				    </g:cell>
 		 				</g:HorizontalPanel>
-		 				
+		 				 <g:HTMLPanel width="100%" height="50px" />
+		 				 <g:HTMLPanel width="100%" height="50px" styleName="{res.style.lowerback}" />
+		 				<g:HorizontalPanel  width="100%" styleName="{res.style.lowerback}">
+	            <g:cell width="4%"> 
+		   			<g:Label width="100%"></g:Label>
+		   		</g:cell>
+	            <g:cell horizontalAlignment='ALIGN_LEFT' verticalAlignment="ALIGN_TOP">
+	                <g:HTMLPanel height="320px" width="240px" styleName="{style.button}">
+		            	<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fneighbourhoodwatchrocks&amp;width=240&amp;height=320&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:240px; height:320px;" allowTransparency="true"></iframe>
+					</g:HTMLPanel>	
+
+				</g:cell>
+				<g:cell width="2%"> 
+		   			<g:Label width="100%"></g:Label>
+		   		</g:cell>
+				<g:cell horizontalAlignment='ALIGN_LEFT' verticalAlignment="ALIGN_MIDDLE">
+				    
+					<g:FlowPanel width="100%">							    			    
+					    <g:HorizontalPanel width="100%" >
+					        <g:cell  horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">
+					            
+<!-- 			       				<g:HTMLPanel height="320px" width="600px" styleName="{style.button}"> -->
+<!-- 		            	<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fneighbourhoodwatchrocks&amp;width=600&amp;height=320&amp;colorscheme=light&amp;show_faces=false&amp;header=false&amp;stream=true&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:600px; height:320px;" allowTransparency="true"></iframe> -->
+<!-- 					</g:HTMLPanel>	 -->
+							            <g:HorizontalPanel  ui:field="twitter">
+			       				</g:HorizontalPanel>				            	
+<!-- 	    						<g:HTMLPanel height="270px" width="480px" styleName="{style.button}"> -->
+<!-- 	    							<iframe  height="270px" width="480px"  src="//www.youtube.com/embed/NiAhk2HfaOg?rel=0" frameborder="0" allowfullscreen="true"/> -->
+<!-- 	    						</g:HTMLPanel>	 -->
+					        </g:cell>
+					        <g:cell width="2%"> 
+	    						<g:Label width="100%"/>
+	    					</g:cell>	    					
+		   					<g:cell height="100%" horizontalAlignment='ALIGN_RIGHT' verticalAlignment="ALIGN_MIDDLE"> 
+	 							<g:HorizontalPanel height="320px"  ui:field="badge">
+			       				</g:HorizontalPanel>
+		   					</g:cell>
+		   					<g:cell width="4%"> 
+	    						<g:Label width="100%"/>
+	    					</g:cell>
+					    </g:HorizontalPanel> 
 					</g:FlowPanel>
 				</g:cell>
 	        </g:HorizontalPanel>
-	      	  <g:HTMLPanel width="100%" height="10px" styleName="{res.style.lowerback}" />
+	      	  <g:HTMLPanel width="100%" height="50px" styleName="{res.style.lowerback}" />
 	    </g:FlowPanel>
 	    
         <!-- FOOTER -->
         
                 
-       <g:HorizontalPanel  width="100%" styleName="{res.style.footerback}" >    
+        <g:HorizontalPanel  width="100%" styleName="{res.style.footerback}" >    
             <g:cell width="5%"> 
 	    			<g:Label width="100%"/>
 	    	</g:cell>
@@ -348,7 +370,10 @@ box-shadow: -4px -4px 0px #f7f7f7, 4px 4px 0px #f7f7f7, 4px -4px 0px #f7f7f7, -4
    			</g:cell>
    			
 	    	<g:cell horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="15%">
+				<g:VerticalPanel>
+				<g:Label styleName="{res.style.white}" text="Note: This website is optimized for Chrome and Firefox"/>
 				<g:Label styleName="{res.style.white}" text="© Neighbourhood Watch"/>
+				</g:VerticalPanel>
 	    	</g:cell>
         </g:HorizontalPanel>
     </g:FlowPanel>

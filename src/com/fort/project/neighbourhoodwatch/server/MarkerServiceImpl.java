@@ -59,7 +59,10 @@ public class MarkerServiceImpl extends RemoteServiceServlet implements MarkerSer
 		symbols = new String[marks.size()];
 		for(int i=0; i<marks.size(); i++) {
 		 
-			symbols[i] = (String)marks.get(i).getProperty("data");
+			symbols[i] = ((String)marks.get(i).getProperty("data"))+"`"+
+						  String.valueOf(marks.get(i).getKey().getId())+"`"+
+					      (String)marks.get(i).getProperty("user");
+			System.out.println("TESting " + symbols[i]);
 		}
 		System.out.println("Loaded");
 		return symbols;

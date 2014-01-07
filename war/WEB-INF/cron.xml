@@ -2,7 +2,17 @@
 <cronentries>
 	<cron>
 		<url>/publicfortress/gaejcronjob</url>
-		<description>GAEJ Cron Job that reduces % by 10 every 1/2 hour</description>
+		<description>GAEJ Cron Job that reduces strength every 24hrs</description>
 		<schedule>every day 00:00</schedule>
+	</cron>
+	<cron>
+		<url>/publicfortress/GeoCoder</url>
+		<description>GAEJ Cron Job that finds and sotres address for a given LatLng</description>
+		<schedule>every 10 minutes</schedule>
+	</cron>
+	<cron>
+		<url>/publicfortress/CounterCorrector</url>
+		<description>GAEJ Cron Job that saves counter info</description>
+		<schedule>every 10 minutes</schedule>
 	</cron>
 </cronentries>

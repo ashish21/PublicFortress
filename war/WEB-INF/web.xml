@@ -6,15 +6,15 @@
          xmlns="http://java.sun.com/xml/ns/javaee">
 
 <!-- Servlets -->
-  
+
   <servlet>
-    <servlet-name>userServlet</servlet-name>
-    <servlet-class>com.fort.project.neighbourhoodwatch.server.UserServiceImpl</servlet-class>
+    <servlet-name>counterServlet</servlet-name>
+    <servlet-class>com.fort.project.neighbourhoodwatch.server.CounterServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
-    <servlet-name>userServlet</servlet-name>
-    <url-pattern>/publicfortress/user</url-pattern>
+    <servlet-name>counterServlet</servlet-name>
+    <url-pattern>/publicfortress/count</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -46,14 +46,27 @@
       <servlet-name>GAEJCronServlet</servlet-name>
       <url-pattern>/publicfortress/gaejcronjob</url-pattern>
   </servlet-mapping>
-<servlet>
-    <servlet-name>MailServlet</servlet-name>
-    <servlet-class>com.fort.project.neighbourhoodwatch.server.MailServlet</servlet-class>
+  
+  <servlet>
+      <servlet-name>GeoCoder</servlet-name>
+      <servlet-class>com.fort.project.neighbourhoodwatch.server.GeoCoder</servlet-class>
   </servlet>
+  
   <servlet-mapping>
-    <servlet-name>MailServlet</servlet-name>
-    <url-pattern>/publicfortress/mailservlet</url-pattern>
-    </servlet-mapping>
+      <servlet-name>GeoCoder</servlet-name>
+      <url-pattern>/publicfortress/GeoCoder</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+      <servlet-name>CounterCorrector</servlet-name>
+      <servlet-class>com.fort.project.neighbourhoodwatch.server.CounterCorrector</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>CounterCorrector</servlet-name>
+      <url-pattern>/publicfortress/CounterCorrector</url-pattern>
+  </servlet-mapping>
+
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>PublicFortress.html</welcome-file>

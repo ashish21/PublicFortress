@@ -7,6 +7,26 @@
    	
     <ui:style>
 
+.button2 {
+	
+outline: 0;	
+background: #ea4a2a;
+border: 1px solid #d03a1d;
+text-transform: uppercase;
+color: #ffffff;
+position: relative;
+text-align: center;
+font-size: 17px;
+font-family: 'Open Sans Condensed';
+text-shadow: #a43520 0 -1px 0;
+box-shadow: 0px 0px 8px #b0b0b0;
+}
+.button2:hover { 
+
+  background:#d93a1a;
+  cursor:pointer;
+}
+
 .scroll {
 
 
@@ -99,7 +119,7 @@ border-collapse:collapse;
     	text-align: center;
  		font-weight: bold;
   		font-size: 23px;
-
+text-transform:uppercase;
   		padding: 5px 5px 5px 5px;
     	-webkit-border-radius: 2px;
     	-moz-border-radius: 2px;
@@ -126,7 +146,7 @@ border-radius: 2px;
     		</g:cell>
     		
     		<g:cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE" >
-            <g:PushButton ui:field='logo' enabled='true' styleName="{res.style.buttonh}" height="56px" width="364px">
+            <g:PushButton ui:field='logo' enabled='true' styleName="{res.style.buttonh}" height="56px" width="217px">
     		<g:upFace image='{res.logoimg}' >   
   			</g:upFace>			 
  			</g:PushButton>
@@ -154,7 +174,7 @@ border-radius: 2px;
         
         <g:FlowPanel width="100%">
 
-	        <g:HorizontalPanel styleName="{res.style.homeback}" ui:field="mapoverlay" width="99.8%" >	 
+	        <g:HorizontalPanel styleName="{res.style.homeback}" ui:field="mapoverlay" width="100%" >	 
 	        
 	        <g:cell horizontalAlignment="ALIGN_LEFT" verticalAlignment="ALIGN_MIDDLE" width="40px">           
             <g:PushButton ui:field='home' enabled='true' styleName="{res.style.buttonh}" height="48px" width="48px">
@@ -176,7 +196,7 @@ border-radius: 2px;
 			</g:cell>
             </g:HorizontalPanel>     
             
-        	<g:SimpleLayoutPanel height="400px" styleName="{style.button}" width="99.7%" ui:field="map_canvas" />
+        	<g:SimpleLayoutPanel height="400px"  width="100%" ui:field="map_canvas" />
 	        <g:HTMLPanel width="100%" height="5px" />
 	        
 	        <g:HorizontalPanel width="100%" >	 
@@ -199,7 +219,7 @@ border-radius: 2px;
 			 	            <g:Label styleName="{style.header}" text="Harassment"/>	
 			 	            <g:SimplePanel height='5px' width="100%" styleName="{style.border_horizontal}"/>
 			 	            <g:HTMLPanel>
-			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='harassment_large.png' height='150px' vertical-align='middle'/></td><td><p>Details of the chosen crime/disaster to be displayed here.</p>
+			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='harassment_large.png' height='150px' vertical-align='middle'/></td><td><p>Harassment covers a wide range of behaviours of an offensive nature. It is commonly understood as behaviour intended to disturb or upset, and it is characteristically repetitive. In the legal sense, it is intentional behaviour which is found threatening or disturbing. Sexual harassment refers to persistent and unwanted sexual advances, where the consequences of refusing are potentially very disadvantageous to the victim.</p>
 			 	                </td></tr></table>
 			 	            </g:HTMLPanel>				
 						</g:HTMLPanel>
@@ -207,7 +227,7 @@ border-radius: 2px;
 			 	            <g:Label styleName="{style.header}" text="Theft"/>	
 			 	            <g:SimplePanel height='5px' width="100%" styleName="{style.border_horizontal}"/>
 			 	            <g:HTMLPanel>
-			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='theft_large.png' height='150px' vertical-align='middle'/></td><td><p>Details of the chosen crime/disaster to be displayed here.</p>
+			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='theft_large.png' height='150px' vertical-align='middle'/></td><td><p>A criminal act in which property belonging to another is taken without that person's consent. The term theft is sometimes used synonymously with Larceny. Theft, however, is actually a broader term, encompassing many forms of deceitful taking of property, including swindling, Embezzlement, and False Pretenses. Some states categorize all these offenses under a single statutory crime of theft.</p>
 			 	                </td></tr></table>
 			 	            </g:HTMLPanel>				
 						</g:HTMLPanel>
@@ -215,7 +235,7 @@ border-radius: 2px;
 			 	            <g:Label styleName="{style.header}" text="Gang Related Activity"/>	
 			 	            <g:SimplePanel height='5px' width="100%" styleName="{style.border_horizontal}"/>
 			 	            <g:HTMLPanel>
-			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='gangrelatedactivity_large.png' height='150px' vertical-align='middle'/></td><td><p>Details of the chosen crime/disaster to be displayed here.</p>
+			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='gangrelatedactivity_large.png' height='150px' vertical-align='middle'/></td><td><p>A gang is a group of recurrently associating individuals or close friends with identifiable leadership and internal organization, identifying with or claiming control over territory in a community, and engaging either individually or collectively in violent or other forms of illegal behavior. Areas prone to such activites must be marked with "Gang Related Activity".</p>
 			 	                </td></tr></table>
 			 	            </g:HTMLPanel>				
 						</g:HTMLPanel>
@@ -223,7 +243,7 @@ border-radius: 2px;
 			 	            <g:Label styleName="{style.header}" text="Unsafe at Night"/>	
 			 	            <g:SimplePanel height='5px' width="100%" styleName="{style.border_horizontal}"/>
 			 	            <g:HTMLPanel>
-			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='unsafeatnight_large.png' height='150px' vertical-align='middle'/></td><td><p>Details of the chosen crime/disaster to be displayed here.</p>
+			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='unsafeatnight_large.png' height='150px' vertical-align='middle'/></td><td><p>A large number of people feel unsafe at night because of security issues in the society and the residential areas. In some areas, cases of violent crimes such as rapes, kidnappings etc. tend to happen at night. Such areas must be demarcated as unsafe at night.</p>
 			 	                </td></tr></table>
 			 	            </g:HTMLPanel>				
 						</g:HTMLPanel>
@@ -231,7 +251,7 @@ border-radius: 2px;
 			 	            <g:Label styleName="{style.header}" text="Physcial Assault"/>	
 			 	            <g:SimplePanel height='5px' width="100%" styleName="{style.border_horizontal}"/>
 			 	            <g:HTMLPanel>
-			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='physicalassault_large.png' height='150px' vertical-align='middle'/></td><td><p>Details of the chosen crime/disaster to be displayed here.</p>
+			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='physicalassault_large.png' height='150px' vertical-align='middle'/></td><td><p>Physical assault takes place when an individual or a group provokes and attacks a person physically, with or without the use of a weapon, or threatens to hurt that person.</p>
 			 	                </td></tr></table>
 			 	            </g:HTMLPanel>				
 						</g:HTMLPanel>
@@ -239,7 +259,7 @@ border-radius: 2px;
 			 	            <g:Label styleName="{style.header}" text="Bribe"/>	
 			 	            <g:SimplePanel height='5px' width="100%" styleName="{style.border_horizontal}"/>
 			 	            <g:HTMLPanel>
-			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='bribe_large.png' height='150px' vertical-align='middle'/></td><td><p>Details of the chosen crime/disaster to be displayed here.</p>
+			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='bribe_large.png' height='150px' vertical-align='middle'/></td><td><p>Bribery is an act of giving money or gift giving that alters the behavior of the recipient. Bribery constitutes a crime and is defined by Black's Law Dictionary as the offering, giving, receiving, or soliciting of any item of value to influence the actions of an official or other person in charge of a public or legal duty.</p>
 			 	                </td></tr></table>
 			 	            </g:HTMLPanel>				
 						</g:HTMLPanel>
@@ -247,23 +267,23 @@ border-radius: 2px;
 			 	            <g:Label styleName="{style.header}" text="Arson"/>	
 			 	            <g:SimplePanel height='5px' width="100%" styleName="{style.border_horizontal}"/>
 			 	            <g:HTMLPanel>
-			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='arson_large.png' height='150px' vertical-align='middle'/></td><td><p>Details of the chosen crime/disaster to be displayed here.</p>
+			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='arson_large.png' height='150px' vertical-align='middle'/></td><td><p>Arson is the crime of intentionally and maliciously setting fire to buildings, wildland areas, vehicles or other property with the intent to cause damage. It may be distinguished from other causes such as spontaneous combustion and natural wildfires. A person who commits this crime is called an arsonist.</p>
 			 	                </td></tr></table>
 			 	            </g:HTMLPanel>				
 						</g:HTMLPanel>
 			 	        <g:HTMLPanel>
-			 	            <g:Label styleName="{style.header}" text="Landslide"/>	
+			 	            <g:Label styleName="{style.header}" text="Disaster"/>	
 			 	            <g:SimplePanel height='5px' width="100%" styleName="{style.border_horizontal}"/>
 			 	            <g:HTMLPanel>
-			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='landslide_large.png' height='150px' vertical-align='middle'/></td><td><p>Details of the chosen crime/disaster to be displayed here.</p>
+			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='disaster_large.png' height='150px' vertical-align='middle'/></td><td><p>A disaster is a natural or man-made (or technological) hazard resulting in an event of substantial extent causing significant physical damage or destruction, loss of life, or drastic change to the environment. A disaster can be ostensively defined as any tragic event stemming from events such as earthquakes, floods, catastrophic accidents, fires, or explosions. It is a phenomenon that can cause damage to life and property and destroy the economic, social and cultural life of people.</p>
 			 	                </td></tr></table>
 			 	            </g:HTMLPanel>				
 						</g:HTMLPanel>
 			 	        <g:HTMLPanel>
-			 	            <g:Label styleName="{style.header}" text="BioHazard"/>	
+			 	            <g:Label styleName="{style.header}" text="Hazard"/>	
 			 	            <g:SimplePanel height='5px' width="100%" styleName="{style.border_horizontal}"/>
 			 	            <g:HTMLPanel>
-			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='biohazard_large.png' height='150px' vertical-align='middle'/></td><td><p>Details of the chosen crime/disaster to be displayed here.</p>
+			 	                <table class="{style.table}"><tr><td class="{style.border}"><img src='hazard_large.png' height='150px' vertical-align='middle'/></td><td><p>Hazards are generally of five types:<br/>1) Physical hazards are conditions or situations that can cause the body physical harm or intense stress. Physical hazards can be both natural and human made elements. <br/>2) Chemical hazards are substances that can cause harm or damage to the body, property or the environment. Chemical hazards can be both natural or human made origin.<br/>3) Biological hazards are biological agents that can cause harm to the human body. These some biological agents can be viruses, parasite,bacteria, food, fungi, and foreign toxin.<br/>4) Psychological hazards are created during work related stress or a stressful environment.<br/>5) Radiation hazards causes harm to the human or damage body by affecting the cell directly.</p>
 			 	                </td></tr></table>
 			 	            </g:HTMLPanel>				
 						</g:HTMLPanel>	 	        
@@ -273,10 +293,33 @@ border-radius: 2px;
 	    			<g:Label width="100%"></g:Label>
 	    		</g:cell>
 		 	    <g:cell height="100%" width="30%" horizontalAlignment="ALIGN_LEFT" verticalAlignment="ALIGN_MIDDLE"> 
-					 <g:VerticalPanel   width="100%">
-					 <g:Label  styleName="{res.style.blackText}">Your Past Reports</g:Label>
-					 <g:ScrollPanel width="100%" visible="false" ui:field="scroll" styleName="{style.button}" />		 	
-					 </g:VerticalPanel>        
+					<g:FlowPanel>  
+			 	        <g:HorizontalPanel width="100%">
+			 	            <g:cell>
+			 	                <g:Button styleName="{style.button2}" ui:field='customize'>Customize Map</g:Button>
+			 	            </g:cell>
+			 	            <g:cell>
+			 	                <g:Button styleName="{style.button2}" ui:field='past' visible='false'>View Past Reports</g:Button>
+			 	            </g:cell>
+			 	            <g:cell>
+			 	                <g:Button styleName="{style.button2}" ui:field='nearby' visible='false'>Nearby Reports</g:Button>
+			 	            </g:cell>
+			 	            <g:cell>
+			 	                <g:Button styleName="{style.button2}" ui:field='latest' visible='false'>Latest Reports</g:Button>
+			 	            </g:cell>
+			 	        </g:HorizontalPanel> 
+		 	        	<g:DeckPanel width="100%" ui:field='togglePanel'>		 	        	    		 		    
+			 				
+			 		    	<g:ScrollPanel width="100%" visible="false" styleName="{style.button}">
+			 		    		<g:VerticalPanel width="100%" ui:field='checkBoxes'/>
+			 		    	</g:ScrollPanel>					 		    	
+				 			<g:ScrollPanel ui:field="scrollPast" width="100%" styleName="{style.button}"/>
+				 							 		    	
+				 			<g:ScrollPanel ui:field="scrollRecent" width="100%" styleName="{style.button}"/>
+				 							 		        					 		    	
+				 			<g:ScrollPanel ui:field="scrollNear" width="100%" styleName="{style.button}"/>
+				 		</g:DeckPanel>				 	 	        
+	    			</g:FlowPanel>					       
 	    		</g:cell> 	    		
 		 	   	<g:cell height="100%" width="1%"> 
 	    			<g:Label width="100%"></g:Label>
@@ -285,46 +328,22 @@ border-radius: 2px;
 	   		<g:HTMLPanel width="100%" height="5px" />
 	 	    <!-- DONE TILL HERE YO -->	   		
 	 	    
-	 	    	  <g:HTMLPanel width="100%" height="10px" styleName="{res.style.lowerback}" />
+	 	    	  <g:HTMLPanel width="100%" height="80px" />
 	                      
-	 	    
-	        <g:HorizontalPanel  width="100%" styleName="{res.style.lowerback}">
-	            <g:cell width="1%"> 
-		   			<g:Label width="100%"></g:Label>
-		   		</g:cell>
-	            <g:cell horizontalAlignment='ALIGN_LEFT' verticalAlignment="ALIGN_MIDDLE">
-		            <g:HTMLPanel height="500px" width="300px" styleName="{style.button}">
-		            	<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fneighbourhoodwatchrocks&amp;width&amp;height=500&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=true&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:500px;" allowTransparency="true"></iframe>
-					</g:HTMLPanel>
-				</g:cell>
-				<g:cell width="5%"> 
-		   			<g:Label width="100%"></g:Label>
-		   		</g:cell>
-				<g:cell horizontalAlignment='ALIGN_LEFT' verticalAlignment="ALIGN_MIDDLE">
-				    
-					<g:FlowPanel width="100%">							    			    
-					    <g:HorizontalPanel height="280px" width="100%" >
-					        <g:cell height="270px" width="480px" horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">					            	
-	    						<g:HTMLPanel height="270px" width="480px" styleName="{style.button}">
-	    							<iframe  height="270px" width="480px"  src="//www.youtube.com/embed/NiAhk2HfaOg?rel=0" frameborder="0" allowfullscreen="true"/>
-	    						</g:HTMLPanel>	
-					        </g:cell>
-					        <g:cell width="1%"> 
-	    						<g:Label width="100%"/>
-	    					</g:cell>	    					
-		   					<g:cell height="100%" horizontalAlignment='ALIGN_RIGHT' verticalAlignment="ALIGN_MIDDLE"> 
-	 							<g:HorizontalPanel width="200px" styleName="{style.button}" ui:field="badge">
-			       				</g:HorizontalPanel>
-		   					</g:cell>
-		   					<g:cell width="1%"> 
+	        					 <g:HorizontalPanel width="100%"  >  
+	        					     <g:cell horizontalAlignment='ALIGN_CENTER' > 
+	    		
+					    <g:Label  width="960px" height="167px" styleName="{res.style.slogan}" text="'Safety by Awareness'"/>
+        					</g:cell>  
+        					 
+        						 </g:HorizontalPanel>
+        						<g:HTMLPanel width="100%" height="10px" />
+		 				
+		 				<g:HorizontalPanel width="100%" >
+		 				     <g:cell width="20%"> 
 	    						<g:Label width="100%"/>
 	    					</g:cell>
-					    </g:HorizontalPanel> 					    
-					    
-        				<g:HTMLPanel width="100%" height="5px"/>				
-		 				
-		 				<g:HorizontalPanel width="550px">
-		 				    <g:cell width="250px" horizontalAlignment='ALIGN_LEFT' verticalAlignment="ALIGN_MIDDLE">
+		 				    <g:cell width="250px"  horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">
 		 				        <g:FlowPanel  width="100%">
 <!-- 		 				            <g:Label width="100%"  styleName="{res.style.bigbtn}" > -->
 <!-- 		 				                Android App -->
@@ -337,24 +356,25 @@ border-radius: 2px;
 <!-- 		 				                    <g:Label>Download our Android app or use the website to submit reports.</g:Label> -->
 <!-- 		 				                </g:cell>		 				                     -->
 <!-- 		 				            </g:HorizontalPanel> -->
-		 				        	<g:HorizontalPanel width="100%">	
+
+		 				        	<g:HorizontalPanel width="100%" >	
 		 				                <g:cell width="100%" horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">
-		 				            		<g:Button ui:field='android' styleName="{res.style.bigbtn2}">Neighbourhood Watch's Android App Coming Soon!</g:Button>
+		 				            		<g:Button height="150px" width="350px" ui:field='android' styleName="{res.style.bigbtn2}">Neighbourhood Watch's Android App Coming Soon! Stay tuned for Updates </g:Button>
 		 				            	</g:cell>
 		 				            </g:HorizontalPanel>
 		 				        </g:FlowPanel>			        
 		 				    </g:cell>
-		 				    <g:cell width="20px"> 
+		 				    <g:cell width="40px"> 
 	    						<g:Label width="100%"/>
 	    					</g:cell>
-		 				    <g:cell horizontalAlignment='ALIGN_RIGHT' verticalAlignment="ALIGN_MIDDLE">
-		 				        <g:FlowPanel styleName="{res.style.box2}" width="280px" >
+		 				    <g:cell horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">
+		 				        <g:FlowPanel styleName="{res.style.box2}" width="350px" >
 		 				            <g:Label width="100%" styleName="{res.style.bigbtn}" >
 		 				                Support our Efforts
 		 				            </g:Label>	
 		 				            <g:HorizontalPanel width="100%">		 				                
 		 				                <g:cell horizontalAlignment='ALIGN_LEFT' verticalAlignment="ALIGN_MIDDLE">
-		 				                    <g:Label>There are many ways in which you can help us. For example, tell your friends about this web-app !</g:Label>
+		 				                    <g:Label>There are many ways in which you can help us. Tell your friends about our Website and click the button below to give feedback and help improve the site.</g:Label>
 		 				                </g:cell>	
 		 				                <g:cell width="20px"> 
 	    						<g:Label width="100%"/>
@@ -366,18 +386,59 @@ border-radius: 2px;
 		 				        	<g:HorizontalPanel height="50px" width="100%">	
 		 				        	    
 		 				                <g:cell width="100%" horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_BOTTOM">
-		 				            		<g:Button ui:field='support' styleName="{res.style.button2}">Coming Soon!</g:Button>
+		 				            		<g:Button ui:field='support' styleName="{res.style.button2}">Get Involved!</g:Button>
 		 				            	</g:cell>
 		 				            	
 		 				            </g:HorizontalPanel>
+		 				            
 		 				        </g:FlowPanel>
 		 				    </g:cell>
 		 				</g:HorizontalPanel>
-		 				
+		 				 <g:HTMLPanel width="100%" height="50px" />
+		 				 <g:HTMLPanel width="100%" height="50px" styleName="{res.style.lowerback}" />
+		 				<g:HorizontalPanel  width="100%" styleName="{res.style.lowerback}">
+	            <g:cell width="4%"> 
+		   			<g:Label width="100%"></g:Label>
+		   		</g:cell>
+	            <g:cell horizontalAlignment='ALIGN_LEFT' verticalAlignment="ALIGN_TOP">
+	                <g:HTMLPanel height="320px" width="240px" styleName="{style.button}">
+		            	<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fneighbourhoodwatchrocks&amp;width=240&amp;height=320&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:240px; height:320px;" allowTransparency="true"></iframe>
+					</g:HTMLPanel>	
+
+				</g:cell>
+				<g:cell width="2%"> 
+		   			<g:Label width="100%"></g:Label>
+		   		</g:cell>
+				<g:cell horizontalAlignment='ALIGN_LEFT' verticalAlignment="ALIGN_MIDDLE">
+				    
+					<g:FlowPanel width="100%">							    			    
+					    <g:HorizontalPanel width="100%" >
+					        <g:cell  horizontalAlignment='ALIGN_CENTER' verticalAlignment="ALIGN_MIDDLE">
+					            
+<!-- 			       				<g:HTMLPanel height="320px" width="600px" styleName="{style.button}"> -->
+<!-- 		            	<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fneighbourhoodwatchrocks&amp;width=600&amp;height=320&amp;colorscheme=light&amp;show_faces=false&amp;header=false&amp;stream=true&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:600px; height:320px;" allowTransparency="true"></iframe> -->
+<!-- 					</g:HTMLPanel>	 -->
+							            <g:HorizontalPanel  ui:field="twitter">
+			       				</g:HorizontalPanel>				            	
+<!-- 	    						<g:HTMLPanel height="270px" width="480px" styleName="{style.button}"> -->
+<!-- 	    							<iframe  height="270px" width="480px"  src="//www.youtube.com/embed/NiAhk2HfaOg?rel=0" frameborder="0" allowfullscreen="true"/> -->
+<!-- 	    						</g:HTMLPanel>	 -->
+					        </g:cell>
+					        <g:cell width="2%"> 
+	    						<g:Label width="100%"/>
+	    					</g:cell>	    					
+		   					<g:cell height="100%" horizontalAlignment='ALIGN_RIGHT' verticalAlignment="ALIGN_MIDDLE"> 
+	 							<g:HorizontalPanel height="320px"  ui:field="badge">
+			       				</g:HorizontalPanel>
+		   					</g:cell>
+		   					<g:cell width="4%"> 
+	    						<g:Label width="100%"/>
+	    					</g:cell>
+					    </g:HorizontalPanel> 
 					</g:FlowPanel>
 				</g:cell>
 	        </g:HorizontalPanel>
-	      	  <g:HTMLPanel width="100%" height="10px" styleName="{res.style.lowerback}" />
+	      	  <g:HTMLPanel width="100%" height="50px" styleName="{res.style.lowerback}" />
 	    </g:FlowPanel>
 	    
         <!-- FOOTER -->
@@ -397,9 +458,13 @@ border-radius: 2px;
 				</g:FlowPanel>	   			
    			</g:cell>
    			
-	    	<g:cell horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="15%">
+	    	<g:cell horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="100%">
+				<g:VerticalPanel>
+				<g:Label styleName="{res.style.white}" text="Note: This website is optimized for Chrome and Firefox"/>
 				<g:Label styleName="{res.style.white}" text="© Neighbourhood Watch"/>
+				</g:VerticalPanel>
 	    	</g:cell>
+	    	
         </g:HorizontalPanel>
     </g:FlowPanel>
 </g:ScrollPanel>
