@@ -29,6 +29,7 @@ public class MyHistoryListener implements ValueChangeHandler<String> {
 			RootLayoutPanel.get().clear();
 			RootLayoutPanel.get().add(Works.getInstance());
 		} 
+		
 	}
 
 }

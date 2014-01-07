@@ -162,12 +162,14 @@ border-radius: 2px;
       				<g:Button text="About Us" styleName="{res.style.menuItemTop}" ui:field="about"/>
       				<g:Button text="Contact Us" styleName="{res.style.menuItemTop}" ui:field="contact"/>
       				<g:Button text="SignIn" styleName="{res.style.menuItemTop}" ui:field="signin"/>
+      				
      			</g:HTMLPanel>	   			
   			</g:cell>
   				
     		<g:cell width="10%"> 
     			<g:Label width="100%"></g:Label>
-    		</g:cell>		 
+    		</g:cell>	
+ 
         </g:HorizontalPanel>
         
         

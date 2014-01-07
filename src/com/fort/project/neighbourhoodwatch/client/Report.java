@@ -28,7 +28,6 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.SimpleLayoutPanel;
-
 import com.google.gwt.user.client.ui.Widget;
 
 public class Report extends Composite {
@@ -150,6 +149,9 @@ public class Report extends Composite {
 		this.res = GWT.create(GwtMapsResources.class);
 		res.style().ensureInjected();	
 		initWidget(uiBinder.createAndBindUi(this));
+		up.setTitle("Click if the report is correct");
+		 down.setTitle("Click if the report is incorrect");
+		 flag.setTitle("Click if you think this is a false report");
 		drawBadge();
 		drawfb();
 		drawTwitter();
@@ -247,6 +249,7 @@ public class Report extends Composite {
 		        @Override
 		        public void onClick(ClickEvent event) {
 		        	History.newItem("Home");
+			  		
 		        	
 		           }
 
@@ -461,9 +464,7 @@ public class Report extends Composite {
 							      magic, setCounter);
 					} 
 				 });
-			 up.setTitle("Click if the report is correct");
-			 down.setTitle("Click if the report is incorrect");
-			 flag.setTitle("Click if you think this is a false report");
+			 
 		 }
 		 
 		 Timer timer = new Timer() {
@@ -471,6 +472,8 @@ public class Report extends Composite {
 		        @Override
 		        public void run() {
 		            mapReload();
+		            fb.clear();
+		            drawfb();
 		            
 		        }
 		    };
@@ -501,14 +504,18 @@ public class Report extends Composite {
 	  }
 	private void drawfb() {
 	    	
-		String s = "<fb:comments href=\"http://gcdc2013-neighbourhoodwatch.appspot.com/#"+String.valueOf(Constants.dataPass.id)+"\" numposts=\"10\" colorscheme=\"light\"></fb:comments>";
-	    HTML h = new HTML(s);
+		String id=String.valueOf(Constants.dataPass.id);
+		String s = "<div class=\"fb-comments\" data-href=\"http://gcdc2013-neighbourhoodwatch.appspot.com/#"+id+"\" data-numposts=\"10\" data-colorscheme=\"light\"></div>";
+
+		HTML h = new HTML(s);
+	    
 	    fb.add(h);
 	    Document doc = Document.get();
 	    ScriptElement script = doc.createScriptElement();
 	    script.setSrc("//connect.facebook.net/en_US/all.js#xfbml=1");
 	    script.setType("text/javascript");
 	    script.setLang("javascript");
+	    
 	    doc.getBody().appendChild(script);
 	   
 	  }

@@ -17,6 +17,7 @@ public class PublicFortress implements EntryPoint {
 	  	
 	    if (initToken.length() == 0) {
 	      History.newItem("Home");
+	      
 	    }
 		    
 	  	History.addValueChangeHandler(new MyHistoryListener());

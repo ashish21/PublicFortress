@@ -94,7 +94,7 @@ public class Home extends Composite {
 	
 	interface LoginWidgetURLBinder extends UiBinder <ScrollPanel, Home> {	}	
 	private static LoginWidgetURLBinder uiBinder = GWT.create(LoginWidgetURLBinder.class);
-	
+	String historyToken="null";
 	public static MapWidget map;    
     	
 	private MarkerClusterer cluster;
@@ -151,7 +151,8 @@ public class Home extends Composite {
 	@UiHandler("signin")
 	void singin(ClickEvent e) {
 
-		Window.open(link, "replace", "");
+		//Window.open(link, "replace", "");
+		Window.Location.assign(link);
 	}
 	
 	@UiHandler("past")
@@ -511,7 +512,9 @@ public class Home extends Composite {
 	    });
 	    home.setTitle("Click to go to zap to your location");
 	    toggle.setTitle("Click to toggle between Cluster and Heatmap view");
-	  }
+	    
+		 
+	    	  }
 	
 	protected void performCrimeVicinityTest(final LatLng initialLocation2) {
 		
@@ -899,6 +902,8 @@ public class Home extends Composite {
 		    script.setLang("javascript");
 		    doc.getBody().appendChild(script);
 		  }
+	  
+	  
 	private void drawTwitter() {
 		    
 		
@@ -921,7 +926,8 @@ public class Home extends Composite {
 	  private void initialise() {	
 
 		  drawBadge();
-			drawTwitter(); 
+			drawTwitter();
+		
 		  about.addClickHandler(new ClickHandler(){
 		        @Override
 		        public void onClick(ClickEvent event) {
@@ -986,7 +992,10 @@ public class Home extends Composite {
 			           }
 			 });
 			
-		  
+			 
+			        	
+			        	
+			 
 		  
 		 Constants.userInfo = new String[1];
 		 Constants.userInfo[0] = "NULL";
@@ -1165,7 +1174,7 @@ public class Home extends Composite {
 		  Constants.dataPass = new bundle(location, uri, strength, date, info, tups, tdwns, flags, address2, id, "blank");
 		  System.out.println(Constants.dataPass.id);
 		  History.newItem("Report");
-		 
+		  
 	  }
 	  
 	  public interface MyTemplate extends SafeHtmlTemplates {

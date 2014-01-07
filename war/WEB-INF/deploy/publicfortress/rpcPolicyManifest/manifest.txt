@@ -1,2 +1,5 @@
 # Module publicfortress
 # RPC service class, partial path of RPC policy file
+com.fort.project.neighbourhoodwatch.client.CounterService, EA05305DA99B253668841897FCF4C290.gwt.rpc
+com.fort.project.neighbourhoodwatch.client.MarkerService, 40E538BFAE3E3B28D1E98A1F8A7CC3D0.gwt.rpc
+com.fort.project.neighbourhoodwatch.client.LoginService, 13240DCBAC2D28206D352DE94D6F4B9E.gwt.rpc
