@@ -11,6 +11,8 @@ public interface GwtMapsResources extends ClientBundle {
 	  
       String blackText();
       
+      String buttonbox();
+      
       String slogan();
       
       String boxtxt();
@@ -33,6 +35,10 @@ public interface GwtMapsResources extends ClientBundle {
       
       String button3();
       
+      String button4();
+      
+      String button5();
+      
       String buttonh();
       
      
@@ -54,6 +60,9 @@ public interface GwtMapsResources extends ClientBundle {
       
       String silver();
            
+      String menuItem2();
+      
+      String menuItem3();
   
       String carbon();
       

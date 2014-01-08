@@ -8,11 +8,11 @@
 	<cron>
 		<url>/publicfortress/GeoCoder</url>
 		<description>GAEJ Cron Job that finds and sotres address for a given LatLng</description>
-		<schedule>every 10 minutes</schedule>
+		<schedule>every day 00:00</schedule>
 	</cron>
 	<cron>
 		<url>/publicfortress/CounterCorrector</url>
 		<description>GAEJ Cron Job that saves counter info</description>
-		<schedule>every 10 minutes</schedule>
+		<schedule>every day 00:00</schedule>
 	</cron>
 </cronentries>

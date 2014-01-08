@@ -28,20 +28,21 @@ public class MainDialogBox extends DialogBox {
 	
 	  String uri = "";
 	  static Date d;
-	  
+
+		interface AbotUiBinder extends UiBinder<Widget, MainDialogBox> {
+		}
 	  @UiField SimplePanel mainPanel;
-	  
+	  @UiField(provided = true)
+	  final GwtMapsResources res;	
 	  @UiField Button okButton, closeButton;
 	  
-	  @UiField MenuBar menuBar;
+	  @UiField MenuBar sub;
 	  
 	  @UiField DatePicker date;
 	  
 	  @UiField TextBox input;
 	  
-	  @UiField MenuItem theft, harassment, unsafe, assault, landSlide, bio, 
-
-gang, bribe, arson, sub;	  
+	  @UiField MenuItem theft, harassment, unsafe, assault, landSlide, bio, gang, bribe, arson;	  
 	  
 	  @UiHandler("okButton")	  
 	  void onSubmit(ClickEvent e) {
@@ -83,6 +84,9 @@ Constants.info);
 
 	  public MainDialogBox() {
 		  
+		  this.res = GWT.create(GwtMapsResources.class);
+			res.style().ensureInjected();	
+			
 		  super.setWidget(GWT.<Binder> create
 
 (Binder.class).createAndBindUi(this));	
@@ -135,7 +139,6 @@ dateShowRangeEvent) {
 	  public void initialise() {
 		  
 		  
-		  menuBar.setTitle("What do you want to report ?");
 		  date.setTitle("When did this mishap occur ?");
 		  input.setTitle("Give us some more details");
 		  
@@ -145,7 +148,18 @@ dateShowRangeEvent) {
 		    		uri = theft.getText().replaceAll(" ", 
 
 "").toLowerCase();
-		    		sub.setText(theft.getText());
+//		    		sub.setText(theft.getText());
+		    		theft.setStyleName(res.style().menuItem2());
+		    		
+		    		arson.setStyleName(res.style().menuItem3());
+		    		bribe.setStyleName(res.style().menuItem3());
+		    		gang.setStyleName(res.style().menuItem3());
+		    		bio.setStyleName(res.style().menuItem3());
+		    		landSlide.setStyleName(res.style().menuItem3());
+		    		assault.setStyleName(res.style().menuItem3());
+		    		unsafe.setStyleName(res.style().menuItem3());
+		    		harassment.setStyleName(res.style().menuItem3());
+
 		    	}
 		  };
 		  theft.setScheduledCommand(cmdBtnTheft);
@@ -156,7 +170,18 @@ dateShowRangeEvent) {
 		    		uri = harassment.getText().replaceAll(" ", 
 
 "").toLowerCase();
-		    		sub.setText(harassment.getText());
+//		    		sub.setText(harassment.getText());
+		    		harassment.setStyleName(res.style().menuItem2());
+		    		
+		    		arson.setStyleName(res.style().menuItem3());
+		    		bribe.setStyleName(res.style().menuItem3());
+		    		gang.setStyleName(res.style().menuItem3());
+		    		bio.setStyleName(res.style().menuItem3());
+		    		landSlide.setStyleName(res.style().menuItem3());
+		    		assault.setStyleName(res.style().menuItem3());
+		    		unsafe.setStyleName(res.style().menuItem3());
+		    		theft.setStyleName(res.style().menuItem3());
+
 		    	}
 		  };
 		  harassment.setScheduledCommand(cmdBtnHarassment);
@@ -167,7 +192,18 @@ dateShowRangeEvent) {
 		    		uri = unsafe.getText().replaceAll(" ", 
 
 "").toLowerCase();
-		    		sub.setText(unsafe.getText());
+//		    		sub.setText(unsafe.getText());
+		    		unsafe.setStyleName(res.style().menuItem2());
+		    		
+		    		arson.setStyleName(res.style().menuItem3());
+		    		bribe.setStyleName(res.style().menuItem3());
+		    		gang.setStyleName(res.style().menuItem3());
+		    		bio.setStyleName(res.style().menuItem3());
+		    		landSlide.setStyleName(res.style().menuItem3());
+		    		assault.setStyleName(res.style().menuItem3());
+		    		harassment.setStyleName(res.style().menuItem3());
+		    		theft.setStyleName(res.style().menuItem3());
+
 		    	}
 		  };
 		  unsafe.setScheduledCommand(cmdBtnUnsafe);		  
@@ -178,7 +214,18 @@ dateShowRangeEvent) {
 		    		uri = assault.getText().replaceAll(" ", 
 
 "").toLowerCase();
-		    		sub.setText(assault.getText());
+//		    		sub.setText(assault.getText());
+		    		assault.setStyleName(res.style().menuItem2());
+		    		
+		    		arson.setStyleName(res.style().menuItem3());
+		    		bribe.setStyleName(res.style().menuItem3());
+		    		gang.setStyleName(res.style().menuItem3());
+		    		bio.setStyleName(res.style().menuItem3());
+		    		landSlide.setStyleName(res.style().menuItem3());
+		    		unsafe.setStyleName(res.style().menuItem3());
+		    		harassment.setStyleName(res.style().menuItem3());
+		    		theft.setStyleName(res.style().menuItem3());
+
 		    	}
 		  };
 		  assault.setScheduledCommand(cmdBtnAssault);
@@ -189,7 +236,17 @@ dateShowRangeEvent) {
 		    		uri = landSlide.getText().replaceAll(" ", 
 
 "").toLowerCase();
-		    		sub.setText(landSlide.getText());
+//		    		sub.setText(landSlide.getText());
+		    		landSlide.setStyleName(res.style().menuItem2());
+		    		
+		    		arson.setStyleName(res.style().menuItem3());
+		    		bribe.setStyleName(res.style().menuItem3());
+		    		gang.setStyleName(res.style().menuItem3());
+		    		bio.setStyleName(res.style().menuItem3());
+		    		assault.setStyleName(res.style().menuItem3());
+		    		unsafe.setStyleName(res.style().menuItem3());
+		    		harassment.setStyleName(res.style().menuItem3());
+		    		theft.setStyleName(res.style().menuItem3());
 		    	}
 		  };
 		  landSlide.setScheduledCommand(cmdBtnLandslide);
@@ -200,7 +257,18 @@ dateShowRangeEvent) {
 		    		uri = bio.getText().replaceAll(" ", 
 
 "").toLowerCase();
-		    		sub.setText(bio.getText());
+//		    		sub.setText(bio.getText());
+		    		bio.setStyleName(res.style().menuItem2());
+		    		
+		    		arson.setStyleName(res.style().menuItem3());
+		    		bribe.setStyleName(res.style().menuItem3());
+		    		gang.setStyleName(res.style().menuItem3());
+		    		landSlide.setStyleName(res.style().menuItem3());
+		    		assault.setStyleName(res.style().menuItem3());
+		    		unsafe.setStyleName(res.style().menuItem3());
+		    		harassment.setStyleName(res.style().menuItem3());
+		    		theft.setStyleName(res.style().menuItem3());
+
 		    	}
 		  };
 		  bio.setScheduledCommand(cmdBtnBio);
@@ -211,7 +279,17 @@ dateShowRangeEvent) {
 		    		uri = gang.getText().replaceAll(" ", 
 
 "").toLowerCase();
-		    		sub.setText(gang.getText());
+//		    		sub.setText(gang.getText());
+		    		gang.setStyleName(res.style().menuItem2());
+		    		
+		    		arson.setStyleName(res.style().menuItem3());
+		    		bribe.setStyleName(res.style().menuItem3());
+		    		bio.setStyleName(res.style().menuItem3());
+		    		landSlide.setStyleName(res.style().menuItem3());
+		    		assault.setStyleName(res.style().menuItem3());
+		    		unsafe.setStyleName(res.style().menuItem3());
+		    		harassment.setStyleName(res.style().menuItem3());
+		    		theft.setStyleName(res.style().menuItem3());
 		    	}
 		  };
 		  gang.setScheduledCommand(cmdBtnGang);
@@ -222,7 +300,17 @@ dateShowRangeEvent) {
 		    		uri = bribe.getText().replaceAll(" ", 
 
 "").toLowerCase();
-		    		sub.setText(bribe.getText());
+//		    		sub.setText(bribe.getText());
+		    		bribe.setStyleName(res.style().menuItem2());
+		    		
+		    		arson.setStyleName(res.style().menuItem3());
+		    		gang.setStyleName(res.style().menuItem3());
+		    		bio.setStyleName(res.style().menuItem3());
+		    		landSlide.setStyleName(res.style().menuItem3());
+		    		assault.setStyleName(res.style().menuItem3());
+		    		unsafe.setStyleName(res.style().menuItem3());
+		    		harassment.setStyleName(res.style().menuItem3());
+		    		theft.setStyleName(res.style().menuItem3());
 		    	}
 		  };
 		  bribe.setScheduledCommand(cmdBtnBribe);
@@ -233,7 +321,17 @@ dateShowRangeEvent) {
 		    		uri = arson.getText().replaceAll(" ", 
 
 "").toLowerCase();
-		    		sub.setText(arson.getText());
+//		    		sub.setText(arson.getText());
+		    		arson.setStyleName(res.style().menuItem2());
+		    		
+		    		bribe.setStyleName(res.style().menuItem3());
+		    		gang.setStyleName(res.style().menuItem3());
+		    		bio.setStyleName(res.style().menuItem3());
+		    		landSlide.setStyleName(res.style().menuItem3());
+		    		assault.setStyleName(res.style().menuItem3());
+		    		unsafe.setStyleName(res.style().menuItem3());
+		    		harassment.setStyleName(res.style().menuItem3());
+		    		theft.setStyleName(res.style().menuItem3());
 		    	}
 		  };
 		  arson.setScheduledCommand(cmdBtnArson);

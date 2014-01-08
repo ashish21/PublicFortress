@@ -111,7 +111,7 @@ public class Home extends Composite {
 	private LatLng initialLocation;	
     String url= "", link="";    
     private int t;
-	private MainDialogBox dialogBox = new MainDialogBox();
+	
     
 	private MarkerServiceAsync markerService = GWT.create(MarkerService.class);
 	private MyTemplate template = GWT.create(MyTemplate.class);
@@ -433,6 +433,20 @@ public class Home extends Composite {
 	        	else {	
 
 	        		Constants.mapClick = event.getMouseEvent().getLatLng();
+	        		MainDialogBox dialogBox = new MainDialogBox();
+	        		 dialogBox.setGlassEnabled(true);
+	        		 dialogBox.setWidth("400px");
+
+	        		 dialogBox.addCloseHandler(new CloseHandler<PopupPanel>() {
+	        			
+	        			@Override
+	        			public void onClose(CloseEvent<PopupPanel> event1) {
+	        				
+	        				if(event1.isAutoClosed())
+	        					reporting(Constants.uri, Constants.mapClick);
+	        			}
+	        		 }); 
+	        		dialogBox.setStyleName(res.style().box2());
 	                dialogBox.center();
 	        	}
 	        }
@@ -1094,17 +1108,7 @@ public class Home extends Composite {
 			}
 	     });
 		 
-		 dialogBox.setGlassEnabled(true);
-		 dialogBox.setText("Enter Details"); 
-		 dialogBox.addCloseHandler(new CloseHandler<PopupPanel>() {
-			
-			@Override
-			public void onClose(CloseEvent<PopupPanel> event1) {
-				
-				if(event1.isAutoClosed())
-					reporting(Constants.uri, Constants.mapClick);
-			}
-		 }); 
+		
 		 
 		
 	  }
@@ -1173,7 +1177,12 @@ public class Home extends Composite {
 		  
 		  Constants.dataPass = new bundle(location, uri, strength, date, info, tups, tdwns, flags, address2, id, "blank");
 		  System.out.println(Constants.dataPass.id);
-		  History.newItem("Report");
+		  Report report = new Report();
+		  report.setGlassEnabled(true);
+		 
+		  report.setStyleName(res.style().box2());
+		  // report.show();
+		  report.center();	
 		  
 	  }
 	  

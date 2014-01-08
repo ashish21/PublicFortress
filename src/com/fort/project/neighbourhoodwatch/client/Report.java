@@ -16,12 +16,11 @@ import com.google.gwt.maps.client.overlays.Marker;
 import com.google.gwt.maps.client.overlays.MarkerOptions;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.History;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -30,7 +29,7 @@ import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.SimpleLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class Report extends Composite {
+public class Report extends DialogBox {
 
 	private CounterServiceAsync counterService = GWT.create(CounterService.class);
 	
@@ -119,42 +118,43 @@ public class Report extends Composite {
 		}
 	};
 	
-	static private Report _instance = null;
 	private MapWidget mapw;
 	@UiField(provided = true)
 	final GwtMapsResources res;	
 	@UiField
-	HorizontalPanel badge,twitter;
-	@UiField
 	HorizontalPanel fb;
 	@UiField
-	Button works, about, contact, homepage, privacy, about2, contact2, blog, android, support;
+	Button closebtn;
 	@UiField
-	PushButton logo,up,down,flag;
+	PushButton up,down,flag;
 	@UiField
 	Image image;
 	@UiField
 	Label description,address,date,upcount,downcount, flagCount, type;
 	@UiField
 	SimpleLayoutPanel mapcanvas;	
+	  @UiHandler("closebtn")
+	  void onClose(ClickEvent e) {
+		  
+		  this.hide(false);
+	  }
 	
-	private static AbotUiBinder uiBinder = GWT.create(AbotUiBinder.class);
+	
+	interface Binder extends UiBinder<Widget, Report> {}
 
-	interface AbotUiBinder extends UiBinder<Widget, Report> {
-	}
 
 	public Report() {
 		
 		System.out.println("ID= "+Constants.dataPass.id);
 		this.res = GWT.create(GwtMapsResources.class);
 		res.style().ensureInjected();	
-		initWidget(uiBinder.createAndBindUi(this));
+		super.setWidget(GWT.<Binder> create (Binder.class).createAndBindUi(this));	
 		up.setTitle("Click if the report is correct");
 		 down.setTitle("Click if the report is incorrect");
 		 flag.setTitle("Click if you think this is a false report");
-		drawBadge();
+
 		drawfb();
-		drawTwitter();
+
 		description.setText(Constants.dataPass.info);
 		address.setText(Constants.dataPass.address);
 		date.setText(Constants.dataPass.date);
@@ -203,78 +203,7 @@ public class Report extends Composite {
         });
 		
 		
-		about.addClickHandler(new ClickHandler(){
-	        @Override
-	        public void onClick(ClickEvent event) {
-	        	History.newItem("About");
-	           }
-
-	    });
-		about2.addClickHandler(new ClickHandler(){
-	        @Override
-	        public void onClick(ClickEvent event) {
-	        	History.newItem("About");
-	           }
-
-	    }); 
-		contact.addClickHandler(new ClickHandler(){
-		        @Override
-		        public void onClick(ClickEvent event) {
-		        	History.newItem("Contact");
-		           }
-
-		    });
-		 contact2.addClickHandler(new ClickHandler(){
-		        @Override
-		        public void onClick(ClickEvent event) {
-		        	History.newItem("Contact");
-		           }
-
-		    });
-		 privacy.addClickHandler(new ClickHandler(){
-		        @Override
-		        public void onClick(ClickEvent event) {
-		        	History.newItem("Privacy");
-		           }
-
-		    });
-		 blog.addClickHandler(new ClickHandler(){
-		        @Override
-		        public void onClick(ClickEvent event) {
-		        	Window.open("http://publicfortress.blogspot.in/","_blank","");
-		           }
-
-		    });
-		 logo.addClickHandler(new ClickHandler(){
-		        @Override
-		        public void onClick(ClickEvent event) {
-		        	History.newItem("Home");
-			  		
-		        	
-		           }
-
-		    });
-		 works.addClickHandler(new ClickHandler(){
-		        @Override
-		        public void onClick(ClickEvent event) {
-		        	History.newItem("Works");
-		           }
-
-		    }); 
-		 homepage.addClickHandler(new ClickHandler(){
-		        @Override
-		        public void onClick(ClickEvent event) {
-		            History.newItem("Home");
-		           }
-
-		    });
-		 support.addClickHandler(new ClickHandler(){
-		        @Override
-		        public void onClick(ClickEvent event) {
-		        	History.newItem("Contact");
-		           }
-
-		    });
+		
 		 if(Home.loginInfo.isLoggedIn()) {
 			 
 			 counterService.getCounter(Home.loginInfo.getNickname()+" "+Constants.dataPass.id, getCounter);
@@ -471,44 +400,20 @@ public class Report extends Composite {
 
 		        @Override
 		        public void run() {
-		            mapReload();
-		            fb.clear();
-		            drawfb();
-		            
+		            mapReload();		            
 		        }
 		    };
 		    timer.schedule(5);
 	}
-		
-	public static Report getInstance(){
-        if(null == _instance) {
-        	_instance = new Report();
-        }
-        return _instance;
-	}
-
  
-	private void drawBadge() {
-	    
-		String s = "<g:page width=\"200\" href=\"https://plus.google.com/102192205824377892093\" rel=\"publisher\"></g:page>";
-	    HTML h = new HTML(s);
-	    badge.add(h);
-	    
-	    // You can insert a script tag this way or via your .gwt.xml
-	    Document doc = Document.get();
-	    ScriptElement script = doc.createScriptElement();
-	    script.setSrc("https://apis.google.com/js/platform.js");
-	    script.setType("text/javascript");
-	    script.setLang("javascript");
-	    doc.getBody().appendChild(script);
-	  }
+	
 	private void drawfb() {
 	    	
 		String id=String.valueOf(Constants.dataPass.id);
 		String s = "<div class=\"fb-comments\" data-href=\"http://gcdc2013-neighbourhoodwatch.appspot.com/#"+id+"\" data-numposts=\"10\" data-colorscheme=\"light\"></div>";
 
 		HTML h = new HTML(s);
-	    
+	    fb.clear();
 	    fb.add(h);
 	    Document doc = Document.get();
 	    ScriptElement script = doc.createScriptElement();
@@ -519,23 +424,7 @@ public class Report extends Composite {
 	    doc.getBody().appendChild(script);
 	   
 	  }
-private void drawTwitter() {
-	    
-		
-		String s = "<a class=\"twitter-timeline\" width=\"520\" height=\"320\" href=\"https://twitter.com/NWatch_gcdc\" data-widget-id=\"418124860338864128\">Tweets by @NWatch_gcdc</a>";
 
-	   
-		HTML h = new HTML(s);
-		    twitter.add(h);
-		    
-		    // You can insert a script tag this way or via your .gwt.xml
-		    Document doc = Document.get();
-		    ScriptElement script = doc.createScriptElement();
-		    script.setSrc("https://platform.twitter.com/widgets.js");
-		    script.setType("text/javascript");
-		    script.setLang("javascript");
-		    doc.getBody().appendChild(script);
-		  }
 private void mapReload(){
 	mapw.triggerResize();
 	mapw.setCenter(Constants.dataPass.location);
