@@ -1052,7 +1052,10 @@ public class Home extends Composite {
 				    	if(toShow[i] == 1) {
 				    		
 				    		System.out.println(getPath(Constants.legend[i]));
+				    		if(t==0)
+				    		{
 				    		cluster.addMarkers(markerMap.get(getPath(Constants.legend[i])));		
+				    		}
 				    		JsArray<LatLng> temp = JavaScriptObject.createArray().cast();
 				    		temp = dataMap.get(getPath(Constants.legend[i]));
 				    		for(int j=0; j<temp.length(); j++) {
@@ -1062,7 +1065,10 @@ public class Home extends Composite {
 				    		}
 				    	}
 				    }	
+				    if(t==0)
+				    {
 				    show();
+				    }
 				    heatMapLayer.setData(dataPoints);
 				}
 	    	  });	
